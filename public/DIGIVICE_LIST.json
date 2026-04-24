@@ -16,8 +16,7 @@
           "Ver. 4",
           "Ver. 5",
           "Ver. 6 (Australia Exclusive)"
-        ],
-        "notes": "The foundation of the series with the standard 2-prong connector."
+        ]
       },
       {
         "id": "vpet-pendulum-og",
@@ -35,8 +34,7 @@
           "5.0 Metal Empire",
           "5.5 Metal Empire",
           "ZERO Virus Busters"
-        ],
-        "notes": "Introduced the 'Shake' mechanic and Jogress fusion."
+        ]
       },
       {
         "id": "vpet-pendulum-cycle",
@@ -47,8 +45,7 @@
           "Ver. 8",
           "Ver. 9",
           "Ver. 10"
-        ],
-        "notes": "Bandai Asia exclusive; features accelerated aging and midnight resetting."
+        ]
       },
       {
         "id": "vpet-pendulum-progress",
@@ -58,8 +55,7 @@
           "1.0 Dragon's Roar",
           "2.0 Armageddon's Army",
           "3.0 Animal Colosseum"
-        ],
-        "notes": "Advanced 2-prong raising with more complex evolution requirements."
+        ]
       },
       {
         "id": "vpet-dcyber",
@@ -70,8 +66,7 @@
           "Version 1.5",
           "Version 2.0",
           "Ultimate"
-        ],
-        "notes": "Flip-phone style shell; Ver. 1.5 includes unique Death-X evolutions like Death-X-DORUguremon."
+        ]
       },
       {
         "id": "vpet-twin",
@@ -80,8 +75,7 @@
         "versions": [
           "Twin L",
           "Twin R"
-        ],
-        "notes": "Utilizes 2-prong for legacy battles but primarily pairs via Infrared."
+        ]
       },
       {
         "id": "vpet-dm-ver20th",
@@ -93,8 +87,7 @@
           "Zubamon",
           "Omegamon",
           "ZekeGreymon"
-        ],
-        "notes": "Modern revival allowed raising two Digimon simultaneously."
+        ]
       },
       {
         "id": "vpet-pendulum-ver20th",
@@ -105,8 +98,7 @@
           "Silver Blue",
           "Dukemon",
           "Beelzebumon"
-        ],
-        "notes": "Updated Pendulum with massive rosters and 2-prong link."
+        ]
       },
       {
         "id": "vpet-pendulum-z",
@@ -119,8 +111,7 @@
           "Wind Guardians",
           "Metal Empire",
           "Virus Busters"
-        ],
-        "notes": "Features 'Folder Continent' species and 2-prong connectivity."
+        ]
       },
       {
         "id": "vpet-newwave1",
@@ -131,8 +122,7 @@
           "Digital Camouflage",
           "Pixel Protein",
           "Digivolution Agumon"
-        ],
-        "notes": "Latest B&W revival released in March 2026 with new 'communication' features."
+        ]
       }
     ]
   },
@@ -151,8 +141,7 @@
           "1.5",
           "2.0",
           "3.0"
-        ],
-        "notes": "First series to use the 10-pin 3-prong connector and XAI system."
+        ]
       },
       {
         "id": "vpet-accel",
@@ -163,8 +152,7 @@
           "Evil Genome",
           "Nature Genome",
           "Ultimate Genome"
-        ],
-        "notes": "High-spec 3-prong series with DNA sensor and removable faceplates."
+        ]
       },
       {
         "id": "vpet-mini",
@@ -177,8 +165,7 @@
           "Xros Wars Red",
           "Xros Wars Blue",
           "Xros Wars Black"
-        ],
-        "notes": "Ultra-compact shell utilizing the 3-prong 10-pin connector."
+        ]
       },
       {
         "id": "vpet-dm-x",
@@ -188,8 +175,7 @@
           "Ver. 1 Black/White",
           "Ver. 2 Red/Purple",
           "Ver. 3 Blue/Yellow"
-        ],
-        "notes": "Flagship modern 3-prong series with built-in quest maps."
+        ]
       }
     ]
   },
@@ -209,8 +195,7 @@
           "Ver. 3",
           "Ver. 4",
           "Ver. 5"
-        ],
-        "notes": "First backlit color V-Pet with rechargeable battery and USB-C."
+        ]
       },
       {
         "id": "vpet-pen-color",
@@ -225,8 +210,7 @@
           "ZERO",
           "6 Saiyu Warriors",
           "7 Toho Braves"
-        ],
-        "notes": "Saiyu Warriors and Toho Braves released late 2025/early 2026."
+        ]
       },
       {
         "id": "vpet-color-collab",
@@ -235,8 +219,7 @@
         "versions": [
           "Godzilla Edition",
           "Monster Hunter 20th Edition"
-        ],
-        "notes": "Special color firmware crossovers with custom evolution trees."
+        ]
       },
       {
         "id": "vpet-dmc-xw",
@@ -245,8 +228,7 @@
         "versions": [
           "Xros Red",
           "Blue Flare"
-        ],
-        "notes": "15th Anniversary Xros Wars color remakes."
+        ]
       }
     ]
   },
@@ -264,8 +246,7 @@
           "Version 1",
           "Version 2",
           "Version 2.5 (Asia)"
-        ],
-        "notes": "Pedometer-driven quest device for Digimon Adventure."
+        ]
       },
       {
         "id": "quest-d3-og",
@@ -275,8 +256,7 @@
           "Ver. 1 V-mon",
           "Ver. 2 Hawkmon",
           "Ver. 3 Armadimon"
-        ],
-        "notes": "Adventure 02 tie-in with 2-prong connectivity."
+        ]
       },
       {
         "id": "quest-dark-og",
@@ -287,8 +267,7 @@
           "Version 1.5",
           "Version 2.0",
           "Ultimate Version"
-        ],
-        "notes": "Uses a card-slash sensor and quest progression."
+        ]
       },
       {
         "id": "quest-dscanner",
@@ -298,8 +277,7 @@
           "Version 1.0",
           "Version 2.0",
           "Version 3.0"
-        ],
-        "notes": "Features a barcode scanner and 2-prong port."
+        ]
       },
       {
         "id": "quest-dspirit",
@@ -308,8 +286,7 @@
         "versions": [
           "D-Spirit 1",
           "D-Spirit 2"
-        ],
-        "notes": "Asia exclusive handheld database/quest hybrid with 575+ Digimon."
+        ]
       },
       {
         "id": "quest-neo",
@@ -318,8 +295,7 @@
         "versions": [
           "Ver. 1",
           "Ver. 2"
-        ],
-        "notes": "Updated quest system based on the Digimon Next manga."
+        ]
       },
       {
         "id": "quest-15th-remake",
@@ -331,8 +307,7 @@
           "Omegamon",
           "Anime Special",
           "Complete Edition"
-        ],
-        "notes": "Enhanced B&W screen revivals."
+        ]
       },
       {
         "id": "quest-digivice-2020",
@@ -342,8 +317,7 @@
           "Standard",
           "Blue",
           "1999 Color"
-        ],
-        "notes": "Adventure: Reboot series pedometer device."
+        ]
       }
     ]
   },
@@ -361,8 +335,7 @@
           "10x",
           "20x",
           "Data Link (US)"
-        ],
-        "notes": "Uses the 3-prong port to link with Pendulum X and Accel V-Pets."
+        ]
       },
       {
         "id": "quest-digivice-burst",
@@ -371,8 +344,7 @@
         "versions": [
           "Shine Orange",
           "Mirage Blue"
-        ],
-        "notes": "Upgraded iC hardware with Air Signal sensor and 3-prong port."
+        ]
       }
     ]
   },
@@ -391,8 +363,7 @@
           "Blue Flare",
           "Black",
           "Fusion Loader (Asia)"
-        ],
-        "notes": "First color TFT device; supports MP3 playback and 'Digi-Melody'."
+        ]
       },
       {
         "id": "quest-applidrive",
@@ -402,8 +373,7 @@
           "Standard",
           "DUO Gatchmon",
           "DUO Offmon"
-        ],
-        "notes": "Utilizes Appmon chips to scan data into the color interface."
+        ]
       },
       {
         "id": "quest-color-25th",
@@ -413,8 +383,7 @@
           "Standard",
           "DX Taichi Set",
           "DX Yamato Set"
-        ],
-        "notes": "Full color remake of the 1999 Adventure quest with anime visuals."
+        ]
       },
       {
         "id": "quest-d3-color-25th",
@@ -427,8 +396,7 @@
           "Iori",
           "T.K.",
           "Hikari"
-        ],
-        "notes": "Full color remake of the 02 quest line."
+        ]
       },
       {
         "id": "quest-dark-color-25th",
@@ -438,8 +406,7 @@
           "Takato",
           "Ruki",
           "Lee"
-        ],
-        "notes": "Latest 2026 release with physical card-slash color integration."
+        ]
       }
     ]
   }

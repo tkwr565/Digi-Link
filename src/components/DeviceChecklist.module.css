@@ -147,13 +147,6 @@
   font-weight: 400;
 }
 
-.notes {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 13px;
-  color: var(--text-secondary);
-  font-style: italic;
-}
-
 .versions {
   display: flex;
   flex-wrap: wrap;

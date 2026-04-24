@@ -103,7 +103,6 @@ export default function DeviceChecklist({ value = [], onChange, label = "Select 
                             {device.name}
                             {device.year && <span className={styles.year}> ({device.year})</span>}
                           </span>
-                          {device.notes && <span className={styles.notes}>{device.notes}</span>}
                         </div>
                         <div className={styles.versions}>
                           {device.versions.map(version => (
@@ -132,7 +131,6 @@ export default function DeviceChecklist({ value = [], onChange, label = "Select 
                             {device.name}
                             {device.year && <span className={styles.year}> ({device.year})</span>}
                           </span>
-                          {device.notes && <span className={styles.notes}>{device.notes}</span>}
                         </span>
                       </label>
                     )}
