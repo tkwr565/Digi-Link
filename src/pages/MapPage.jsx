@@ -66,13 +66,18 @@ export default function MapPage() {
 
       if (navigator.geolocation) {
         try {
-          const pos = await new Promise((resolve, reject) =>
-            navigator.geolocation.getCurrentPosition(resolve, reject, {
-              enableHighAccuracy: false,
-              timeout: 15000,
-              maximumAge: 60000,
-            })
-          )
+          const pos = await Promise.race([
+            new Promise((resolve, reject) =>
+              navigator.geolocation.getCurrentPosition(resolve, reject, {
+                enableHighAccuracy: false,
+                timeout: 8000,
+                maximumAge: 60000,
+              })
+            ),
+            new Promise((_, reject) =>
+              setTimeout(() => reject(new Error('Location timeout')), 8000)
+            ),
+          ])
           lat = pos.coords.latitude
           lng = pos.coords.longitude
           setUserLocation({ latitude: lat, longitude: lng })
@@ -174,9 +179,12 @@ export default function MapPage() {
     }
   }
 
-  // onIdle (not onLoad) dismisses the radar — tiles are painted by then, so no grey flash after AppLoadAnimation fades.
-  const handleMapIdle = () => {
+  const handleMapLoad = () => {
     if (isMapLoading) setIsMapLoading(false)
+    loadPinsInViewport()
+  }
+
+  const handleMapIdle = () => {
     loadPinsInViewport()
   }
 
@@ -450,6 +458,7 @@ export default function MapPage() {
           ref={mapRef}
           {...viewState}
           onMove={(evt) => setViewState(evt.viewState)}
+          onLoad={handleMapLoad}
           onIdle={handleMapIdle}
           mapStyle={CARTO_DARK_MATTER}
           style={{ width: '100%', height: '100%' }}
