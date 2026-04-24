@@ -12,7 +12,7 @@ export default function DeviceChecklist({ value = [], onChange, label = "Select 
       .then(res => res.json())
       .then(data => {
         setCategories(data)
-        setExpandedCategories(new Set([data[0]?.category]))
+        setExpandedCategories(new Set())
         setLoading(false)
       })
       .catch(err => {
