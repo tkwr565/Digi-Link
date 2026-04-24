@@ -494,6 +494,12 @@ export default function MapPage() {
           />
         </Map>
 
+        {/* App wordmark */}
+        <div className={styles.wordmark}>
+          <span className={styles.wordmarkChinese}>數碼吉龍波</span>
+          <span className={styles.wordmarkRoman}>Digi-Gut</span>
+        </div>
+
         {/* Map loading overlay */}
         {isMapLoading && (
           <div className={styles.mapLoadingOverlay}>
