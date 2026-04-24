@@ -47,6 +47,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.5rem;
+  min-height: 44px;
   cursor: pointer;
   transition: color 0.2s ease, transform 0.1s;
   text-transform: uppercase;

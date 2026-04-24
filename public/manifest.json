@@ -1,0 +1,23 @@
+{
+  "name": "數碼吉龍波 (Digi-Gut)",
+  "short_name": "數碼吉龍波",
+  "description": "Find Digimon fans in the real world",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#00d4ff",
+  "background_color": "#050a0e",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
