@@ -51,7 +51,7 @@ export default function ProfileSetupPage() {
   }
 
   const checkUsernameUnique = async (username) => {
-    if (!username || username.length < 3) {
+    if (!username || username.length < 5) {
       return false
     }
 
@@ -81,8 +81,8 @@ export default function ProfileSetupPage() {
   }
 
   const handleUsernameNext = async () => {
-    if (username.length < 3) {
-      setUsernameError('Username must be at least 3 characters')
+    if (username.length < 5) {
+      setUsernameError('Username must be at least 5 characters')
       return
     }
 
@@ -91,8 +91,8 @@ export default function ProfileSetupPage() {
       return
     }
 
-    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-      setUsernameError('Username can only contain letters, numbers, and underscores')
+    if (!/^[a-zA-Z0-9_一-鿿㐀-䶿]+$/.test(username)) {
+      setUsernameError('Username can only contain letters, numbers, underscores, or Chinese characters')
       return
     }
 

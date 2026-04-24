@@ -137,7 +137,7 @@ export default function ProfilePage() {
   }
 
   const checkUsernameUnique = async (username) => {
-    if (!username || username.length < 3) {
+    if (!username || username.length < 5) {
       return false
     }
 
@@ -173,13 +173,13 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     // Validate username
-    if (editUsername.length < 3 || editUsername.length > 20) {
-      setError('Username must be between 3 and 20 characters')
+    if (editUsername.length < 5 || editUsername.length > 20) {
+      setError('Username must be between 5 and 20 characters')
       return
     }
 
-    if (!/^[a-zA-Z0-9_]+$/.test(editUsername)) {
-      setError('Username can only contain letters, numbers, and underscores')
+    if (!/^[a-zA-Z0-9_一-鿿㐀-䶿]+$/.test(editUsername)) {
+      setError('Username can only contain letters, numbers, underscores, or Chinese characters')
       return
     }
 
@@ -396,7 +396,7 @@ export default function ProfilePage() {
               {usernameError && (
                 <div className={styles.inputError}>{usernameError}</div>
               )}
-              {editUsername !== profile.username && !usernameError && !usernameChecking && editUsername.length >= 3 && (
+              {editUsername !== profile.username && !usernameError && !usernameChecking && editUsername.length >= 5 && (
                 <div className={styles.hintSuccess}>Username available!</div>
               )}
             </div>
