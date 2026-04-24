@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabase'
 import DigimonSprite from '../components/DigimonSprite'
 import EmptyState from '../components/EmptyState'
+import { useTranslation } from 'react-i18next'
 import styles from './LeaderboardPage.module.css'
 
 const LEADERBOARD_LIMIT = 50
@@ -11,6 +12,7 @@ const WEEK_MS = 7 * 24 * 60 * 60 * 1000
 
 export default function LeaderboardPage() {
   const { user } = useAuth()
+  const { t } = useTranslation()
   const userRowRef = useRef(null)
 
   const [scope, setScope] = useState('all')      // 'all' | 'friends'
@@ -171,7 +173,7 @@ export default function LeaderboardPage() {
       )
     } catch (err) {
       console.error('Failed to load leaderboard:', err)
-      setError('Failed to load leaderboard. Please try again.')
+      setError(t('leaderboard.error'))
     } finally {
       setLoading(false)
     }
@@ -188,7 +190,7 @@ export default function LeaderboardPage() {
     (period === 'weekly' ? weeklyAllUserAppended : allTimeAllUserAppended)
 
   const battleKey = period === 'weekly' ? 'weekly_battles' : 'total_battles'
-  const battleLabel = period === 'weekly' ? 'this week' : 'battles'
+  const battleLabel = period === 'weekly' ? t('leaderboard.thisWeekLabel') : t('leaderboard.battles')
 
   const scrollToUser = () => {
     userRowRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -197,7 +199,7 @@ export default function LeaderboardPage() {
   if (loading) {
     return (
       <div className={styles.container}>
-        <div className={styles.loadingState}>Loading leaderboard...</div>
+        <div className={styles.loadingState}>{t('leaderboard.loading')}</div>
       </div>
     )
   }
@@ -207,8 +209,8 @@ export default function LeaderboardPage() {
       {/* ── Fixed controls (do not scroll) ── */}
       <div className={styles.controls}>
         <div className={styles.header}>
-          <h1 className={styles.title}>LEADERBOARD</h1>
-          <p className={styles.subtitle}>Ranked by confirmed battles</p>
+          <h1 className={styles.title}>{t('leaderboard.title')}</h1>
+          <p className={styles.subtitle}>{t('leaderboard.subtitle')}</p>
         </div>
 
         {/* Scope tabs */}
@@ -217,13 +219,13 @@ export default function LeaderboardPage() {
             className={`${styles.tab} ${scope === 'all' ? styles.tabActive : ''}`}
             onClick={() => setScope('all')}
           >
-            All Trainers
+            {t('leaderboard.allTrainers')}
           </button>
           <button
             className={`${styles.tab} ${scope === 'friends' ? styles.tabActive : ''}`}
             onClick={() => setScope('friends')}
           >
-            Friends
+            {t('leaderboard.friends')}
           </button>
         </div>
 
@@ -234,17 +236,17 @@ export default function LeaderboardPage() {
               className={`${styles.periodTab} ${period === 'weekly' ? styles.periodTabActive : ''}`}
               onClick={() => setPeriod('weekly')}
             >
-              This Week
+              {t('leaderboard.thisWeek')}
             </button>
             <button
               className={`${styles.periodTab} ${period === 'alltime' ? styles.periodTabActive : ''}`}
               onClick={() => setPeriod('alltime')}
             >
-              All Time
+              {t('leaderboard.allTime')}
             </button>
           </div>
           <button className={styles.yourRankBtn} onClick={scrollToUser}>
-            ↑ Your Rank
+            {t('leaderboard.yourRank')}
           </button>
         </div>
       </div>
@@ -254,7 +256,7 @@ export default function LeaderboardPage() {
         {error ? (
           <EmptyState
             icon={WifiOff}
-            title="Could not load leaderboard"
+            title={t('leaderboard.error')}
             message={error}
             variant="error"
           />
@@ -262,17 +264,17 @@ export default function LeaderboardPage() {
           <EmptyState
             icon={scope === 'friends' ? Users : Trophy}
             title={
-              scope === 'friends' && period === 'weekly' ? 'No friend battles this week' :
-              scope === 'friends' ? 'No friends ranked yet' :
-              period === 'weekly' ? 'No battles this week' :
-              'No trainers yet'
+              scope === 'friends' && period === 'weekly' ? t('leaderboard.noFriendBattles') :
+              scope === 'friends' ? t('leaderboard.noFriendsRanked') :
+              period === 'weekly' ? t('leaderboard.noBattles') :
+              t('leaderboard.noTrainers')
             }
             message={
               scope === 'friends'
-                ? 'Add friends to compare battle rankings!'
+                ? t('leaderboard.addFriends')
                 : period === 'weekly'
-                ? 'Be the first to battle this week!'
-                : 'Be the first trainer on the leaderboard.'
+                ? t('leaderboard.firstToBattle')
+                : t('leaderboard.firstTrainer')
             }
           />
         ) : (
@@ -301,7 +303,7 @@ export default function LeaderboardPage() {
                     </div>
                     <div className={styles.nameCol}>
                       <span className={styles.username}>{entry.username}</span>
-                      {isOwn && <span className={styles.youTag}>YOU</span>}
+                      {isOwn && <span className={styles.youTag}>{t('leaderboard.you')}</span>}
                     </div>
                     <div className={styles.battles}>
                       <span className={styles.battlesNum}>

@@ -5,11 +5,13 @@ import { supabase } from '../lib/supabase'
 import DigimonSprite from '../components/DigimonSprite'
 import DigimonPicker from '../components/DigimonPicker'
 import DeviceChecklist from '../components/DeviceChecklist'
+import { useTranslation } from 'react-i18next'
 import styles from './ProfilePage.module.css'
 
 export default function ProfilePage() {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
 
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -66,6 +68,11 @@ export default function ProfilePage() {
       if (profileError) throw profileError
 
       setProfile(profileData)
+      
+      // If profile has a language, set it
+      if (profileData.language && profileData.language !== i18n.language) {
+        i18n.changeLanguage(profileData.language)
+      }
 
       // Load devices
       const { data: devicesData, error: devicesError } = await supabase
@@ -78,9 +85,24 @@ export default function ProfilePage() {
       setDevices(devicesData || [])
     } catch (err) {
       console.error('Failed to load profile:', err)
-      setError(`Failed to load profile: ${err.message}`)
+      setError(`${t('common.error')}: ${err.message}`)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleLanguageChange = async (newLang) => {
+    i18n.changeLanguage(newLang)
+    
+    if (user) {
+      try {
+        await supabase
+          .from('profiles')
+          .update({ language: newLang })
+          .eq('id', user.id)
+      } catch (err) {
+        console.error('Failed to persist language choice:', err)
+      }
     }
   }
 
@@ -159,7 +181,7 @@ export default function ProfilePage() {
 
     if (error) {
       console.error('Error checking username:', error)
-      setUsernameError('Error checking username availability')
+      setUsernameError(t('common.error'))
       return false
     }
 
@@ -191,12 +213,12 @@ export default function ProfilePage() {
 
     // Validate Digimon
     if (!editFavouriteDigimon) {
-      setError('Please select a favourite Digimon')
+      setError(t('profile.selectFavourite'))
       return
     }
 
     if (editActivePartners.length === 0) {
-      setError('Please select at least one active partner')
+      setError(t('profile.selectPartners'))
       return
     }
 
@@ -255,7 +277,7 @@ export default function ProfilePage() {
       setEditMode(false)
     } catch (err) {
       console.error('Failed to save profile:', err)
-      setError(`Failed to save profile: ${err.message}`)
+      setError(`${t('common.error')}: ${err.message}`)
     } finally {
       setSaving(false)
     }
@@ -271,9 +293,9 @@ export default function ProfilePage() {
     return (
       <div className={styles.container}>
         <div className={styles.pageHeader}>
-          <h1 className={styles.pageTitle}>Profile</h1>
+          <h1 className={styles.pageTitle}>{t('profile.title')}</h1>
         </div>
-        <div className={styles.loading}>Loading profile...</div>
+        <div className={styles.loading}>{t('common.loading')}</div>
       </div>
     )
   }
@@ -282,9 +304,9 @@ export default function ProfilePage() {
     return (
       <div className={styles.container}>
         <div className={styles.pageHeader}>
-          <h1 className={styles.pageTitle}>Profile</h1>
+          <h1 className={styles.pageTitle}>{t('profile.title')}</h1>
         </div>
-        <div className={styles.error}>Profile not found</div>
+        <div className={styles.error}>{t('common.error')}</div>
       </div>
     )
   }
@@ -292,10 +314,20 @@ export default function ProfilePage() {
   return (
     <div className={styles.container}>
       <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>{editMode ? 'Edit Profile' : 'Profile'}</h1>
-        {!editMode && (
-          <button onClick={handleEditClick} className={styles.btnEdit}>Edit</button>
-        )}
+        <h1 className={styles.pageTitle}>{editMode ? t('profile.editTitle') : t('profile.title')}</h1>
+        <div className={styles.headerActions}>
+          <select 
+            className={styles.langSwitcher}
+            value={i18n.language}
+            onChange={(e) => handleLanguageChange(e.target.value)}
+          >
+            <option value="en">EN</option>
+            <option value="zh-HK">中</option>
+          </select>
+          {!editMode && (
+            <button onClick={handleEditClick} className={styles.btnEdit}>{t('common.edit')}</button>
+          )}
+        </div>
       </div>
 
       <div className={styles.scrollArea}>
@@ -309,7 +341,7 @@ export default function ProfilePage() {
 
             {/* Favourite Digimon */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Favourite Digimon</h2>
+              <h2 className={styles.sectionTitle}>{t('profile.favouriteDigimon')}</h2>
               <div className={styles.favouriteDisplay}>
                 <DigimonSprite suffix={profile.favourite_digimon} size="lg" />
                 <div className={styles.digimonName}>
@@ -320,7 +352,7 @@ export default function ProfilePage() {
 
             {/* Active Partners */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Active Partners</h2>
+              <h2 className={styles.sectionTitle}>{t('profile.activePartners')}</h2>
               <div className={styles.partnersGrid}>
                 {profile.active_partners.map(suffix => (
                   <div key={suffix} className={styles.partnerCard}>
@@ -333,7 +365,7 @@ export default function ProfilePage() {
 
             {/* Active Devices */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Active Devices</h2>
+              <h2 className={styles.sectionTitle}>{t('profile.activeDevices')}</h2>
               <div className={styles.devicesList}>
                 {devices.filter(d => d.is_active).map(device => (
                   <div key={`${device.digivice_id}-${device.version_label}`} className={styles.deviceItem}>
@@ -341,32 +373,32 @@ export default function ProfilePage() {
                   </div>
                 ))}
                 {devices.filter(d => d.is_active).length === 0 && (
-                  <div className={styles.emptyState}>No active devices</div>
+                  <div className={styles.emptyState}>{t('profile.noActiveDevices')}</div>
                 )}
               </div>
             </div>
 
             {/* Battle Stats */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Battle Statistics</h2>
+              <h2 className={styles.sectionTitle}>{t('profile.battleStats')}</h2>
               <div className={styles.statsGrid}>
                 <div className={styles.statCard}>
                   <div className={styles.statValue}>{profile.total_battles}</div>
-                  <div className={styles.statLabel}>Total Battles</div>
+                  <div className={styles.statLabel}>{t('profile.totalBattles')}</div>
                 </div>
               </div>
             </div>
 
             <button onClick={() => navigate('/friends')} className={styles.btnFriends}>
-              Friends
+              {t('profile.friends')}
             </button>
 
             <button onClick={() => navigate('/my-pins')} className={styles.btnMyPins}>
-              My Pins
+              {t('profile.myPins')}
             </button>
 
             <button onClick={signOut} className={styles.btnLogout}>
-              Log Out
+              {t('profile.logout')}
             </button>
           </>
         ) : (
@@ -378,7 +410,7 @@ export default function ProfilePage() {
 
             {/* Username */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Username</h2>
+              <h2 className={styles.sectionTitle}>{t('profile.username')}</h2>
               <input
                 type="text"
                 value={editUsername}
@@ -391,19 +423,19 @@ export default function ProfilePage() {
                 disabled={saving}
               />
               {usernameChecking && (
-                <div className={styles.hint}>Checking availability...</div>
+                <div className={styles.hint}>{t('profile.checkingUsername')}</div>
               )}
               {usernameError && (
                 <div className={styles.inputError}>{usernameError}</div>
               )}
               {editUsername !== profile.username && !usernameError && !usernameChecking && editUsername.length >= 5 && (
-                <div className={styles.hintSuccess}>Username available!</div>
+                <div className={styles.hintSuccess}>{t('profile.usernameAvailable')}</div>
               )}
             </div>
 
             {/* Favourite Digimon */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Favourite Digimon</h2>
+              <h2 className={styles.sectionTitle}>{t('profile.favouriteDigimon')}</h2>
               {editFavouriteDigimon && (
                 <div className={styles.preview}>
                   <DigimonSprite suffix={editFavouriteDigimon.suffix} size="lg" />
@@ -414,13 +446,13 @@ export default function ProfilePage() {
                 value={editFavouriteDigimon}
                 onChange={setEditFavouriteDigimon}
                 multiple={false}
-                label="Select Favourite Digimon"
+                label={t('profile.selectFavourite')}
               />
             </div>
 
             {/* Active Partners */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Active Partners</h2>
+              <h2 className={styles.sectionTitle}>{t('profile.activePartners')}</h2>
               {editActivePartners.length > 0 && (
                 <div className={styles.previewPartners}>
                   {editActivePartners.map(digimon => (
@@ -436,13 +468,13 @@ export default function ProfilePage() {
                 onChange={setEditActivePartners}
                 multiple={true}
                 maxSelection={3}
-                label="Select Active Partners"
+                label={t('profile.selectPartners')}
               />
             </div>
 
             {/* Devices */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>Devices Owned</h2>
+              <h2 className={styles.sectionTitle}>{t('profile.ownedDevices')}</h2>
               <DeviceChecklist
                 value={editOwnedDevices}
                 onChange={(owned) => {
@@ -450,14 +482,14 @@ export default function ProfilePage() {
                   // Remove any active devices that are no longer owned
                   setEditActiveDevices(prev => prev.filter(id => owned.includes(id)))
                 }}
-                label="Your Devices"
+                label={t('profile.ownedDevices')}
               />
             </div>
 
             {/* Active Devices */}
             {editOwnedDevices.length > 0 && (
               <div className={styles.section}>
-                <h2 className={styles.sectionTitle}>Active Devices</h2>
+                <h2 className={styles.sectionTitle}>{t('profile.activeDevices')}</h2>
                 <div className={styles.activeDeviceList}>
                   {editOwnedDevices.map(deviceId => {
                     const [digiviceId, versionLabel] = deviceId.includes(':')
@@ -495,14 +527,14 @@ export default function ProfilePage() {
                 disabled={saving}
                 className={styles.btnSecondary}
               >
-                Cancel
+                {t('common.cancel')}
               </button>
               <button
                 onClick={handleSave}
                 disabled={saving}
                 className={styles.btnPrimary}
               >
-                {saving ? 'Saving...' : 'Save Changes'}
+                {saving ? t('common.saving') : t('common.save')}
               </button>
             </div>
           </>

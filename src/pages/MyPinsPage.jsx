@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, MapPin, Edit2, Trash2, RefreshCw, Clock, X, Check } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabase'
+import { useTranslation } from 'react-i18next'
 import styles from './MyPinsPage.module.css'
 
 const DAY_LABELS = { MON: 'Mon', TUE: 'Tue', WED: 'Wed', THU: 'Thu', FRI: 'Fri', SAT: 'Sat', SUN: 'Sun' }
@@ -55,6 +56,7 @@ function formatTimeWindow(pin) {
 export default function MyPinsPage() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const [pins, setPins] = useState([])
   const [loading, setLoading] = useState(true)
@@ -83,12 +85,12 @@ export default function MyPinsPage() {
 
     if (err) {
       console.error(err)
-      setError('Failed to load pins.')
+      setError(t('myPins.error'))
     } else {
       setPins(data || [])
     }
     setLoading(false)
-  }, [user])
+  }, [user, t])
 
   useEffect(() => { loadPins() }, [loadPins])
 
@@ -123,7 +125,7 @@ export default function MyPinsPage() {
     setEditError('')
 
     if (!editTitle.trim()) {
-      setEditError('Title is required.')
+      setEditError(t('myPins.titleRequired'))
       return
     }
 
@@ -144,7 +146,7 @@ export default function MyPinsPage() {
       await loadPins()
     } catch (err) {
       console.error(err)
-      setEditError('Failed to save changes.')
+      setEditError(t('myPins.saveFailed'))
     } finally {
       setSaving(false)
     }
@@ -170,10 +172,10 @@ export default function MyPinsPage() {
     const status = getPinStatus(pin)
     return (
       <span className={`${styles.badge} ${styles[`badge_${status}`]}`}>
-        {status === 'active' && 'ACTIVE'}
-        {status === 'recurring' && <><RefreshCw size={10} /> RECURRING</>}
-        {status === 'upcoming' && <><Clock size={10} /> UPCOMING</>}
-        {status === 'expired' && 'EXPIRED'}
+        {status === 'active' && t('myPins.statusActive')}
+        {status === 'recurring' && <><RefreshCw size={10} /> {t('myPins.statusRecurring')}</>}
+        {status === 'upcoming' && <><Clock size={10} /> {t('myPins.statusUpcoming')}</>}
+        {status === 'expired' && t('myPins.statusExpired')}
       </span>
     )
   }
@@ -191,14 +193,14 @@ export default function MyPinsPage() {
                 <button
                   className={styles.iconBtn}
                   onClick={() => openEdit(pin)}
-                  title="Edit pin"
+                  title={t('common.edit')}
                 >
                   <Edit2 size={16} />
                 </button>
                 <button
                   className={`${styles.iconBtn} ${styles.iconBtnDanger}`}
                   onClick={() => setDeletingPin(pin.id)}
-                  title="Delete pin"
+                  title={t('common.delete')}
                 >
                   <Trash2 size={16} />
                 </button>
@@ -206,7 +208,7 @@ export default function MyPinsPage() {
             )}
             {isDeleting && (
               <div className={styles.deleteConfirm}>
-                <span>Delete?</span>
+                <span>{t('myPins.deleteConfirm')}</span>
                 <button
                   className={styles.confirmDeleteBtn}
                   onClick={() => handleDelete(pin)}
@@ -240,11 +242,11 @@ export default function MyPinsPage() {
     )
   }
 
-  const renderSection = (label, pinList) => {
+  const renderSection = (labelKey, pinList) => {
     if (pinList.length === 0) return null
     return (
       <div className={styles.section}>
-        <div className={styles.sectionHeader}>{label}</div>
+        <div className={styles.sectionHeader}>{t(`myPins.status${labelKey.charAt(0).toUpperCase() + labelKey.slice(1)}`)}</div>
         {pinList.map(renderPinCard)}
       </div>
     )
@@ -259,14 +261,14 @@ export default function MyPinsPage() {
         <button className={styles.backBtn} onClick={() => navigate('/profile')}>
           <ArrowLeft size={20} />
         </button>
-        <h1 className={styles.title}>MY PINS</h1>
+        <h1 className={styles.title}>{t('myPins.title')}</h1>
         <span className={styles.pinCount}>{totalPins}</span>
       </div>
 
       {/* Content */}
       <div className={styles.content}>
         {loading && (
-          <div className={styles.centered}>Loading...</div>
+          <div className={styles.centered}>{t('myPins.loading')}</div>
         )}
 
         {!loading && error && (
@@ -276,20 +278,20 @@ export default function MyPinsPage() {
         {!loading && !error && totalPins === 0 && (
           <div className={styles.emptyState}>
             <MapPin size={48} className={styles.emptyIcon} />
-            <p className={styles.emptyTitle}>No pins yet</p>
-            <p className={styles.emptyText}>Create a pin from the map to show up for other Tamers nearby.</p>
+            <p className={styles.emptyTitle}>{t('myPins.emptyTitle')}</p>
+            <p className={styles.emptyText}>{t('myPins.emptyText')}</p>
             <button className={styles.goToMapBtn} onClick={() => navigate('/')}>
-              Open Map
+              {t('myPins.openMap')}
             </button>
           </div>
         )}
 
         {!loading && !error && totalPins > 0 && (
           <>
-            {renderSection('ACTIVE', grouped.active)}
-            {renderSection('RECURRING', grouped.recurring)}
-            {renderSection('UPCOMING', grouped.upcoming)}
-            {renderSection('EXPIRED', grouped.expired)}
+            {renderSection('active', grouped.active)}
+            {renderSection('recurring', grouped.recurring)}
+            {renderSection('upcoming', grouped.upcoming)}
+            {renderSection('expired', grouped.expired)}
           </>
         )}
       </div>
@@ -301,7 +303,7 @@ export default function MyPinsPage() {
             <div className={styles.modalHandle} />
 
             <div className={styles.modalHeader}>
-              <h2 className={styles.modalTitle}>Edit Pin</h2>
+              <h2 className={styles.modalTitle}>{t('myPins.editPin')}</h2>
               <button className={styles.modalCloseBtn} onClick={closeEdit}>
                 <X size={20} />
               </button>
@@ -309,28 +311,28 @@ export default function MyPinsPage() {
 
             <div className={styles.locationNote}>
               <MapPin size={14} />
-              Location and time window cannot be changed — delete and recreate to adjust.
+              {t('myPins.locationNote')}
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Title</label>
+              <label className={styles.label}>{t('myPins.titleLabel')}</label>
               <input
                 className={styles.input}
                 value={editTitle}
                 onChange={e => setEditTitle(e.target.value)}
                 maxLength={80}
-                placeholder="Pin title"
+                placeholder={t('myPins.pinTitlePlaceholder')}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Message <span className={styles.optional}>(optional)</span></label>
+              <label className={styles.label}>{t('myPins.messageLabel')} <span className={styles.optional}>{t('myPins.optional')}</span></label>
               <textarea
                 className={`${styles.input} ${styles.textarea}`}
                 value={editMessage}
                 onChange={e => setEditMessage(e.target.value)}
                 maxLength={200}
-                placeholder="Optional message for other Tamers"
+                placeholder={t('myPins.messagePlaceholder')}
                 rows={3}
               />
             </div>
@@ -343,14 +345,14 @@ export default function MyPinsPage() {
                 onClick={handleSave}
                 disabled={saving}
               >
-                {saving ? 'Saving...' : 'Save Changes'}
+                {saving ? t('common.saving') : t('myPins.saveChanges')}
               </button>
               <button
                 className={styles.cancelBtn}
                 onClick={closeEdit}
                 disabled={saving}
               >
-                Cancel
+                {t('common.cancel')}
               </button>
             </div>
           </div>

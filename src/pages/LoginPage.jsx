@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import styles from './AuthPages.module.css'
 
 function LoginPage() {
@@ -10,6 +11,7 @@ function LoginPage() {
   const [loading, setLoading] = useState(false)
 
   const { signIn, signInWithGoogle } = useAuth()
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   const handleEmailLogin = async (e) => {
@@ -17,7 +19,7 @@ function LoginPage() {
     setError('')
 
     if (!email || !password) {
-      setError('Email and password are required')
+      setError(t('auth.emailRequired'))
       return
     }
 
@@ -52,8 +54,9 @@ function LoginPage() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1 className={styles.title}>DigiMap</h1>
-        <p className={styles.subtitle}>Find Digimon fans in the real world</p>
+        <h1 className={styles.titleChinese}>數碼吉龍波</h1>
+        <p className={styles.title}>Digi-Gut</p>
+        <p className={styles.subtitle}>{t('auth.subtitle')}</p>
 
         {error && <div className={styles.error}>{error}</div>}
 
@@ -81,16 +84,16 @@ function LoginPage() {
               d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
             />
           </svg>
-          Sign in with Google
+          {t('auth.googleSignIn')}
         </button>
 
         <div className={styles.divider}>
-          <span>or</span>
+          <span>{t('auth.or')}</span>
         </div>
 
         <form onSubmit={handleEmailLogin} className={styles.form}>
           <div className={styles.field}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t('auth.email')}</label>
             <input
               id="email"
               type="email"
@@ -103,7 +106,7 @@ function LoginPage() {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t('auth.password')}</label>
             <input
               id="password"
               type="password"
@@ -116,14 +119,14 @@ function LoginPage() {
           </div>
 
           <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Signing In...' : 'Sign In'}
+            {loading ? t('auth.signingIn') : t('auth.signIn')}
           </button>
         </form>
 
         <div className={styles.footer}>
-          Don't have an account?{' '}
+          {t('auth.noAccount')}{' '}
           <a href="/register" className={styles.link}>
-            Sign up
+            {t('auth.signUp')}
           </a>
         </div>
       </div>

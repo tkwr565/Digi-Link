@@ -5,11 +5,13 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabase'
 import DigimonSprite from '../components/DigimonSprite'
 import EmptyState from '../components/EmptyState'
+import { useTranslation } from 'react-i18next'
 import styles from './FriendsPage.module.css'
 
 export default function FriendsPage() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const [loading, setLoading] = useState(true)
   const [friends, setFriends] = useState([])
@@ -140,7 +142,7 @@ export default function FriendsPage() {
       setBattleContacts(contactProfiles)
     } catch (err) {
       console.error('Failed to load friends data:', err)
-      setError('Failed to load friends data. Please try again.')
+      setError(t('friends.error'))
     } finally {
       setLoading(false)
     }
@@ -234,7 +236,7 @@ export default function FriendsPage() {
   if (loading) {
     return (
       <div className={styles.container}>
-        <div className={styles.loadingState}>Loading friends...</div>
+        <div className={styles.loadingState}>{t('friends.loading')}</div>
       </div>
     )
   }
@@ -245,32 +247,32 @@ export default function FriendsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <button onClick={() => navigate('/profile')} className={styles.backBtn}>← Back</button>
-        <h1 className={styles.title}>FRIENDS</h1>
+        <button onClick={() => navigate('/profile')} className={styles.backBtn}>← {t('common.back')}</button>
+        <h1 className={styles.title}>{t('friends.title')}</h1>
       </div>
 
       <div className={styles.infoBanner}>
         <Info size={13} />
-        <span>After a battle is confirmed, you'll be prompted to add that trainer as a friend.</span>
+        <span>{t('friends.infoBanner')}</span>
       </div>
 
       {error && (
         <EmptyState
           icon={WifiOff}
-          title="Could not load friends"
+          title={t('friends.error')}
           message={error}
-          action={{ label: 'Retry', onClick: loadAll }}
+          action={{ label: t('common.retry'), onClick: loadAll }}
           variant="error"
         />
       )}
 
       {/* ── Username Search ── */}
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>FIND BY USERNAME</h2>
+        <h2 className={styles.sectionTitle}>{t('friends.findByUsername')}</h2>
         <input
           type="text"
           className={styles.searchInput}
-          placeholder="Type a username..."
+          placeholder={t('friends.searchPlaceholder')}
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
           autoComplete="off"
@@ -279,9 +281,9 @@ export default function FriendsPage() {
 
         {isSearchActive && (
           <div className={styles.searchResults}>
-            {searching && <div className={styles.searchHint}>Searching...</div>}
+            {searching && <div className={styles.searchHint}>{t('friends.searching')}</div>}
             {!searching && searchResults.length === 0 && (
-              <div className={styles.searchHint}>No trainers found.</div>
+              <div className={styles.searchHint}>{t('friends.noTrainersFound')}</div>
             )}
             {!searching && searchResults.map(result => {
               const status = getStatus(result.id)
@@ -291,11 +293,13 @@ export default function FriendsPage() {
                     <DigimonSprite suffix={result.favourite_digimon} size="sm" />
                     <div className={styles.userDetails}>
                       <span className={styles.username}>{result.username}</span>
-                      <span className={styles.battleCount}>{result.total_battles} battles</span>
+                      <span className={styles.battleCount}>
+                        {t('friends.battlesCount', { count: result.total_battles })}
+                      </span>
                     </div>
                   </div>
                   {status === 'friends' && (
-                    <span className={styles.tagFriends}>Friends ✓</span>
+                    <span className={styles.tagFriends}>{t('friends.tagFriends')}</span>
                   )}
                   {status === 'incoming' && (
                     <button
@@ -303,11 +307,11 @@ export default function FriendsPage() {
                       onClick={() => acceptRequest(result.id)}
                       disabled={actionLoading === result.id}
                     >
-                      {actionLoading === result.id ? '...' : 'Accept'}
+                      {actionLoading === result.id ? '...' : t('friends.btnAccept')}
                     </button>
                   )}
                   {status === 'outgoing' && (
-                    <span className={styles.btnPending}>Sent</span>
+                    <span className={styles.btnPending}>{t('friends.btnPending')}</span>
                   )}
                   {status === 'none' && (
                     <button
@@ -315,7 +319,7 @@ export default function FriendsPage() {
                       onClick={() => sendRequest(result.id)}
                       disabled={actionLoading === result.id}
                     >
-                      {actionLoading === result.id ? '...' : 'Add'}
+                      {actionLoading === result.id ? '...' : t('friends.btnAdd')}
                     </button>
                   )}
                 </div>
@@ -328,7 +332,7 @@ export default function FriendsPage() {
       {/* ── Incoming Requests ── */}
       {incomingRequests.length > 0 && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>INCOMING REQUESTS</h2>
+          <h2 className={styles.sectionTitle}>{t('friends.incomingRequests')}</h2>
           {incomingRequests.map(req => (
             <div key={req.id} className={styles.requestCard}>
               <div className={styles.userInfo}>
@@ -341,14 +345,14 @@ export default function FriendsPage() {
                   onClick={() => acceptRequest(req.id)}
                   disabled={actionLoading === req.id}
                 >
-                  {actionLoading === req.id ? '...' : 'Accept'}
+                  {actionLoading === req.id ? '...' : t('friends.btnAccept')}
                 </button>
                 <button
                   className={styles.btnReject}
                   onClick={() => rejectRequest(req.id)}
                   disabled={actionLoading === `reject-${req.id}`}
                 >
-                  {actionLoading === `reject-${req.id}` ? '...' : 'Reject'}
+                  {actionLoading === `reject-${req.id}` ? '...' : t('friends.btnReject')}
                 </button>
               </div>
             </div>
@@ -358,12 +362,12 @@ export default function FriendsPage() {
 
       {/* ── My Friends ── */}
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>MY FRIENDS</h2>
+        <h2 className={styles.sectionTitle}>{t('friends.myFriends')}</h2>
         {friends.length === 0 ? (
           <EmptyState
             icon={Users}
-            title="No friends yet"
-            message="Battle someone and add them to build your network."
+            title={t('friends.noFriendsYet')}
+            message={t('friends.battleSomeone')}
           />
         ) : (
           friends.map(friend => (
@@ -372,7 +376,9 @@ export default function FriendsPage() {
                 <DigimonSprite suffix={friend.favourite_digimon} size="sm" />
                 <div className={styles.userDetails}>
                   <span className={styles.username}>{friend.username}</span>
-                  <span className={styles.battleCount}>{friend.total_battles} battles</span>
+                  <span className={styles.battleCount}>
+                    {t('friends.battlesCount', { count: friend.total_battles })}
+                  </span>
                 </div>
               </div>
               <button
@@ -380,7 +386,7 @@ export default function FriendsPage() {
                 onClick={() => removeFriend(friend.id)}
                 disabled={actionLoading === `remove-${friend.id}`}
               >
-                {actionLoading === `remove-${friend.id}` ? '...' : 'Remove'}
+                {actionLoading === `remove-${friend.id}` ? '...' : t('friends.btnRemove')}
               </button>
             </div>
           ))
@@ -390,8 +396,8 @@ export default function FriendsPage() {
       {/* ── Battle Contacts ── */}
       {battleContacts.length > 0 && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>BATTLE CONTACTS</h2>
-          <p className={styles.sectionHint}>People you've battled — send them a friend request</p>
+          <h2 className={styles.sectionTitle}>{t('friends.battleContacts')}</h2>
+          <p className={styles.sectionHint}>{t('friends.battleContactsHint')}</p>
           {battleContacts.map(contact => {
             const isPending = outgoingRequestIds.has(contact.id)
             return (
@@ -400,7 +406,9 @@ export default function FriendsPage() {
                   <DigimonSprite suffix={contact.favourite_digimon} size="sm" />
                   <div className={styles.userDetails}>
                     <span className={styles.username}>{contact.username}</span>
-                    <span className={styles.battleCount}>{contact.total_battles} battles</span>
+                    <span className={styles.battleCount}>
+                      {t('friends.battlesCount', { count: contact.total_battles })}
+                    </span>
                   </div>
                 </div>
                 <button
@@ -408,7 +416,7 @@ export default function FriendsPage() {
                   onClick={() => !isPending && sendRequest(contact.id)}
                   disabled={isPending || actionLoading === contact.id}
                 >
-                  {actionLoading === contact.id ? '...' : isPending ? 'Sent' : 'Add'}
+                  {actionLoading === contact.id ? '...' : isPending ? t('friends.btnPending') : t('friends.btnAdd')}
                 </button>
               </div>
             )
@@ -418,9 +426,9 @@ export default function FriendsPage() {
 
       {!hasContent && !isSearchActive && (
         <div className={styles.fullEmpty}>
-          <div className={styles.fullEmptyTitle}>No connections yet</div>
+          <div className={styles.fullEmptyTitle}>{t('friends.noConnectionsYet')}</div>
           <div className={styles.fullEmptyHint}>
-            Battle other players to add them as friends, or search by username above.
+            {t('friends.noConnectionsHint')}
           </div>
         </div>
       )}

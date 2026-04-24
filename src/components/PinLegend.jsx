@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next'
 import styles from './PinLegend.module.css'
 
 export default function PinLegend() {
+  const { t } = useTranslation()
+  
   // Hexagon SVG component for legend
   const Hexagon = ({ color }) => (
     <svg
@@ -37,22 +40,22 @@ export default function PinLegend() {
         <div className={styles.legendItems}>
           <div className={styles.legendItem}>
             <Hexagon color="var(--blue-bright)" />
-            <span className={styles.legendLabel}>Your Pins</span>
+            <span className={styles.legendLabel}>{t('map.legendYourPins')}</span>
           </div>
 
           <div className={styles.legendItem}>
             <Hexagon color="var(--red)" />
-            <span className={styles.legendLabel}>Available</span>
+            <span className={styles.legendLabel}>{t('map.legendAvailable')}</span>
           </div>
 
           <div className={styles.legendItem}>
             <Hexagon color="var(--amber)" />
-            <span className={styles.legendLabel}>Contacted</span>
+            <span className={styles.legendLabel}>{t('map.legendContacted')}</span>
           </div>
 
           <div className={styles.legendItem}>
             <Hexagon color="var(--green-bright)" />
-            <span className={styles.legendLabel}>Battled</span>
+            <span className={styles.legendLabel}>{t('map.legendBattled')}</span>
           </div>
         </div>
       </div>

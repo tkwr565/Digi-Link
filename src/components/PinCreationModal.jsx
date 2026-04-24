@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { X, MapPin } from 'lucide-react'
 import Map, { Marker } from 'react-map-gl/maplibre'
@@ -7,6 +7,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
 import { loadDeviceList, getDeviceFullDisplay, loadDigimonDb, getDigimonName } from '../utils/digimonUtils'
 import DigimonSprite from './DigimonSprite'
+import { useTranslation } from 'react-i18next'
 import styles from './PinCreationModal.module.css'
 
 const CARTO_DARK_MATTER = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
@@ -42,30 +43,9 @@ const DAYS_OF_WEEK = [
   { value: 'SUN', label: 'Sunday' },
 ]
 
-// Generate next 6 days (starting from tomorrow)
-const getNextSixDays = () => {
-  const days = []
-  const today = new Date()
-
-  for (let i = 1; i <= 6; i++) {
-    const date = new Date(today)
-    date.setDate(today.getDate() + i)
-
-    const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })
-    const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-
-    days.push({
-      date: date,
-      value: date.toISOString().split('T')[0], // YYYY-MM-DD format
-      label: `${dayName}, ${dateStr}` // e.g., "Tue, Apr 22"
-    })
-  }
-
-  return days
-}
-
 export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocation }) {
   const { user } = useAuth()
+  const { t, i18n } = useTranslation()
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -81,14 +61,36 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
   const [nowDuration, setNowDuration] = useState(60) // Default 1 hour
   const [todayStartTime, setTodayStartTime] = useState('')
   const [todayEndTime, setTodayEndTime] = useState('')
-  const [weekDate, setWeekDate] = useState('') // Changed: actual date in YYYY-MM-DD format
+  const [weekDate, setWeekDate] = useState('') // actual date in YYYY-MM-DD format
   const [weekStartTime, setWeekStartTime] = useState('')
   const [weekEndTime, setWeekEndTime] = useState('')
   const [recurringDays, setRecurringDays] = useState([])
   const [recurringStartTime, setRecurringStartTime] = useState('09:00')
   const [recurringEndTime, setRecurringEndTime] = useState('17:00')
 
-  // Generate next 6 days options
+  // Generate next 6 days (starting from tomorrow)
+  const getNextSixDays = () => {
+    const days = []
+    const today = new Date()
+    const locale = i18n.language === 'zh-HK' ? 'zh-HK' : 'en-US'
+
+    for (let i = 1; i <= 6; i++) {
+      const date = new Date(today)
+      date.setDate(today.getDate() + i)
+
+      const dayName = date.toLocaleDateString(locale, { weekday: 'short' })
+      const dateStr = date.toLocaleDateString(locale, { month: 'short', day: 'numeric' })
+
+      days.push({
+        date: date,
+        value: date.toISOString().split('T')[0], // YYYY-MM-DD format
+        label: `${dayName}, ${dateStr}` // e.g., "Tue, Apr 22"
+      })
+    }
+
+    return days
+  }
+
   const nextSixDays = getNextSixDays()
 
   // User data
@@ -101,8 +103,8 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
 
   // Map state for location picker
   const [mapViewState, setMapViewState] = useState({
-    longitude: 0,
-    latitude: 0,
+    longitude: 114.1694,
+    latitude: 22.3193,
     zoom: 15
   })
 
@@ -155,13 +157,13 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
 
       // Validation: must have at least one active device
       if (!devices || devices.length === 0) {
-        setError('You must have at least one active device to create a pin. Please update your profile.')
+        setError(t('createPin.noActiveDevicesError'))
         return
       }
 
     } catch (err) {
       console.error('Error loading user data:', err)
-      setError('Failed to load user data. Please try again.')
+      setError(t('common.error'))
     } finally {
       setLoading(false)
     }
@@ -170,19 +172,19 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
   const handleNext = () => {
     // Validation for each step
     if (step === 1 && !location) {
-      setError('Please confirm your location')
+      setError(t('createPin.confirmLocationError'))
       return
     }
     if (step === 2) {
       if (timeMode === TIME_MODES.TODAY) {
         if (!todayStartTime || !todayEndTime) {
-          setError('Please set start and end times for today')
+          setError(t('createPin.setTodayTimesError'))
           return
         }
 
         // Check if end time is after start time
         if (todayEndTime <= todayStartTime) {
-          setError('End time must be after start time')
+          setError(t('createPin.endTimeAfterStartError'))
           return
         }
 
@@ -193,45 +195,45 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
         const startDateTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), startHour, startMin)
 
         if (startDateTime < now) {
-          setError('Start time cannot be in the past')
+          setError(t('createPin.startTimePastError'))
           return
         }
       }
 
       if (timeMode === TIME_MODES.THIS_WEEK) {
         if (!weekDate || !weekStartTime || !weekEndTime) {
-          setError('Please select a date and times for this week')
+          setError(t('createPin.selectDateTimesError'))
           return
         }
 
         // Check if end time is after start time
         if (weekEndTime <= weekStartTime) {
-          setError('End time must be after start time')
+          setError(t('createPin.endTimeAfterStartError'))
           return
         }
       }
 
       if (timeMode === TIME_MODES.RECURRING) {
         if (recurringDays.length === 0 || !recurringStartTime || !recurringEndTime) {
-          setError('Please select days and times for recurring pin')
+          setError(t('createPin.selectRecurringError'))
           return
         }
 
         // Check if end time is after start time
         if (recurringEndTime <= recurringStartTime) {
-          setError('End time must be after start time')
+          setError(t('createPin.endTimeAfterStartError'))
           return
         }
       }
     }
     // Step 3: validate device selection
     if (step === 3 && selectedDevices.length === 0) {
-      setError('Please select at least one device')
+      setError(t('createPin.selectDeviceError'))
       return
     }
     // Step 4: validate partner selection
     if (step === 4 && selectedPartners.length === 0) {
-      setError('Please select at least one partner')
+      setError(t('createPin.selectPartnerError'))
       return
     }
 
@@ -261,6 +263,54 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
         return [...prev, day]
       }
     })
+  }
+
+  const toggleDeviceSelection = (device) => {
+    setSelectedDevices(prev => {
+      const isSelected = prev.find(d => d.id === device.id)
+      if (isSelected) {
+        return prev.filter(d => d.id !== device.id)
+      } else {
+        return [...prev, device]
+      }
+    })
+  }
+
+  const togglePartnerSelection = (partner) => {
+    setSelectedPartners(prev => {
+      const isSelected = prev.includes(partner)
+      if (isSelected) {
+        return prev.filter(p => p !== partner)
+      } else {
+        return [...prev, partner]
+      }
+    })
+  }
+
+  const resetForm = () => {
+    setStep(1)
+    setLocation(null)
+    setIsPickingLocation(false)
+    setTimeMode(TIME_MODES.NOW)
+    setNowDuration(60)
+    setTitle('')
+    setMessage('')
+    setTodayStartTime('')
+    setTodayEndTime('')
+    setWeekDate('')
+    setWeekStartTime('')
+    setWeekEndTime('')
+    setRecurringDays([])
+    setRecurringStartTime('09:00')
+    setRecurringEndTime('17:00')
+    setSelectedDevices([])
+    setSelectedPartners([])
+    setError(null)
+  }
+
+  const handleClose = () => {
+    resetForm()
+    onClose()
   }
 
   const handleSubmit = async () => {
@@ -360,58 +410,10 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
 
     } catch (err) {
       console.error('Error creating pin:', err)
-      setError('Failed to create pin. Please try again.')
+      setError(t('createPin.createFailed'))
     } finally {
       setLoading(false)
     }
-  }
-
-  const toggleDeviceSelection = (device) => {
-    setSelectedDevices(prev => {
-      const isSelected = prev.find(d => d.id === device.id)
-      if (isSelected) {
-        return prev.filter(d => d.id !== device.id)
-      } else {
-        return [...prev, device]
-      }
-    })
-  }
-
-  const togglePartnerSelection = (partner) => {
-    setSelectedPartners(prev => {
-      const isSelected = prev.includes(partner)
-      if (isSelected) {
-        return prev.filter(p => p !== partner)
-      } else {
-        return [...prev, partner]
-      }
-    })
-  }
-
-  const resetForm = () => {
-    setStep(1)
-    setLocation(null)
-    setIsPickingLocation(false)
-    setTimeMode(TIME_MODES.NOW)
-    setNowDuration(60)
-    setTitle('')
-    setMessage('')
-    setTodayStartTime('')
-    setTodayEndTime('')
-    setWeekDate('')
-    setWeekStartTime('')
-    setWeekEndTime('')
-    setRecurringDays([])
-    setRecurringStartTime('09:00')
-    setRecurringEndTime('17:00')
-    setSelectedDevices([])
-    setSelectedPartners([])
-    setError(null)
-  }
-
-  const handleClose = () => {
-    resetForm()
-    onClose()
   }
 
   if (!isOpen) return null
@@ -422,21 +424,21 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
       <div className={styles.overlay}>
         <div className={styles.modal}>
           <div className={styles.header}>
-            <h2>Cannot Create Pin</h2>
+            <h2>{t('createPin.cannotCreate')}</h2>
             <button onClick={handleClose} className={styles.closeButton}>
               <X size={24} />
             </button>
           </div>
           <div className={styles.content}>
             <p className={styles.errorText}>
-              You must have at least one active device to create a pin.
-              Please update your profile to mark devices as active.
+              {t('createPin.noActiveDevicesError')}
             </p>
             <button onClick={handleClose} className="btn-primary">
-              Go to Profile
+              {t('createPin.goToProfile')}
             </button>
           </div>
         </div>
+
       </div>,
       document.body
     )
@@ -447,7 +449,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
       <div className={styles.modal}>
         {/* Header */}
         <div className={styles.header}>
-          <h2>Create Pin</h2>
+          <h2>{t('createPin.title')}</h2>
           <button onClick={handleClose} className={styles.closeButton}>
             <X size={24} />
           </button>
@@ -455,15 +457,12 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
 
         {/* Step indicator */}
         <div className={styles.stepIndicator}>
-          <div className={`${styles.step} ${step >= 1 ? styles.stepActive : ''}`}>1</div>
-          <div className={styles.stepLine} />
-          <div className={`${styles.step} ${step >= 2 ? styles.stepActive : ''}`}>2</div>
-          <div className={styles.stepLine} />
-          <div className={`${styles.step} ${step >= 3 ? styles.stepActive : ''}`}>3</div>
-          <div className={styles.stepLine} />
-          <div className={`${styles.step} ${step >= 4 ? styles.stepActive : ''}`}>4</div>
-          <div className={styles.stepLine} />
-          <div className={`${styles.step} ${step >= 5 ? styles.stepActive : ''}`}>5</div>
+          {[1, 2, 3, 4, 5].map((s) => (
+            <React.Fragment key={s}>
+              <div className={`${styles.step} ${step >= s ? styles.stepActive : ''}`}>{s}</div>
+              {s < 5 && <div className={styles.stepLine} />}
+            </React.Fragment>
+          ))}
         </div>
 
         {/* Content */}
@@ -477,10 +476,9 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
           {/* Step 1: Location */}
           {step === 1 && (
             <div className={styles.stepContent}>
-              <h3>Choose Location</h3>
+              <h3>{t('createPin.stepLocation')}</h3>
               <p className={styles.stepDescription}>
-                Use your current location or tap on the map to place your pin.
-                Location is snapped to ~100m grid for privacy.
+                {t('createPin.stepLocationDesc')}
               </p>
 
               {/* Map for location picking */}
@@ -521,40 +519,40 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                   }}
                   className="btn-secondary"
                 >
-                  Use Current Location
+                  {t('createPin.useCurrentLocation')}
                 </button>
                 <button
                   onClick={() => setIsPickingLocation(!isPickingLocation)}
                   className={isPickingLocation ? 'btn-primary' : 'btn-secondary'}
                 >
-                  {isPickingLocation ? 'Tap Map to Place Pin' : 'Pick Location on Map'}
+                  {isPickingLocation ? t('createPin.tapMapToPlace') : t('createPin.pickLocationOnMap')}
                 </button>
               </div>
 
               {location && (
                 <div className={styles.locationDisplay}>
-                  <span className="section-label">Selected Location</span>
+                  <span className="section-label">{t('createPin.selectedLocation')}</span>
                   <span className="mono">
-                    {snapCoordinate(location.latitude).toFixed(3)}, {snapCoordinate(location.longitude).toFixed(3)}
+                    {location.latitude.toFixed(3)}, {location.longitude.toFixed(3)}
                   </span>
                 </div>
               )}
 
               <div className={styles.optionalFields}>
-                <label className="section-label">Pin Title (Optional)</label>
+                <label className="section-label">{t('createPin.pinTitleLabel')}</label>
                 <input
                   type="text"
-                  placeholder="e.g., At T.O.P. Mall!"
+                  placeholder={t('createPin.pinTitlePlaceholder')}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   maxLength={100}
                 />
 
                 <label className="section-label" style={{ marginTop: '1rem' }}>
-                  Message (Optional)
+                  {t('createPin.messageLabel')}
                 </label>
                 <textarea
-                  placeholder="e.g., Bring your Pendulum!"
+                  placeholder={t('createPin.messagePlaceholder')}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   maxLength={500}
@@ -567,9 +565,9 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
           {/* Step 2: Time Window */}
           {step === 2 && (
             <div className={styles.stepContent}>
-              <h3>Set Time Window</h3>
+              <h3>{t('createPin.stepTime')}</h3>
               <p className={styles.stepDescription}>
-                Choose when your pin should be active
+                {t('createPin.stepTimeDesc')}
               </p>
 
               {/* Time mode selection */}
@@ -578,32 +576,32 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                   className={`${styles.timeModeButton} ${timeMode === TIME_MODES.NOW ? styles.timeModeButtonActive : ''}`}
                   onClick={() => setTimeMode(TIME_MODES.NOW)}
                 >
-                  Now
+                  {t('createPin.modeNow')}
                 </button>
                 <button
                   className={`${styles.timeModeButton} ${timeMode === TIME_MODES.TODAY ? styles.timeModeButtonActive : ''}`}
                   onClick={() => setTimeMode(TIME_MODES.TODAY)}
                 >
-                  Today
+                  {t('createPin.modeToday')}
                 </button>
                 <button
                   className={`${styles.timeModeButton} ${timeMode === TIME_MODES.THIS_WEEK ? styles.timeModeButtonActive : ''}`}
                   onClick={() => setTimeMode(TIME_MODES.THIS_WEEK)}
                 >
-                  This Week
+                  {t('createPin.modeThisWeek')}
                 </button>
                 <button
                   className={`${styles.timeModeButton} ${timeMode === TIME_MODES.RECURRING ? styles.timeModeButtonActive : ''}`}
                   onClick={() => setTimeMode(TIME_MODES.RECURRING)}
                 >
-                  Recurring
+                  {t('createPin.modeRecurring')}
                 </button>
               </div>
 
               {/* Now mode */}
               {timeMode === TIME_MODES.NOW && (
                 <div className={styles.timeModeContent}>
-                  <label className="section-label">Duration</label>
+                  <label className="section-label">{t('createPin.durationLabel')}</label>
                   <div className={styles.timeOptions}>
                     {NOW_DURATIONS.map((option) => (
                       <button
@@ -618,7 +616,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                     ))}
                   </div>
                   <div className={styles.timePreview}>
-                    <span className="section-label">Pin will expire:</span>
+                    <span className="section-label">{t('createPin.pinWillExpire')}</span>
                     <span className="mono">
                       {new Date(Date.now() + nowDuration * 60000).toLocaleString()}
                     </span>
@@ -631,7 +629,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                 <div className={styles.timeModeContent}>
                   <div className={styles.timeInputRow}>
                     <div className={styles.timeInputGroup}>
-                      <label className="section-label">Start Time</label>
+                      <label className="section-label">{t('createPin.startTime')}</label>
                       <input
                         type="time"
                         value={todayStartTime}
@@ -639,7 +637,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       />
                     </div>
                     <div className={styles.timeInputGroup}>
-                      <label className="section-label">End Time</label>
+                      <label className="section-label">{t('createPin.endTime')}</label>
                       <input
                         type="time"
                         value={todayEndTime}
@@ -654,9 +652,9 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
               {timeMode === TIME_MODES.THIS_WEEK && (
                 <div className={styles.timeModeContent}>
                   <div className={styles.timeInputGroup}>
-                    <label className="section-label">Select Date (Next 6 Days)</label>
+                    <label className="section-label">{t('createPin.selectDate')}</label>
                     <select value={weekDate} onChange={(e) => setWeekDate(e.target.value)}>
-                      <option value="">Select date</option>
+                      <option value="">{t('createPin.selectDatePlaceholder')}</option>
                       {nextSixDays.map(day => (
                         <option key={day.value} value={day.value}>{day.label}</option>
                       ))}
@@ -664,7 +662,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                   </div>
                   <div className={styles.timeInputRow}>
                     <div className={styles.timeInputGroup}>
-                      <label className="section-label">Start Time</label>
+                      <label className="section-label">{t('createPin.startTime')}</label>
                       <input
                         type="time"
                         value={weekStartTime}
@@ -672,7 +670,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       />
                     </div>
                     <div className={styles.timeInputGroup}>
-                      <label className="section-label">End Time</label>
+                      <label className="section-label">{t('createPin.endTime')}</label>
                       <input
                         type="time"
                         value={weekEndTime}
@@ -686,7 +684,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
               {/* Recurring mode */}
               {timeMode === TIME_MODES.RECURRING && (
                 <div className={styles.timeModeContent}>
-                  <label className="section-label">Active Days</label>
+                  <label className="section-label">{t('createPin.activeDays')}</label>
                   <div className={styles.daySelector}>
                     {DAYS_OF_WEEK.map(day => (
                       <button
@@ -702,7 +700,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                   </div>
                   <div className={styles.timeInputRow}>
                     <div className={styles.timeInputGroup}>
-                      <label className="section-label">Start Time</label>
+                      <label className="section-label">{t('createPin.startTime')}</label>
                       <input
                         type="time"
                         value={recurringStartTime}
@@ -710,7 +708,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       />
                     </div>
                     <div className={styles.timeInputGroup}>
-                      <label className="section-label">End Time</label>
+                      <label className="section-label">{t('createPin.endTime')}</label>
                       <input
                         type="time"
                         value={recurringEndTime}
@@ -726,15 +724,14 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
           {/* Step 3: Device Selection */}
           {step === 3 && (
             <div className={styles.stepContent}>
-              <h3>Select Devices You're Bringing</h3>
+              <h3>{t('createPin.stepDevices')}</h3>
               <p className={styles.stepDescription}>
-                Choose which of your active devices you're carrying today.
-                These will be shown on your pin.
+                {t('createPin.stepDevicesDesc')}
               </p>
 
               <div className={styles.deviceList}>
                 {userDevices.map((device) => {
-                  const isSelected = selectedDevices.find(d => d.id === device.id)
+                  const isSelected = !!selectedDevices.find(d => d.id === device.id)
                   return (
                     <button
                       key={device.id}
@@ -743,7 +740,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                     >
                       <input
                         type="checkbox"
-                        checked={!!isSelected}
+                        checked={isSelected}
                         readOnly
                         className={styles.deviceCheckbox}
                       />
@@ -756,7 +753,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
               </div>
 
               <p className={styles.deviceNote}>
-                Selected: {selectedDevices.length} device{selectedDevices.length !== 1 ? 's' : ''}
+                {t('createPin.selectedCount', { count: selectedDevices.length })} {t(selectedDevices.length === 1 ? 'createPin.device_one' : 'createPin.device_other')}
               </p>
             </div>
           )}
@@ -764,10 +761,9 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
           {/* Step 4: Partner Selection */}
           {step === 4 && (
             <div className={styles.stepContent}>
-              <h3>Select Active Partners</h3>
+              <h3>{t('createPin.stepPartners')}</h3>
               <p className={styles.stepDescription}>
-                Choose which Digimon partners you're carrying today.
-                These will be shown on your pin.
+                {t('createPin.stepPartnersDesc')}
               </p>
 
               <div className={styles.deviceList}>
@@ -795,7 +791,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
               </div>
 
               <p className={styles.deviceNote}>
-                Selected: {selectedPartners.length} partner{selectedPartners.length !== 1 ? 's' : ''}
+                {t('createPin.selectedCount', { count: selectedPartners.length })} {t(selectedPartners.length === 1 ? 'createPin.partner_one' : 'createPin.partner_other')}
               </p>
             </div>
           )}
@@ -803,52 +799,52 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
           {/* Step 5: Review */}
           {step === 5 && (
             <div className={styles.stepContent}>
-              <h3>Review & Confirm</h3>
+              <h3>{t('createPin.stepReview')}</h3>
 
               <div className={styles.reviewSection}>
-                <label className="section-label">Location</label>
+                <label className="section-label">{t('createPin.reviewLocation')}</label>
                 <p className="mono">
-                  {snapCoordinate(location.latitude).toFixed(3)}, {snapCoordinate(location.longitude).toFixed(3)}
+                  {location?.latitude.toFixed(3)}, {location?.longitude.toFixed(3)}
                 </p>
               </div>
 
               {title && (
                 <div className={styles.reviewSection}>
-                  <label className="section-label">Title</label>
+                  <label className="section-label">{t('createPin.reviewTitle')}</label>
                   <p>{title}</p>
                 </div>
               )}
 
               {message && (
                 <div className={styles.reviewSection}>
-                  <label className="section-label">Message</label>
+                  <label className="section-label">{t('createPin.reviewMessage')}</label>
                   <p>{message}</p>
                 </div>
               )}
 
               <div className={styles.reviewSection}>
-                <label className="section-label">Schedule</label>
+                <label className="section-label">{t('createPin.reviewSchedule')}</label>
                 {timeMode === TIME_MODES.NOW && (
-                  <p>{NOW_DURATIONS.find(d => d.minutes === nowDuration)?.label} starting now</p>
+                  <p>{NOW_DURATIONS.find(d => d.minutes === nowDuration)?.label} {t('createPin.startingNow')}</p>
                 )}
                 {timeMode === TIME_MODES.TODAY && (
-                  <p>Today from {todayStartTime} to {todayEndTime}</p>
+                  <p>{t('common.today')} {t('createPin.fromTime', { start: todayStartTime, end: todayEndTime })}</p>
                 )}
                 {timeMode === TIME_MODES.THIS_WEEK && (
                   <p>
-                    {nextSixDays.find(d => d.value === weekDate)?.label || weekDate} from {weekStartTime} to {weekEndTime}
+                    {nextSixDays.find(d => d.value === weekDate)?.label || weekDate} {t('createPin.fromTime', { start: weekStartTime, end: weekEndTime })}
                   </p>
                 )}
                 {timeMode === TIME_MODES.RECURRING && (
                   <div>
-                    <p>Every {recurringDays.join(', ')}</p>
-                    <p>From {recurringStartTime} to {recurringEndTime}</p>
+                    <p>{t('createPin.everyDay', { days: recurringDays.join(', ') })}</p>
+                    <p>{t('createPin.fromTime', { start: recurringStartTime, end: recurringEndTime })}</p>
                   </div>
                 )}
               </div>
 
               <div className={styles.reviewSection}>
-                <label className="section-label">Devices Bringing ({selectedDevices.length})</label>
+                <label className="section-label">{t('createPin.reviewDevices', { count: selectedDevices.length })}</label>
                 {selectedDevices.map((device) => (
                   <p key={device.id} className={styles.deviceReview}>
                     {getDeviceFullDisplay(device.digivice_id, device.version_label, deviceList)}
@@ -857,7 +853,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
               </div>
 
               <div className={styles.reviewSection}>
-                <label className="section-label">Active Partners ({selectedPartners.length})</label>
+                <label className="section-label">{t('createPin.reviewPartners', { count: selectedPartners.length })}</label>
                 <div className={styles.partnerReviewList}>
                   {selectedPartners.map((partner, i) => (
                     <div key={i} className={styles.partnerReviewItem}>
@@ -879,7 +875,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
               className="btn-secondary"
               disabled={loading}
             >
-              Back
+              {t('common.back')}
             </button>
           )}
 
@@ -889,7 +885,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
               className="btn-primary"
               disabled={loading || !location}
             >
-              Next
+              {t('common.next')}
             </button>
           ) : (
             <button
@@ -897,7 +893,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
               className="btn-primary"
               disabled={loading}
             >
-              {loading ? 'Creating...' : 'Create Pin'}
+              {loading ? t('createPin.creating') : t('createPin.title')}
             </button>
           )}
         </div>

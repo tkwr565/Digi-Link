@@ -1,9 +1,10 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Map as MapIcon, MessageCircle, Trophy, User } from 'lucide-react'
 import { useUnreadCount } from '../hooks/useUnreadCount'
+import { useTranslation } from 'react-i18next'
 import styles from './AppLayout.module.css'
 
-const SESSION_FLAG = 'digimap_load_anim_played'
+const SESSION_FLAG = 'digi_gut_load_anim_played'
 
 /**
  * AppLayout - Persistent layout wrapper with bottom navigation
@@ -14,6 +15,7 @@ export default function AppLayout({ children }) {
   const navigate = useNavigate()
   const location = useLocation()
   const unreadCount = useUnreadCount()
+  const { t } = useTranslation()
 
   // Slide-up animation only on first session load (before flag is set by AppLoadAnimation)
   const shouldAnimate = !sessionStorage.getItem(SESSION_FLAG)
@@ -36,15 +38,15 @@ export default function AppLayout({ children }) {
         <button
           className={`${styles.navButton} ${isMapActive ? styles.active : ''}`}
           onClick={() => navigate('/')}
-          title="Map"
+          title={t('nav.map')}
         >
           <MapIcon size={24} />
-          <span>Map</span>
+          <span>{t('nav.map')}</span>
         </button>
         <button
           className={`${styles.navButton} ${isMessagesActive ? styles.active : ''}`}
           onClick={() => navigate('/messages')}
-          title="Messages"
+          title={t('nav.messages')}
         >
           <div className={styles.navIconWrapper}>
             <MessageCircle size={24} />
@@ -52,23 +54,23 @@ export default function AppLayout({ children }) {
               <span className={styles.unreadBadge}>{unreadCount}</span>
             )}
           </div>
-          <span>Messages</span>
+          <span>{t('nav.messages')}</span>
         </button>
         <button
           className={`${styles.navButton} ${isLeaderboardActive ? styles.active : ''}`}
           onClick={() => navigate('/leaderboard')}
-          title="Leaderboard"
+          title={t('nav.leaderboard')}
         >
           <Trophy size={24} />
-          <span>Leaderboard</span>
+          <span>{t('nav.leaderboard')}</span>
         </button>
         <button
           className={`${styles.navButton} ${isProfileActive ? styles.active : ''}`}
           onClick={() => navigate('/profile')}
-          title="Profile"
+          title={t('nav.profile')}
         >
           <User size={24} />
-          <span>Profile</span>
+          <span>{t('nav.profile')}</span>
         </button>
       </div>
     </div>

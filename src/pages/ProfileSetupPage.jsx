@@ -1,20 +1,23 @@
-﻿import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabase'
 import DigimonPicker from '../components/DigimonPicker'
 import DeviceChecklist from '../components/DeviceChecklist'
 import DigimonSprite from '../components/DigimonSprite'
+import { useTranslation } from 'react-i18next'
 import styles from './ProfileSetupPage.module.css'
 
 export default function ProfileSetupPage() {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
 
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  const [language, setLanguage] = useState(i18n.language || 'en')
   const [username, setUsername] = useState('')
   const [usernameChecking, setUsernameChecking] = useState(false)
   const [usernameError, setUsernameError] = useState('')
@@ -68,7 +71,7 @@ export default function ProfileSetupPage() {
 
     if (error) {
       console.error('Error checking username:', error)
-      setUsernameError('Error checking username availability')
+      setUsernameError(t('common.error'))
       return false
     }
 
@@ -78,6 +81,11 @@ export default function ProfileSetupPage() {
     }
 
     return true
+  }
+
+  const handleLanguageNext = () => {
+    i18n.changeLanguage(language)
+    setStep(2)
   }
 
   const handleUsernameNext = async () => {
@@ -98,26 +106,26 @@ export default function ProfileSetupPage() {
 
     const isUnique = await checkUsernameUnique(username)
     if (isUnique) {
-      setStep(2)
+      setStep(3)
     }
   }
 
   const handleFavouriteNext = () => {
     if (!favouriteDigimon) {
-      setError('Please select a favourite Digimon')
-      return
-    }
-    setError('')
-    setStep(3)
-  }
-
-  const handlePartnersNext = () => {
-    if (activePartners.length === 0) {
-      setError('Please select at least one active partner')
+      setError(t('profile.selectFavourite'))
       return
     }
     setError('')
     setStep(4)
+  }
+
+  const handlePartnersNext = () => {
+    if (activePartners.length === 0) {
+      setError(t('profile.selectPartners'))
+      return
+    }
+    setError('')
+    setStep(5)
   }
 
   const handleDevicesNext = () => {
@@ -126,7 +134,7 @@ export default function ProfileSetupPage() {
       return
     }
     setError('')
-    setStep(5)
+    setStep(6)
   }
 
   const handleSubmit = async () => {
@@ -152,49 +160,57 @@ export default function ProfileSetupPage() {
         throw new Error(`Profile check failed: ${checkError.message}`)
       }
 
+      const profileData = {
+        username,
+        favourite_digimon: favouriteDigimon.suffix,
+        active_partners: activePartners.map(d => d.suffix),
+        language: language
+      }
+
       if (!existingProfile) {
         // Profile doesn't exist (Google OAuth case) - create it
-        const { data: newProfile, error: createError } = await supabase
+        const { error: createError } = await supabase
           .from('profiles')
           .insert({
             id: user.id,
-            username,
-            favourite_digimon: favouriteDigimon.suffix,
-            active_partners: activePartners.map(d => d.suffix),
+            ...profileData
           })
-          .select()
 
         if (createError) {
-          console.error('Profile creation error:', createError)
-          throw new Error(`Failed to create profile: ${createError.message}`)
+          // Fallback if language column missing
+          const { error: retryError } = await supabase
+            .from('profiles')
+            .insert({
+              id: user.id,
+              username: profileData.username,
+              favourite_digimon: profileData.favourite_digimon,
+              active_partners: profileData.active_partners
+            })
+          if (retryError) throw retryError
         }
 
       } else {
         // Profile exists - update it
-        const { data: profileData, error: profileError } = await supabase
+        const { error: profileError } = await supabase
           .from('profiles')
-          .update({
-            username,
-            favourite_digimon: favouriteDigimon.suffix,
-            active_partners: activePartners.map(d => d.suffix),
-          })
+          .update(profileData)
           .eq('id', user.id)
-          .select()
 
         if (profileError) {
-          console.error('Profile update error:', profileError)
-          throw new Error(`Profile update failed: ${profileError.message}`)
-        }
-
-
-        if (!profileData || profileData.length === 0) {
-          throw new Error('Profile update returned no data')
+          // Fallback if language column missing
+          const { error: retryError } = await supabase
+            .from('profiles')
+            .update({
+              username: profileData.username,
+              favourite_digimon: profileData.favourite_digimon,
+              active_partners: profileData.active_partners
+            })
+            .eq('id', user.id)
+          if (retryError) throw retryError
         }
       }
 
       const deviceRecords = activeDevices.map(deviceId => {
-        // Split device ID into digivice_id and version_label
-        // Format is either "device-id" or "device-id:version"
         const [digiviceId, versionLabel] = deviceId.includes(':')
           ? deviceId.split(':')
           : [deviceId, 'Standard']
@@ -208,13 +224,11 @@ export default function ProfileSetupPage() {
       })
 
 
-      const { data: devicesData, error: devicesError } = await supabase
+      const { error: devicesError } = await supabase
         .from('user_devices')
         .insert(deviceRecords)
-        .select()
 
       if (devicesError) {
-        console.error('Devices insert error:', devicesError)
         throw new Error(`Devices insert failed: ${devicesError.message}`)
       }
 
@@ -232,7 +246,7 @@ export default function ProfileSetupPage() {
       <div className={styles.card}>
         <h1 className={styles.title}>Profile Setup</h1>
         <div className={styles.stepIndicator}>
-          Step {step} of 5
+          Step {step} of 6
         </div>
 
         {error && (
@@ -254,6 +268,32 @@ export default function ProfileSetupPage() {
 
         {step === 1 && (
           <div className={styles.step}>
+            <h2 className={styles.stepTitle}>Choose Your Language</h2>
+            <p className={styles.stepDesc}>
+              Select your preferred language for the interface.
+            </p>
+
+            <select 
+              value={language} 
+              onChange={(e) => setLanguage(e.target.value)}
+              className={styles.input}
+              style={{ marginBottom: '20px' }}
+            >
+              <option value="en">English</option>
+              <option value="zh-HK">繁體中文 (香港)</option>
+            </select>
+
+            <button
+              onClick={handleLanguageNext}
+              className={styles.btnPrimary}
+            >
+              Next
+            </button>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div className={styles.step}>
             <h2 className={styles.stepTitle}>Choose Your Username</h2>
             <p className={styles.stepDesc}>
               This is how other trainers will see you on the map.
@@ -274,7 +314,7 @@ export default function ProfileSetupPage() {
             />
 
             {usernameChecking && (
-              <div className={styles.hint}>Checking availability...</div>
+              <div className={styles.hint}>{t('profile.checkingUsername')}</div>
             )}
 
             {usernameError && (
@@ -282,20 +322,25 @@ export default function ProfileSetupPage() {
             )}
 
             {username && !usernameError && !usernameChecking && (
-              <div className={styles.hintSuccess}>Username available!</div>
+              <div className={styles.hintSuccess}>{t('profile.usernameAvailable')}</div>
             )}
 
-            <button
-              onClick={handleUsernameNext}
-              disabled={loading || usernameChecking || !username || !!usernameError}
-              className={styles.btnPrimary}
-            >
-              Next
-            </button>
+            <div className={styles.buttonGroup}>
+              <button onClick={() => setStep(1)} className={styles.btnSecondary}>
+                Back
+              </button>
+              <button
+                onClick={handleUsernameNext}
+                disabled={loading || usernameChecking || !username || !!usernameError}
+                className={styles.btnPrimary}
+              >
+                Next
+              </button>
+            </div>
           </div>
         )}
 
-        {step === 2 && (
+        {step === 3 && (
           <div className={styles.step}>
             <h2 className={styles.stepTitle}>Pick Your Favourite Digimon</h2>
             <p className={styles.stepDesc}>
@@ -313,11 +358,11 @@ export default function ProfileSetupPage() {
               value={favouriteDigimon}
               onChange={setFavouriteDigimon}
               multiple={false}
-              label="Select Favourite Digimon"
+              label={t('profile.selectFavourite')}
             />
 
             <div className={styles.buttonGroup}>
-              <button onClick={() => setStep(1)} className={styles.btnSecondary}>
+              <button onClick={() => setStep(2)} className={styles.btnSecondary}>
                 Back
               </button>
               <button onClick={handleFavouriteNext} className={styles.btnPrimary}>
@@ -327,7 +372,7 @@ export default function ProfileSetupPage() {
           </div>
         )}
 
-        {step === 3 && (
+        {step === 4 && (
           <div className={styles.step}>
             <h2 className={styles.stepTitle}>Choose Your Active Partners</h2>
             <p className={styles.stepDesc}>
@@ -350,11 +395,11 @@ export default function ProfileSetupPage() {
               onChange={setActivePartners}
               multiple={true}
               maxSelection={3}
-              label="Select Active Partners"
+              label={t('profile.selectPartners')}
             />
 
             <div className={styles.buttonGroup}>
-              <button onClick={() => setStep(2)} className={styles.btnSecondary}>
+              <button onClick={() => setStep(3)} className={styles.btnSecondary}>
                 Back
               </button>
               <button onClick={handlePartnersNext} className={styles.btnPrimary}>
@@ -364,7 +409,7 @@ export default function ProfileSetupPage() {
           </div>
         )}
 
-        {step === 4 && (
+        {step === 5 && (
           <div className={styles.step}>
             <h2 className={styles.stepTitle}>Which Devices Do You Own?</h2>
             <p className={styles.stepDesc}>
@@ -374,11 +419,11 @@ export default function ProfileSetupPage() {
             <DeviceChecklist
               value={ownedDevices}
               onChange={setOwnedDevices}
-              label="Your Devices"
+              label={t('profile.ownedDevices')}
             />
 
             <div className={styles.buttonGroup}>
-              <button onClick={() => setStep(3)} className={styles.btnSecondary}>
+              <button onClick={() => setStep(4)} className={styles.btnSecondary}>
                 Back
               </button>
               <button onClick={handleDevicesNext} className={styles.btnPrimary}>
@@ -388,7 +433,7 @@ export default function ProfileSetupPage() {
           </div>
         )}
 
-        {step === 5 && (
+        {step === 6 && (
           <div className={styles.step}>
             <h2 className={styles.stepTitle}>Mark Your Active Devices</h2>
             <p className={styles.stepDesc}>
@@ -416,7 +461,7 @@ export default function ProfileSetupPage() {
             </div>
 
             <div className={styles.buttonGroup}>
-              <button onClick={() => setStep(4)} className={styles.btnSecondary}>
+              <button onClick={() => setStep(5)} className={styles.btnSecondary}>
                 Back
               </button>
               <button

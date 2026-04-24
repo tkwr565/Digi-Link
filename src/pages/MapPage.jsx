@@ -1,8 +1,9 @@
-﻿import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Map, { Marker, NavigationControl, GeolocateControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { Plus, Radar, Crosshair, MapPin } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import styles from './MapPage.module.css'
 import { useAuth } from '../hooks/useAuth'
 import PinCreationModal from '../components/PinCreationModal'
@@ -32,6 +33,7 @@ const WEATHER_CLASSES = {
 export default function MapPage() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [searchParams, setSearchParams] = useSearchParams()
   const [viewState, setViewState] = useState({
     longitude: 0,
@@ -50,6 +52,7 @@ export default function MapPage() {
   const [selectedPin, setSelectedPin] = useState(null)
   const [isScanning, setIsScanning] = useState(false)
   const [isFindingNearest, setIsFindingNearest] = useState(false)
+  const [isMapLoading, setIsMapLoading] = useState(true)
   const mapRef = useRef()
 
   useEffect(() => {
@@ -200,7 +203,7 @@ export default function MapPage() {
 
         if (error) {
           console.error('Error loading pin:', error)
-          showToast('error', 'Pin not found')
+          showToast('error', t('map.pinNotFound'))
           // Clear the pinId parameter
           setSearchParams({})
           return
@@ -227,12 +230,12 @@ export default function MapPage() {
     }
 
     loadAndShowPin()
-  }, [searchParams, user, setSearchParams])
+  }, [searchParams, user, setSearchParams, t])
 
   // Handle successful pin creation
   const handlePinCreated = () => {
     // Show success toast
-    showToast('success', 'Pin created successfully!')
+    showToast('success', t('map.pinCreated'))
 
     // Refresh pins on map
     loadPinsInViewport()
@@ -244,7 +247,7 @@ export default function MapPage() {
   // Scan area around user location
   const handleScan = async () => {
     if (!userLocation) {
-      showToast('error', 'Location required to scan area')
+      showToast('error', t('map.locationRequired'))
       return
     }
 
@@ -263,12 +266,12 @@ export default function MapPage() {
       // Wait for map to finish flying, then load pins
       setTimeout(async () => {
         await loadPinsInViewport()
-        showToast('info', `Found ${pins.length} pin${pins.length !== 1 ? 's' : ''} near you`)
+        showToast('info', t('map.foundPins', { count: pins.length }))
         setIsScanning(false)
       }, 1600)
     } catch (error) {
       console.error('Error scanning area:', error)
-      showToast('error', 'Error scanning area')
+      showToast('error', t('common.error'))
       setIsScanning(false)
     }
   }
@@ -292,7 +295,7 @@ export default function MapPage() {
   // Find nearest pin using client-side distance calculation
   const handleFindNearest = async () => {
     if (!userLocation) {
-      showToast('error', 'Location required to find nearest pin')
+      showToast('error', t('map.locationRequired'))
       return
     }
 
@@ -319,13 +322,13 @@ export default function MapPage() {
 
       if (error) {
         console.error('Error loading pins:', error)
-        showToast('error', 'Could not find nearest pin')
+        showToast('error', t('common.error'))
         setIsFindingNearest(false)
         return
       }
 
       if (!data || data.length === 0) {
-        showToast('info', 'No active pins found nearby')
+        showToast('info', t('map.noPinsFound'))
         setIsFindingNearest(false)
         return
       }
@@ -353,7 +356,7 @@ export default function MapPage() {
       })
 
       if (!nearestPin) {
-        showToast('info', 'No active pins found nearby')
+        showToast('info', t('map.noPinsFound'))
         setIsFindingNearest(false)
         return
       }
@@ -367,7 +370,7 @@ export default function MapPage() {
         })
       }
 
-      showToast('success', `Found pin ${Math.round(minDistance)}m away`)
+      showToast('success', t('map.foundNearest', { distance: Math.round(minDistance) }))
 
       // Load pins in new viewport after flight
       setTimeout(() => {
@@ -375,7 +378,7 @@ export default function MapPage() {
       }, 2100)
     } catch (error) {
       console.error('Error finding nearest pin:', error)
-      showToast('error', 'Error finding nearest pin')
+      showToast('error', t('common.error'))
     } finally {
       setIsFindingNearest(false)
     }
@@ -415,16 +418,16 @@ export default function MapPage() {
 
       if (error) {
         console.error('Error loading Hong Kong pins:', error)
-        showToast('error', 'Could not load pins')
+        showToast('error', t('common.error'))
         setIsScanning(false)
         return
       }
 
       setPins(data || [])
-      showToast('success', `Found ${data?.length || 0} pin${data?.length !== 1 ? 's' : ''} in Hong Kong`)
+      showToast('success', t('map.foundPins', { count: data?.length || 0 }))
     } catch (error) {
       console.error('Error scanning Hong Kong:', error)
-      showToast('error', 'Error scanning Hong Kong')
+      showToast('error', t('common.error'))
     } finally {
       setIsScanning(false)
     }
@@ -437,6 +440,7 @@ export default function MapPage() {
           ref={mapRef}
           {...viewState}
           onMove={(evt) => setViewState(evt.viewState)}
+          onLoad={() => setIsMapLoading(false)}
           onIdle={handleMapIdle}
           mapStyle={CARTO_DARK_MATTER}
           style={{ width: '100%', height: '100%' }}
@@ -490,6 +494,16 @@ export default function MapPage() {
           />
         </Map>
 
+        {/* Map loading overlay */}
+        {isMapLoading && (
+          <div className={styles.mapLoadingOverlay}>
+            <div className={styles.radarRing} />
+            <div className={styles.radarSweep} />
+            <div className={styles.radarDot} />
+            <span className={styles.radarLabel}>SCANNING…</span>
+          </div>
+        )}
+
         {/* Weather overlay — CSS tint over map, pointer-events: none */}
         {weather && (
           <div className={`${styles.weatherOverlay} ${styles[WEATHER_CLASSES[weather]]}`} />
@@ -510,7 +524,7 @@ export default function MapPage() {
       {/* Location error message */}
       {locationError && (
         <div className={styles.errorBanner}>
-          GPS unavailable: {locationError}
+          {t('map.gpsUnavailable')}: {locationError}
         </div>
       )}
 
@@ -520,7 +534,7 @@ export default function MapPage() {
         <button
           className={styles.fab}
           onClick={() => setShowPinModal(true)}
-          title="Create new pin"
+          title={t('map.createPin')}
         >
           <Plus size={22} />
         </button>
@@ -532,7 +546,7 @@ export default function MapPage() {
           disabled={isScanning}
         >
           <MapPin size={18} />
-          <span className={styles.buttonLabel}>Scan HK</span>
+          <span className={styles.buttonLabel}>{t('map.scanHK')}</span>
         </button>
 
         {/* Find Nearest */}
@@ -542,7 +556,7 @@ export default function MapPage() {
           disabled={isFindingNearest || !userLocation}
         >
           <Crosshair size={18} />
-          <span className={styles.buttonLabel}>Find Nearest</span>
+          <span className={styles.buttonLabel}>{t('map.findNearest')}</span>
         </button>
 
         {/* Scan Area Around User */}
@@ -552,7 +566,7 @@ export default function MapPage() {
           disabled={isScanning || !userLocation}
         >
           <Radar size={18} />
-          <span className={styles.buttonLabel}>Scan Area</span>
+          <span className={styles.buttonLabel}>{t('map.scanArea')}</span>
         </button>
       </div>
 

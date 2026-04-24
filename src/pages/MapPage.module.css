@@ -390,3 +390,86 @@
     animation: none !important;
   }
 }
+
+/* ─────────────────────────────────────────────────────
+   Map loading overlay — radar sweep shown before map tiles render
+   ───────────────────────────────────────────────────── */
+
+.mapLoadingOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Outer ring */
+.radarRing {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  box-shadow: 0 0 0 40px rgba(0, 212, 255, 0.04),
+              inset 0 0 40px rgba(0, 212, 255, 0.06);
+}
+
+/* Rotating sweep — conic gradient fades out behind the beam */
+.radarSweep {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 270deg,
+    rgba(0, 212, 255, 0.08) 300deg,
+    rgba(0, 212, 255, 0.35) 360deg
+  );
+  animation: radarRotate 2s linear infinite;
+}
+
+/* Centre dot */
+.radarDot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue-bright);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.8);
+}
+
+.radarLabel {
+  position: absolute;
+  bottom: calc(50% - 120px);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(0, 212, 255, 0.6);
+  animation: labelBlink 1.2s ease-in-out infinite;
+}
+
+@keyframes radarRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes labelBlink {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radarSweep {
+    animation: none;
+    background: rgba(0, 212, 255, 0.1);
+  }
+  .radarLabel {
+    animation: none;
+    opacity: 0.6;
+  }
+}
