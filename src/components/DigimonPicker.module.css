@@ -106,29 +106,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 12px;
-  max-height: 400px;
-  overflow-y: auto;
   padding: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--blue-mid) var(--bg-surface);
-}
-
-.grid::-webkit-scrollbar {
-  width: 8px;
-}
-
-.grid::-webkit-scrollbar-track {
-  background: var(--bg-surface);
-  border-radius: 4px;
-}
-
-.grid::-webkit-scrollbar-thumb {
-  background: var(--blue-mid);
-  border-radius: 4px;
-}
-
-.grid::-webkit-scrollbar-thumb:hover {
-  background: var(--blue-bright);
 }
 
 .card {
