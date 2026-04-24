@@ -1,0 +1,66 @@
+/* Pin Legend Component Styles */
+
+.legendContainer {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+}
+
+/* Legend panel - always visible */
+.legendPanel {
+  background: rgba(10, 22, 40, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.6rem 0.75rem;
+  min-width: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Legend items */
+.legendItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Hexagon icons */
+.hexagon {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* Legend labels */
+.legendLabel {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .legendPanel {
+    animation-duration: 0.01ms !important;
+  }
+}

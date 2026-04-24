@@ -1,0 +1,114 @@
+/* Toast Notification Component Styles */
+
+.toast {
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  min-width: 300px;
+  max-width: 90%;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: slideDown 0.3s ease-out;
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Success toast */
+.toast.success {
+  background: var(--green-dim);
+  border: 1px solid var(--green-bright);
+  color: var(--green-bright);
+}
+
+.toast.success .icon {
+  color: var(--green-bright);
+}
+
+/* Error toast */
+.toast.error {
+  background: var(--red-dim);
+  border: 1px solid var(--red);
+  color: var(--red);
+}
+
+.toast.error .icon {
+  color: var(--red);
+}
+
+/* Info toast */
+.toast.info {
+  background: var(--blue-dim);
+  border: 1px solid var(--blue-bright);
+  color: var(--blue-bright);
+}
+
+.toast.info .icon {
+  color: var(--blue-bright);
+}
+
+/* Toast icon */
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Toast message */
+.message {
+  flex: 1;
+  color: var(--text-primary);
+}
+
+/* Close button */
+.closeButton {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.closeButton:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .toast {
+    top: 4rem;
+    min-width: 280px;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation-duration: 0.01ms !important;
+  }
+}

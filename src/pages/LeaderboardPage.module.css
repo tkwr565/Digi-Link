@@ -1,0 +1,313 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 80px; /* above bottom nav */
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-deepest);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+/* ── Non-scrolling header + tabs ── */
+.controls {
+  flex-shrink: 0;
+  padding: 1.5rem 1rem 0;
+}
+
+/* ── Scrollable list area ── */
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.75rem 1rem 1rem;
+}
+
+/* ── Header ── */
+.header {
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  color: var(--blue-bright);
+  margin: 0 0 0.25rem;
+}
+
+.subtitle {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* ── States ── */
+.loadingState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  color: var(--text-secondary);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.errorBox {
+  background: var(--red-dim);
+  border: 1px solid var(--red);
+  color: var(--red);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+}
+
+.emptyState {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  padding: 3rem 0;
+  text-align: center;
+}
+
+/* ── Tab toggle ── */
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.6rem 0;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tab + .tab {
+  border-left: 1px solid var(--border);
+}
+
+.tabActive {
+  background: var(--blue-bright);
+  color: var(--bg-deepest);
+}
+
+/* ── List ── */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+/* ── Row base ── */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+/* ── Rank variants ── */
+
+/* #1 — amber glow */
+.rankGold {
+  background: linear-gradient(90deg, var(--amber-dim) 0%, var(--bg-deep) 60%);
+  border-color: var(--amber);
+  box-shadow: 0 0 14px var(--amber)28;
+}
+
+.rankGold .rankNum {
+  color: var(--amber);
+  font-size: 1rem;
+}
+
+/* #2–#3 — blue subtle highlight */
+.rankTop3 {
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.06) 0%, var(--bg-deep) 60%);
+  border-color: var(--blue-dim);
+}
+
+.rankTop3 .rankNum {
+  color: var(--blue-bright);
+}
+
+/* Own row — always highlighted regardless of rank */
+.rankOwn {
+  background: var(--bg-overlay);
+  border-color: var(--blue-mid);
+}
+
+/* Gold + own: keep amber gradient, own border */
+.rankGold.rankOwn {
+  background: linear-gradient(90deg, var(--amber-dim) 0%, var(--bg-overlay) 60%);
+  border-color: var(--amber);
+}
+
+/* Top3 + own */
+.rankTop3.rankOwn {
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.08) 0%, var(--bg-overlay) 60%);
+  border-color: var(--blue-mid);
+}
+
+/* ── Row columns ── */
+.rankNum {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  width: 36px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.spriteWrapper {
+  flex-shrink: 0;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nameCol {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.username {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.youTag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--blue-bright);
+  background: rgba(0, 212, 255, 0.12);
+  border: 1px solid var(--blue-dim);
+  border-radius: 3px;
+  padding: 0 5px;
+  flex-shrink: 0;
+  letter-spacing: 0.06em;
+}
+
+.battles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.battlesNum {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.battlesLabel {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Period row (second-level tabs + Your Rank button) ── */
+.periodRow {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 1.25rem;
+}
+
+.periodTabs {
+  display: flex;
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.periodTab {
+  flex: 1;
+  padding: 0.5rem 0;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.periodTab + .periodTab {
+  border-left: 1px solid var(--border);
+}
+
+.periodTabActive {
+  background: rgba(0, 212, 255, 0.12);
+  color: var(--blue-bright);
+}
+
+.yourRankBtn {
+  padding: 0.5rem 0.875rem;
+  background: transparent;
+  color: var(--blue-bright);
+  border: 1px solid var(--blue-mid);
+  border-radius: 6px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.yourRankBtn:hover {
+  background: var(--bg-overlay);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+/* ── Gap shown before an appended-user row ── */
+.ellipsis {
+  text-align: center;
+  color: var(--text-dim);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  padding: 0.5rem 0 0.25rem;
+}

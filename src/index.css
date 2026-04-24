@@ -1,0 +1,321 @@
+/* DigiMap — Global Styles & CSS Variables */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* Backgrounds */
+  --bg-deepest:    #050a0e;   /* Near-black. Main app background */
+  --bg-deep:       #0a1628;   /* Dark navy. Cards, panels */
+  --bg-surface:    #0f2040;   /* Mid navy. Input fields, elevated surfaces */
+  --bg-overlay:    #162a4a;   /* Lighter navy. Hover states, selected */
+
+  /* Primary — Electric Blue (Digital World data streams) */
+  --blue-bright:   #00d4ff;   /* Primary accent. Active elements, links */
+  --blue-mid:      #0088cc;   /* Secondary blue. Borders, icons */
+  --blue-dim:      #004466;   /* Muted blue. Inactive borders */
+
+  /* Secondary — Phosphor Green (Digivice LCD energy) */
+  --green-bright:  #39ff14;   /* Battle confirmed, success states */
+  --green-mid:     #22cc00;   /* Active pin glow, online indicators */
+  --green-dim:     #0a4400;   /* Muted green. Backgrounds for success */
+
+  /* Accent — Digital Amber (warnings, own pins) */
+  --amber:         #ffaa00;   /* Own pin glow, highlights, caution */
+  --amber-dim:     #442200;   /* Amber background tint */
+
+  /* Text */
+  --text-primary:  #e0f4ff;   /* Almost white with blue tint */
+  --text-secondary:#7ab8d4;   /* Muted blue-white. Secondary labels */
+  --text-dim:      #3a6080;   /* Very muted. Placeholders, disabled */
+
+  /* Danger */
+  --red:           #ff3860;   /* Errors, destructive actions */
+  --red-dim:       #3a0015;   /* Red background tint */
+
+  /* Borders */
+  --border:        #1a3a5c;   /* Standard border */
+  --border-bright: #00d4ff44; /* Glowing border (semi-transparent blue) */
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-deepest);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.section-label {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.mono {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+}
+
+/* Links */
+a {
+  color: var(--blue-bright);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--blue-mid);
+}
+
+/* Buttons */
+button {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--blue-bright);
+  color: var(--bg-deepest);
+  border-radius: 6px;
+  padding: 12px 24px;
+  box-shadow: 0 0 16px var(--blue-bright);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 28px var(--blue-bright);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--blue-bright);
+  border: 1px solid var(--blue-mid);
+  border-radius: 6px;
+  padding: 12px 24px;
+}
+
+.btn-secondary:hover {
+  border-color: var(--blue-bright);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 6px;
+  padding: 12px 24px;
+}
+
+.btn-danger:hover {
+  background: var(--red-dim);
+}
+
+.btn-battle {
+  background: var(--green-dim);
+  color: var(--green-bright);
+  border: 1px solid var(--green-bright);
+  border-radius: 6px;
+  padding: 12px 24px;
+  box-shadow: 0 0 12px var(--green-bright);
+}
+
+/* Input Fields */
+input,
+textarea,
+select {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--blue-bright);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.13);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-dim);
+}
+
+/* Cards */
+.card {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow:
+    0 0 0 1px var(--border),
+    inset 0 1px 0 0 var(--border-bright);
+  padding: 16px;
+}
+
+/* Digimon Type Colors */
+.type-vaccine {
+  color: var(--blue-bright);
+}
+
+.type-data {
+  color: var(--amber);
+}
+
+.type-virus {
+  color: var(--red);
+}
+
+.type-free {
+  color: var(--text-secondary);
+}
+
+/* Digimon Sprite Rendering */
+.digimon-sprite {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Scanline Overlay */
+.scanlines {
+  position: relative;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Map Grid Overlay */
+.map-grid {
+  position: relative;
+}
+
+.map-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pin Appearance Animation */
+@keyframes pin-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+    filter: brightness(3);
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+/* Pin Pulse Animation */
+@keyframes pin-pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile Safe Areas */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

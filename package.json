@@ -1,0 +1,22 @@
+{
+  "name": "digimap",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.104.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "lucide-react": "^1.8.0",
+    "maplibre-gl": "^5.23.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-map-gl": "^8.1.1",
+    "react-router-dom": "^7.14.1",
+    "vite": "^5.4.21"
+  }
+}

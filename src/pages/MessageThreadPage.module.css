@@ -1,0 +1,553 @@
+/* MessageThreadPage - Chat view */
+
+.container {
+  width: 100%;
+  height: calc(100vh - 80px); /* 80px = fixed bottom nav height */
+  background: var(--bg-deepest);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+}
+
+.error {
+  color: var(--red);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: var(--blue-bright);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: -0.5rem 0 -0.5rem -0.5rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.backButton:hover {
+  color: var(--blue-mid);
+}
+
+.headerClickable {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  padding: 0.25rem;
+  margin: -0.25rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.headerClickable:hover {
+  background: var(--bg-surface);
+}
+
+.headerClickable:active {
+  transform: scale(0.98);
+}
+
+.headerNonClickable {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.25rem;
+  margin: -0.25rem;
+  border-radius: 6px;
+  opacity: 0.7;
+  cursor: default;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-overlay);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.headerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.username {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pinTitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Battle button in header */
+.battleButton {
+  background: var(--blue-bright);
+  color: var(--bg-deepest);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.875rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.1s, background 0.2s;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.battleButton:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.battleButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.battleButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.battleButtonConfirmed {
+  background: var(--green-bright);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+}
+
+.battleButtonConfirmed:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+.battleButtonCompleted {
+  background: var(--green-bright);
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.5);
+  opacity: 1;
+}
+
+/* Connection status indicator */
+.connectionStatus {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.statusDot.connecting {
+  background: var(--text-dim);
+}
+
+.statusDot.reconnecting {
+  background: var(--yellow);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.statusDot.error {
+  background: var(--red);
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+.statusDot.disconnected {
+  background: var(--text-dim);
+  opacity: 0.5;
+  animation: none;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Messages container */
+.messagesContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-deepest);
+}
+
+/* Archived conversation banner */
+.archivedBanner {
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.emptyMessages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  color: var(--text-secondary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+}
+
+.messagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Message bubbles */
+.messageWrapper {
+  display: flex;
+  max-width: 75%;
+}
+
+.ownMessage {
+  align-self: flex-end;
+}
+
+.otherMessage {
+  align-self: flex-start;
+}
+
+.messageBubble {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  word-wrap: break-word;
+}
+
+.ownMessage .messageBubble {
+  background: var(--blue-dim);
+  border: 1px solid var(--blue-mid);
+  border-bottom-right-radius: 4px;
+}
+
+.otherMessage .messageBubble {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px;
+}
+
+.messageContent {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.messageTimestamp {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-align: right;
+}
+
+.otherMessage .messageTimestamp {
+  text-align: left;
+}
+
+/* Input container */
+.inputContainer {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--bg-deep);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+.input {
+  flex: 1;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  border-color: var(--blue-bright);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.13);
+  outline: none;
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sendButton {
+  background: var(--blue-bright);
+  color: var(--bg-deepest);
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.27);
+  min-width: 80px;
+}
+
+.sendButton:hover:not(:disabled) {
+  box-shadow: 0 0 28px rgba(0, 212, 255, 0.53);
+  transform: translateY(-1px);
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Expired notice */
+.expiredNotice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--bg-deep);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  color: var(--text-secondary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9375rem;
+  font-style: italic;
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+  .messagesContainer {
+    padding: 0.75rem;
+  }
+
+  .messageWrapper {
+    max-width: 85%;
+  }
+
+  .messageBubble {
+    padding: 0.625rem 0.875rem;
+  }
+
+  .messageContent {
+    font-size: 0.9375rem;
+  }
+
+  .sendButton {
+    padding: 0.75rem 1.25rem;
+    min-width: 70px;
+  }
+}
+
+/* Custom scrollbar */
+.messagesContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messagesContainer::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+.messagesContainer::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-dim);
+}
+
+/* Bottom navigation - shared with MapPage and MessagesPage */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--bg-deep);
+  border-top: 2px solid var(--border);
+  padding: 0.5rem 0;
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+  z-index: 30;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.navButton {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.1s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.navButton:hover {
+  color: var(--blue-mid);
+}
+
+.navButton:active {
+  transform: scale(0.95);
+}
+
+.navButton.active {
+  color: var(--blue-bright);
+}
+
+.navButton span {
+  display: block;
+  margin-top: 2px;
+}
+
+/* Friend prompt banner */
+.friendPrompt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  background: var(--bg-deep);
+  border: 1px solid var(--green-bright);
+  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 12px var(--green-bright)22;
+}
+
+.friendPromptText {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+}
+
+.friendPromptText strong {
+  color: var(--green-bright);
+}
+
+.friendPromptActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.friendPromptAdd {
+  background: var(--green-dim);
+  color: var(--green-bright);
+  border: 1px solid var(--green-bright);
+  border-radius: 6px;
+  padding: 0.4rem 0.875rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.friendPromptAdd:hover {
+  box-shadow: 0 0 12px var(--green-bright)44;
+}
+
+.friendPromptDismiss {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.4rem 0.875rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.friendPromptSent {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.875rem;
+  color: var(--green-bright);
+  text-align: center;
+  padding: 0.375rem 0;
+  margin-bottom: 0.75rem;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

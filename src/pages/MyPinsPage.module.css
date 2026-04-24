@@ -1,0 +1,563 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-deepest);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-deep);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.backBtn {
+  background: transparent;
+  border: none;
+  color: var(--blue-bright);
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.backBtn:hover { background: var(--bg-surface); }
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+  letter-spacing: 0.08em;
+  flex: 1;
+  margin: 0;
+}
+
+.pinCount {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2px 10px;
+  flex-shrink: 0;
+}
+
+/* ── Content ── */
+.content {
+  flex: 1;
+  padding: 16px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.centered {
+  text-align: center;
+  color: var(--text-dim);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  padding: 40px 0;
+}
+
+.errorMsg {
+  color: var(--red);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  padding: 16px;
+  text-align: center;
+}
+
+/* ── Empty state ── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.emptyIcon { color: var(--text-dim); }
+
+.emptyTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.emptyText {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  color: var(--text-dim);
+  max-width: 260px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.goToMapBtn {
+  margin-top: 8px;
+  background: var(--blue-bright);
+  color: var(--bg-deepest);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  cursor: pointer;
+  box-shadow: 0 0 16px var(--blue-bright)44;
+  transition: box-shadow 0.2s;
+}
+.goToMapBtn:hover { box-shadow: 0 0 28px var(--blue-bright)88; }
+
+/* ── Sections ── */
+.section {
+  margin-bottom: 8px;
+}
+
+.sectionHeader {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  padding: 12px 4px 6px;
+  position: sticky;
+  top: 61px;
+  background: var(--bg-deepest);
+  z-index: 5;
+}
+
+/* ── Pin Card ── */
+.card {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 14px 12px;
+  margin-bottom: 10px;
+  box-shadow: inset 0 1px 0 0 var(--border-bright);
+  transition: border-color 0.15s;
+}
+
+.card_active {
+  border-left: 3px solid var(--green-bright);
+}
+
+.card_recurring {
+  border-left: 3px solid var(--amber);
+}
+
+.card_upcoming {
+  border-left: 3px solid var(--blue-bright);
+}
+
+.card_expired {
+  border-left: 3px solid var(--border);
+  opacity: 0.65;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.pinIcon {
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.cardMessage {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.cardTime {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* ── Status badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  padding: 3px 7px;
+}
+
+.badge_active {
+  color: var(--green-bright);
+  background: var(--green-dim);
+  border: 1px solid var(--green-bright)66;
+}
+
+.badge_recurring {
+  color: var(--amber);
+  background: var(--amber-dim);
+  border: 1px solid var(--amber)66;
+}
+
+.badge_upcoming {
+  color: var(--blue-bright);
+  background: var(--bg-surface);
+  border: 1px solid var(--blue-mid);
+}
+
+.badge_expired {
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+/* ── Card action buttons ── */
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.iconBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.iconBtn:hover {
+  background: var(--bg-overlay);
+  color: var(--blue-bright);
+  border-color: var(--blue-mid);
+}
+
+.iconBtnDanger:hover {
+  color: var(--red);
+  border-color: var(--red);
+  background: var(--red-dim);
+}
+
+.deleteConfirm {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.deleteConfirm span {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  color: var(--red);
+}
+
+.confirmDeleteBtn {
+  background: var(--red-dim);
+  border: 1px solid var(--red);
+  color: var(--red);
+  border-radius: 6px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+.confirmDeleteBtn:hover { background: var(--red); color: #fff; }
+.confirmDeleteBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.cancelDeleteBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+.cancelDeleteBtn:hover { background: var(--bg-overlay); }
+.cancelDeleteBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Edit Modal ── */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+}
+
+@media (min-width: 600px) {
+  .modalBackdrop {
+    align-items: center;
+    justify-content: center;
+  }
+  .modal {
+    border-radius: 12px !important;
+    max-height: 85vh;
+  }
+}
+
+.modal {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--blue-bright);
+  border-radius: 16px 16px 0 0;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 0 20px 32px;
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.5);
+}
+
+.modalHandle {
+  width: 40px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 12px auto 0;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 4px;
+}
+
+.modalTitle {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modalCloseBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.modalCloseBtn:hover { color: var(--text-primary); }
+
+.locationNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 8px 0 16px;
+  line-height: 1.4;
+}
+
+.locationNote svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--text-dim);
+}
+
+/* ── Form ── */
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.label {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.optional {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.input {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  color-scheme: dark;
+}
+.input:focus {
+  border-color: var(--blue-bright);
+  box-shadow: 0 0 0 3px var(--blue-bright)22;
+  outline: none;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+.timeRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.timeField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.timeLabel {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Day grid ── */
+.dayGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.dayBtn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 6px;
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.dayBtn:hover {
+  background: var(--bg-overlay);
+  border-color: var(--blue-mid);
+}
+.dayBtnActive {
+  background: var(--bg-overlay);
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+/* ── Modal actions ── */
+.editError {
+  color: var(--red);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: var(--red-dim);
+  border: 1px solid var(--red);
+  border-radius: 6px;
+}
+
+.modalActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.saveBtn {
+  background: var(--blue-bright);
+  color: var(--bg-deepest);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: 6px;
+  padding: 13px;
+  cursor: pointer;
+  box-shadow: 0 0 16px var(--blue-bright)44;
+  transition: box-shadow 0.2s, opacity 0.15s;
+}
+.saveBtn:hover { box-shadow: 0 0 28px var(--blue-bright)88; }
+.saveBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.cancelBtn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.cancelBtn:hover { background: var(--bg-surface); }
+.cancelBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,205 @@
+.checklist {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.counter {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 500px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue-mid) var(--bg-surface);
+}
+
+.categories::-webkit-scrollbar {
+  width: 8px;
+}
+
+.categories::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+  border-radius: 4px;
+}
+
+.categories::-webkit-scrollbar-thumb {
+  background: var(--blue-mid);
+  border-radius: 4px;
+}
+
+.categories::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-bright);
+}
+
+.category {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.categoryHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.categoryHeader:hover {
+  background: var(--bg-overlay);
+}
+
+.categoryName {
+  font-size: 16px;
+  font-weight: 600;
+  flex: 1;
+}
+
+.categoryMeta {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.devices {
+  padding: 8px 14px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.device {
+  display: flex;
+  flex-direction: column;
+}
+
+.deviceLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.deviceLabel:hover {
+  background: var(--bg-overlay);
+}
+
+.deviceWithVersions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deviceMain {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+}
+
+.deviceContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.deviceName {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.year {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.notes {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.versions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 20px;
+}
+
+.versionLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.versionLabel:hover {
+  border-color: var(--blue-mid);
+}
+
+.versionLabel:has(.checkbox:checked) {
+  border-color: var(--blue-bright);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.versionText {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--blue-bright);
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+}

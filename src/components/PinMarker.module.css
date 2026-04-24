@@ -1,0 +1,170 @@
+/* Pin Marker Component Styles */
+
+.pinMarker {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pinMarker:hover {
+  transform: translateY(-2px);
+  z-index: 100;
+}
+
+/* SVG hexagon */
+.hexagon {
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Own pins - Blue glow */
+.ownMarker {
+  color: var(--blue-bright);
+}
+
+.ownMarker .glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse-blue 1.5s ease-in-out infinite;
+}
+
+/* Other users' pins (no interaction) - Red glow */
+.otherMarker {
+  color: var(--red);
+}
+
+.otherMarker .glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(255, 56, 96, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse-red 2s ease-in-out infinite;
+}
+
+/* Messaged pins (DM sent or battle pending) - Yellow/Amber glow */
+.messagedMarker {
+  color: var(--amber);
+}
+
+.messagedMarker .glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(255, 170, 0, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse-yellow 1.8s ease-in-out infinite;
+}
+
+/* Battled pins (confirmed battle) - Green glow */
+.battledMarker {
+  color: var(--green-bright);
+}
+
+.battledMarker .glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(57, 255, 20, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse-green 1.2s ease-in-out infinite;
+}
+
+/* Pulse animations for each state */
+@keyframes pulse-blue {
+  0%, 100% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+@keyframes pulse-red {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes pulse-yellow {
+  0%, 100% {
+    opacity: 0.65;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+}
+
+@keyframes pulse-green {
+  0%, 100% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+/* Pin appear animation */
+.pinMarker {
+  animation: pin-appear 0.6s ease-out;
+}
+
+@keyframes pin-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+    filter: brightness(3);
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .pinMarker,
+  .glow {
+    animation-duration: 0.01ms !important;
+  }
+
+  .pinMarker:hover {
+    transform: none;
+  }
+}

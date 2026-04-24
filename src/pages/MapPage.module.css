@@ -1,0 +1,392 @@
+/* MapPage — Full-screen mobile-first map layout */
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-deep);
+  overflow: hidden;
+}
+
+.mapWrapper {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* User location marker */
+.userMarker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--blue-bright);
+  border: 3px solid var(--bg-deep);
+  box-shadow: 0 0 0 2px var(--blue-bright),
+              0 0 12px rgba(0, 242, 254, 0.6);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Error banner */
+.errorBanner {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(244, 63, 94, 0.95);
+  color: var(--text-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: var(--font-ui);
+  z-index: 10;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Map control buttons */
+.mapControls {
+  position: absolute;
+  bottom: 7rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 20;
+}
+
+.mapButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border-radius: 20px;
+  background: rgba(10, 22, 40, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--blue-bright);
+  border: 1px solid var(--blue-bright);
+  box-shadow: 0 2px 10px rgba(0, 212, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  min-width: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mapButton:focus,
+.mapButton:focus-visible {
+  outline: none;
+}
+
+/* Active state (on click) - glow effect */
+.mapButton.active:not(:disabled) {
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.7);
+  background: rgba(0, 212, 255, 0.15);
+  animation: pulse-glow 1s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 14px rgba(0, 212, 255, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(0, 212, 255, 1);
+  }
+}
+
+.mapButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.mapButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--text-dim);
+  border-color: var(--border);
+}
+
+.mapButton:disabled .buttonLabel {
+  color: var(--text-dim);
+}
+
+.buttonLabel {
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+/* Floating Action Button (FAB) */
+.fab {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--text-primary);
+  border: 1px solid var(--blue-bright);
+  box-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  align-self: flex-end;
+}
+
+.fab:focus,
+.fab:focus-visible {
+  outline: none;
+}
+
+.fab:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.8);
+}
+
+/* Bottom navigation */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--bg-deep);
+  border-top: 2px solid var(--border);
+  padding: 0.5rem 0;
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+  z-index: 30;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.navButton {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.1s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.navButton:hover {
+  color: var(--blue-mid);
+}
+
+.navButton:active {
+  transform: scale(0.95);
+}
+
+.navButton.active {
+  color: var(--blue-bright);
+}
+
+.navButton span {
+  display: block;
+  margin-top: 2px;
+}
+
+.navIconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unreadBadge {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  background: var(--red);
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.625rem;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(255, 56, 96, 0.8);
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(255, 56, 96, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(255, 56, 96, 1);
+  }
+}
+
+/* Override MapLibre default controls styling */
+:global(.maplibregl-ctrl-group) {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+:global(.maplibregl-ctrl-group button) {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+:global(.maplibregl-ctrl-group button:hover) {
+  background: var(--bg-hover);
+}
+
+:global(.maplibregl-ctrl-icon) {
+  filter: invert(1);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  /* Bottom nav stays full width on all screen sizes */
+}
+
+/* ─────────────────────────────────────────────────────
+   Weather overlays — CSS tints layered over the map.
+   All pointer-events: none so map interaction is unaffected.
+   ───────────────────────────────────────────────────── */
+
+.weatherOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  transition: background 1.5s ease;
+}
+
+/* Night — Digital World Sky: deep navy tint + pixel star field */
+.weatherNight {
+  background: rgba(5, 10, 20, 0.35);
+}
+.weatherNight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at  8% 12%, rgba(0, 212, 255, 0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22%  5%, rgba(0, 212, 255, 0.40) 0%, transparent 100%),
+    radial-gradient(1px 1px at 38% 20%, rgba(224, 244, 255, 0.50) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55%  8%, rgba(0, 212, 255, 0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 16%, rgba(224, 244, 255, 0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88%  4%, rgba(0, 212, 255, 0.50) 0%, transparent 100%),
+    radial-gradient(1px 1px at 14% 38%, rgba(0, 212, 255, 0.30) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 32%, rgba(224, 244, 255, 0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 66% 42%, rgba(0, 212, 255, 0.40) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 28%, rgba(224, 244, 255, 0.30) 0%, transparent 100%),
+    radial-gradient(1px 1px at  5% 58%, rgba(0, 212, 255, 0.50) 0%, transparent 100%),
+    radial-gradient(1px 1px at 28% 65%, rgba(224, 244, 255, 0.40) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 55%, rgba(0, 212, 255, 0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 60%, rgba(224, 244, 255, 0.50) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 50%, rgba(0, 212, 255, 0.40) 0%, transparent 100%),
+    radial-gradient(1px 1px at 18% 80%, rgba(224, 244, 255, 0.30) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 88%, rgba(0, 212, 255, 0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 62% 75%, rgba(224, 244, 255, 0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 82%, rgba(0, 212, 255, 0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at  3% 92%, rgba(224, 244, 255, 0.40) 0%, transparent 100%);
+  animation: twinkle 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes twinkle {
+  0%   { opacity: 0.5; }
+  100% { opacity: 1.0; }
+}
+
+/* Clear — File Island: warm amber sunrise tint */
+.weatherClear {
+  background: rgba(255, 160, 40, 0.07);
+}
+
+/* Cloudy — Server Farm: grey muted overlay */
+.weatherCloudy {
+  background: rgba(90, 110, 130, 0.14);
+}
+
+/* Rain — Dark Area: deep blue tint + falling streaks */
+.weatherRain {
+  background: rgba(0, 25, 70, 0.22);
+}
+.weatherRain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 10px,
+    rgba(0, 212, 255, 0.045) 10px,
+    rgba(0, 212, 255, 0.045) 11px
+  );
+  animation: rainFall 0.55s linear infinite;
+  pointer-events: none;
+}
+@keyframes rainFall {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 11px; }
+}
+
+/* ─── Weather badge — bottom-left of map ─── */
+.weatherBadge {
+  position: absolute;
+  bottom: calc(80px + 1rem);
+  left: 1rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(10, 22, 40, 0.82);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weatherNight::before,
+  .weatherRain::before {
+    animation: none !important;
+  }
+}

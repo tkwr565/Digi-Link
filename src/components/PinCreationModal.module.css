@@ -1,0 +1,498 @@
+/* PinCreationModal — Bottom sheet modal for pin creation */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 10, 14, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  width: 100%;
+  max-height: 85vh;
+  background: var(--bg-deep);
+  border-radius: 16px 16px 0 0;
+  border-top: 2px solid var(--blue-bright);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.5),
+              0 0 0 1px var(--border),
+              inset 0 1px 0 0 var(--border-bright);
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+  overflow: hidden;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h2 {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  color: var(--blue-bright);
+}
+
+/* Step Indicator */
+.stepIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  gap: 0.5rem;
+}
+
+.step {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.stepActive {
+  background: var(--blue-bright);
+  color: var(--bg-deepest);
+  border-color: var(--blue-bright);
+  box-shadow: 0 0 12px var(--blue-bright);
+}
+
+.stepLine {
+  width: 40px;
+  height: 2px;
+  background: var(--border);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.stepContent {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stepContent h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.stepDescription {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Error Message */
+.error {
+  background: var(--red-dim);
+  border: 1px solid var(--red);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--red);
+  font-size: 14px;
+}
+
+.errorText {
+  color: var(--red);
+  margin: 1rem 0;
+}
+
+/* Step 1: Location */
+.mapContainer {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+}
+
+.locationButtons {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.locationButtons button {
+  flex: 1;
+}
+
+.locationDisplay {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.coords {
+  font-size: 18px;
+  color: var(--blue-bright);
+  margin-bottom: 0.5rem;
+}
+
+.locationNote {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.optionalFields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.optionalFields label {
+  margin-top: 0.5rem;
+}
+
+/* Step 2: Time Window */
+.timeModeButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeModeButton {
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.timeModeButton:hover {
+  border-color: var(--blue-mid);
+  background: var(--bg-overlay);
+}
+
+.timeModeButtonActive {
+  border-color: var(--blue-bright);
+  background: var(--bg-overlay);
+  color: var(--blue-bright);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.13);
+}
+
+.timeModeContent {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.timeOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.timeOption {
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.timeOption:hover {
+  border-color: var(--blue-mid);
+  background: var(--bg-overlay);
+}
+
+.timeOptionSelected {
+  border-color: var(--blue-bright);
+  background: var(--bg-overlay);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.13);
+}
+
+.timePreview {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeInputRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.timeInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeInputGroup select,
+.timeInputGroup input[type="time"] {
+  width: 100%;
+}
+
+.daySelector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 0.5rem;
+  margin: 0.75rem 0 1.5rem 0;
+}
+
+.dayButton {
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 0.5rem;
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dayButton:hover {
+  border-color: var(--blue-mid);
+  background: var(--bg-overlay);
+}
+
+.dayButtonActive {
+  border-color: var(--blue-bright);
+  background: var(--bg-overlay);
+  color: var(--blue-bright);
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.13);
+}
+
+/* Step 3: Device List */
+.deviceList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.deviceItem {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.deviceItem:hover {
+  border-color: var(--blue-mid);
+  background: var(--bg-overlay);
+}
+
+.deviceItemSelected {
+  border-color: var(--blue-bright);
+  background: var(--bg-overlay);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.13);
+}
+
+.deviceCheckbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--blue-bright);
+}
+
+.deviceName {
+  flex: 1;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.deviceNote {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Step 4: Review */
+.reviewSection {
+  margin-bottom: 1.5rem;
+}
+
+.reviewSection label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.reviewSection p {
+  margin: 0.25rem 0;
+  color: var(--text-primary);
+}
+
+.deviceReview {
+  font-size: 14px;
+}
+
+.partnerReviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.partnerReviewItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.partnerReviewItem span {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.footer button {
+  flex: 1;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .overlay {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal {
+    max-width: 600px;
+    max-height: 90vh;
+    border-radius: 16px;
+    border: 2px solid var(--blue-bright);
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+/* Mobile safe area */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .footer {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+}

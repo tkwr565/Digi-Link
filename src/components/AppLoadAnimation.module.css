@@ -1,0 +1,92 @@
+/* App load animation — full-screen overlay that plays once per browser session */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #050a0e; /* --bg-deepest */
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Screen power-on: brightness flash then fade to transparent */
+.overlay.fading {
+  animation: screen-on 0.5s ease-out forwards;
+}
+
+@keyframes screen-on {
+  0%   { opacity: 1; filter: brightness(1); }
+  30%  { opacity: 1; filter: brightness(2.5); }
+  100% { opacity: 0; filter: brightness(1); }
+}
+
+/* Horizontal scan line sweeps top → bottom in 0.4s */
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -4px;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 212, 255, 0.3) 15%,
+    rgba(0, 212, 255, 1) 50%,
+    rgba(0, 212, 255, 0.3) 85%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 12px rgba(0, 212, 255, 0.9),
+    0 0 30px rgba(0, 212, 255, 0.5),
+    0 0 60px rgba(0, 212, 255, 0.2);
+  animation: scanline-sweep 0.4s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+@keyframes scanline-sweep {
+  from { top: -4px; }
+  to   { top: 100%; }
+}
+
+/* Content — centered vertically and horizontally */
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  animation: content-fadein 0.3s ease-out 0.2s both;
+}
+
+@keyframes content-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.loadingText {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.9;
+}
+
+.digimonName {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .scanline {
+    animation-duration: 0.01ms !important;
+  }
+}

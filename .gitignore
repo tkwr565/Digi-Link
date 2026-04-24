@@ -1,0 +1,48 @@
+# ─── Credentials & environment ───────────────────────────────────────────────
+# Ignore all .env variants except the committed example file
+.env
+.env.*
+!.env.example
+
+# ─── Build output ────────────────────────────────────────────────────────────
+dist/
+dist-ssr/
+
+# ─── Dependencies ────────────────────────────────────────────────────────────
+node_modules/
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─── Claude Code (dev assistant config — not for public) ─────────────────────
+.claude/
+CLAUDE.md
+PROGRESS.md
+START_NEXT_CHAT.txt
+
+# ─── Development docs (internal, not for public) ─────────────────────────────
+docs/
+
+# ─── Database migrations (applied to Supabase cloud, for dev use only) ───────
+supabase/
+
+# ─── Dev tools & scripts ─────────────────────────────────────────────────────
+generate_offsets.ps1
+
+# ─── OS & editor ─────────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+nul
