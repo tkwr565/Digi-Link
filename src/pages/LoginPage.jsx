@@ -54,8 +54,8 @@ function LoginPage() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1 className={styles.titleChinese}>數碼吉士</h1>
-        <p className={styles.title}>Digi-Guts</p>
+        <h1 className={styles.titleChinese}>數碼連結</h1>
+        <p className={styles.title}>Digi-Link</p>
         <p className={styles.subtitle}>{t('auth.subtitle')}</p>
 
         {error && <div className={styles.error}>{error}</div>}

@@ -506,8 +506,8 @@ export default function MapPage() {
 
         {/* App wordmark */}
         <div className={styles.wordmark}>
-          <span className={styles.wordmarkChinese}>數碼吉士</span>
-          <span className={styles.wordmarkRoman}>Digi-Guts</span>
+          <span className={styles.wordmarkChinese}>數碼連結</span>
+          <span className={styles.wordmarkRoman}>Digi-Link</span>
         </div>
 
         {/* Map loading overlay */}

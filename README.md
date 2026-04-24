@@ -1,4 +1,4 @@
-# 數碼吉士 (Digi-Guts)
+# 數碼連結 (Digi-Link)
 
 > Find other Digimon fans in the real world. · 尋找現實世界中的數碼暴龍粉絲
 
@@ -8,7 +8,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?logo=supabase)](https://supabase.com)
 [![MapLibre](https://img.shields.io/badge/MapLibre-Map-396CB2)](https://maplibre.org)
 
-Remember bumping into a stranger on the street who also had a Digivice? 數碼吉士 (Digi-Guts) brings that back — for adults, anywhere on the planet.
+Remember bumping into a stranger on the street who also had a Digivice? 數碼連結 (Digi-Link) brings that back — for adults, anywhere on the planet.
 
 The app is fully localised in **English** and **繁體中文 (Traditional Chinese / Hong Kong)**.
 
@@ -58,8 +58,8 @@ Drop a timed pin on the map when you're out and about with your Digivice. Other 
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/tkwr565/Digi-Gut.git
-cd Digi-Gut
+git clone https://github.com/tkwr565/Digi-Link.git
+cd Digi-Link
 
 # 2. Install dependencies
 npm install
@@ -78,7 +78,7 @@ You will need a [Supabase](https://supabase.com) project with PostGIS enabled. S
 
 ## Contributing
 
-This is a personal fan project. Bug reports and suggestions are welcome via [GitHub Issues](https://github.com/tkwr565/Digi-Gut/issues). Pull requests may be considered at the maintainer's discretion.
+This is a personal fan project. Bug reports and suggestions are welcome via [GitHub Issues](https://github.com/tkwr565/Digi-Link/issues). Pull requests may be considered at the maintainer's discretion.
 
 Please read the [license](LICENSE) before contributing — commercial use of this code or any derivative is not permitted.
 

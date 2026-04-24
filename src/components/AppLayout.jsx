@@ -5,7 +5,7 @@ import { useFriendPinCount } from '../hooks/useFriendPinCount'
 import { useTranslation } from 'react-i18next'
 import styles from './AppLayout.module.css'
 
-const SESSION_FLAG = 'digi_guts_load_anim_played'
+const SESSION_FLAG = 'digi_link_load_anim_played'
 
 /**
  * AppLayout - Persistent layout wrapper with bottom navigation
