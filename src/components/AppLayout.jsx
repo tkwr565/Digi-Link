@@ -1,10 +1,11 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Map as MapIcon, MessageCircle, Trophy, User } from 'lucide-react'
+import { Map as MapIcon, MessageCircle, Users, User } from 'lucide-react'
 import { useUnreadCount } from '../hooks/useUnreadCount'
+import { useFriendPinCount } from '../hooks/useFriendPinCount'
 import { useTranslation } from 'react-i18next'
 import styles from './AppLayout.module.css'
 
-const SESSION_FLAG = 'digi_gut_load_anim_played'
+const SESSION_FLAG = 'digi_guts_load_anim_played'
 
 /**
  * AppLayout - Persistent layout wrapper with bottom navigation
@@ -15,6 +16,7 @@ export default function AppLayout({ children }) {
   const navigate = useNavigate()
   const location = useLocation()
   const unreadCount = useUnreadCount()
+  const friendPinCount = useFriendPinCount()
   const { t } = useTranslation()
 
   // Slide-up animation only on first session load (before flag is set by AppLoadAnimation)
@@ -23,7 +25,7 @@ export default function AppLayout({ children }) {
   // Determine which nav button is active based on current path
   const isMapActive = location.pathname === '/'
   const isMessagesActive = location.pathname.startsWith('/messages')
-  const isLeaderboardActive = location.pathname === '/leaderboard'
+  const isFriendsActive = location.pathname === '/friends'
   const isProfileActive = location.pathname === '/profile'
 
   return (
@@ -57,12 +59,17 @@ export default function AppLayout({ children }) {
           <span>{t('nav.messages')}</span>
         </button>
         <button
-          className={`${styles.navButton} ${isLeaderboardActive ? styles.active : ''}`}
-          onClick={() => navigate('/leaderboard')}
-          title={t('nav.leaderboard')}
+          className={`${styles.navButton} ${isFriendsActive ? styles.active : ''}`}
+          onClick={() => navigate('/friends')}
+          title={t('nav.friends')}
         >
-          <Trophy size={24} />
-          <span>{t('nav.leaderboard')}</span>
+          <div className={styles.navIconWrapper}>
+            <Users size={24} />
+            {friendPinCount > 0 && (
+              <span className={styles.unreadBadge}>{friendPinCount}</span>
+            )}
+          </div>
+          <span>{t('nav.friends')}</span>
         </button>
         <button
           className={`${styles.navButton} ${isProfileActive ? styles.active : ''}`}

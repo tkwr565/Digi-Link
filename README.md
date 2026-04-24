@@ -1,4 +1,4 @@
-# 數碼吉龍波 (Digi-Gut)
+# 數碼吉士 (Digi-Guts)
 
 > Find other Digimon fans in the real world. · 尋找現實世界中的數碼暴龍粉絲
 
@@ -8,7 +8,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?logo=supabase)](https://supabase.com)
 [![MapLibre](https://img.shields.io/badge/MapLibre-Map-396CB2)](https://maplibre.org)
 
-Remember bumping into a stranger on the street who also had a Digivice? 數碼吉龍波 (Digi-Gut) brings that back — for adults, anywhere on the planet.
+Remember bumping into a stranger on the street who also had a Digivice? 數碼吉士 (Digi-Guts) brings that back — for adults, anywhere on the planet.
 
 The app is fully localised in **English** and **繁體中文 (Traditional Chinese / Hong Kong)**.
 

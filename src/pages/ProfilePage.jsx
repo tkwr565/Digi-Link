@@ -389,10 +389,6 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <button onClick={() => navigate('/friends')} className={styles.btnFriends}>
-              {t('profile.friends')}
-            </button>
-
             <button onClick={() => navigate('/my-pins')} className={styles.btnMyPins}>
               {t('profile.myPins')}
             </button>

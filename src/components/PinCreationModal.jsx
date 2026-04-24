@@ -6,6 +6,7 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
 import { loadDeviceList, getDeviceFullDisplay, loadDigimonDb, getDigimonName } from '../utils/digimonUtils'
+import { getDistrictKey } from '../utils/hkDistrict'
 import DigimonSprite from './DigimonSprite'
 import { useTranslation } from 'react-i18next'
 import styles from './PinCreationModal.module.css'
@@ -529,14 +530,24 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                 </button>
               </div>
 
-              {location && (
-                <div className={styles.locationDisplay}>
-                  <span className="section-label">{t('createPin.selectedLocation')}</span>
-                  <span className="mono">
-                    {location.latitude.toFixed(3)}, {location.longitude.toFixed(3)}
-                  </span>
-                </div>
-              )}
+              {location && (() => {
+                const snLat = snapCoordinate(location.latitude)
+                const snLng = snapCoordinate(location.longitude)
+                const districtKey = getDistrictKey(snLat, snLng)
+                return (
+                  <div className={styles.locationDisplay}>
+                    <span className="section-label">{t('createPin.selectedLocation')}</span>
+                    <span className="mono">
+                      {snLat}, {snLng}
+                    </span>
+                    {districtKey && (
+                      <span className={styles.locationDistrict}>
+                        {t(`districts.${districtKey}`)}
+                      </span>
+                    )}
+                  </div>
+                )
+              })()}
 
               <div className={styles.optionalFields}>
                 <label className="section-label">{t('createPin.pinTitleLabel')}</label>

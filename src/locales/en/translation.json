@@ -43,7 +43,7 @@
     "logIn": "Log in",
     "emailRequired": "Email and password are required",
     "passwordsMatch": "Passwords do not match",
-    "joinTitle": "Join Digi-Gut"
+    "joinTitle": "Join Digi-Guts"
   },
   "profile": {
     "title": "Profile",
@@ -122,13 +122,39 @@
     "btnReject": "Reject",
     "btnRemove": "Remove",
     "incomingRequests": "INCOMING REQUESTS",
+    "sentRequests": "SENT REQUESTS",
+    "sentRequestsHint": "Waiting for them to accept your request",
     "myFriends": "MY FRIENDS",
     "noFriendsYet": "No friends yet",
     "battleSomeone": "Battle someone and add them to build your network.",
     "battleContacts": "BATTLE CONTACTS",
     "battleContactsHint": "People you've battled — send them a friend request",
     "noConnectionsYet": "No connections yet",
-    "noConnectionsHint": "Battle other players to add them as friends, or search by username above."
+    "noConnectionsHint": "Battle other players to add them as friends, or search by username above.",
+    "friendActivity": "FRIEND ACTIVITY",
+    "noFriendActivity": "No active pins from friends right now.",
+    "pinNoTitle": "Untitled pin",
+    "pinExpiredLabel": "EXPIRED"
+  },
+  "districts": {
+    "centralWestern": "Central & Western",
+    "wanChai": "Wan Chai",
+    "eastern": "Eastern",
+    "southern": "Southern",
+    "yauTsimMong": "Yau Tsim Mong",
+    "shamShuiPo": "Sham Shui Po",
+    "kowloonCity": "Kowloon City",
+    "wongTaiSin": "Wong Tai Sin",
+    "kwunTong": "Kwun Tong",
+    "kwaiTsing": "Kwai Tsing",
+    "tsuenWan": "Tsuen Wan",
+    "tuenMun": "Tuen Mun",
+    "yuenLong": "Yuen Long",
+    "north": "North",
+    "taiPo": "Tai Po",
+    "shaTin": "Sha Tin",
+    "saiKung": "Sai Kung",
+    "islands": "Islands"
   },
   "myPins": {
     "title": "MY PINS",
@@ -256,6 +282,7 @@
     "confirmBattleTooltip": "Confirm battle completion",
     "archivedDeleted": "This conversation is archived — Pin was deleted by the owner",
     "archivedExpired": "This conversation is archived — Pin has expired",
+    "archivedInputNotice": "No new messages can be sent",
     "addFriendPrompt": "Add {{name}} as a friend?",
     "maybeLater": "Maybe Later",
     "friendRequestSent": "Friend request sent to {{name}} ✓",

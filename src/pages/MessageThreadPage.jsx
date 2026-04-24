@@ -114,7 +114,9 @@ function MessageThreadPage() {
 
   const handleSendMessage = async (e) => {
     e.preventDefault()
-    if (!messageText.trim() || !conversation || sending) return
+    const _isPinDeleted = !conversation?.pin_id
+    const _isArchived = _isPinDeleted || (pin !== null && !pin.is_active)
+    if (!messageText.trim() || !conversation || sending || _isArchived) return
     setSending(true)
     const otherUserId = conversation.user1_id === user.id ? conversation.user2_id : conversation.user1_id
     const { data, error } = await sendMessageUtil(conversation.id, user.id, otherUserId, conversation.pin_id, messageText, supabase)
@@ -128,6 +130,7 @@ function MessageThreadPage() {
 
   const isPinDeleted = !conversation.pin_id
   const isPinActive = pin && pin.is_active
+  const isArchived = isPinDeleted || (pin !== null && !pin.is_active)
   const currentUserConfirmed = battle && (battle.requester_id === user.id ? battle.requester_confirmed : battle.responder_confirmed)
   const battleCompleted = battle && battle.battle_completed_at
   const now = new Date()
@@ -178,10 +181,14 @@ function MessageThreadPage() {
         )}
       </div>
 
-      <form className={styles.inputContainer} onSubmit={handleSendMessage}>
-        <input type="text" className={styles.input} placeholder={t('messages.typeMessage')} value={messageText} onChange={(e) => setMessageText(e.target.value)} disabled={sending} maxLength={1000} />
-        <button type="submit" className={styles.sendButton} disabled={!messageText.trim() || sending}>{sending ? '...' : t('common.send')}</button>
-      </form>
+      {isArchived ? (
+        <div className={styles.expiredNotice}>🔒 {t('messages.archivedInputNotice')}</div>
+      ) : (
+        <form className={styles.inputContainer} onSubmit={handleSendMessage}>
+          <input type="text" className={styles.input} placeholder={t('messages.typeMessage')} value={messageText} onChange={(e) => setMessageText(e.target.value)} disabled={sending} maxLength={1000} />
+          <button type="submit" className={styles.sendButton} disabled={!messageText.trim() || sending}>{sending ? '...' : t('common.send')}</button>
+        </form>
+      )}
     </div>
   )
 }

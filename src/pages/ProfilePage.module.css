@@ -240,7 +240,6 @@
   box-shadow: 0 0 10px rgba(0, 198, 255, 0.4);
 }
 
-.btnFriends,
 .btnMyPins {
   width: 100%;
   padding: 0.625rem;
@@ -258,7 +257,6 @@
   transition: background 0.2s;
 }
 
-.btnFriends:hover,
 .btnMyPins:hover {
   background: var(--bg-surface);
 }

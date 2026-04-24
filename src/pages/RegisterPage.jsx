@@ -59,8 +59,8 @@ function RegisterPage() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1 className={styles.titleChinese}>數碼吉龍波</h1>
-        <p className={styles.title}>Digi-Gut</p>
+        <h1 className={styles.titleChinese}>數碼吉士</h1>
+        <p className={styles.title}>Digi-Guts</p>
         <p className={styles.subtitle}>{t('auth.joinTitle')}</p>
 
         {error && <div className={styles.error}>{error}</div>}

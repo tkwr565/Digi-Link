@@ -57,13 +57,8 @@ function ProtectedRoute({ children }) {
       <div style={{
         width: '100%',
         height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'var(--blue-bright)'
-      }}>
-        Loading...
-      </div>
+        background: 'var(--bg-deep)',
+      }} />
     )
   }
 
@@ -120,13 +115,8 @@ function ProfileSetupRoute({ children }) {
       <div style={{
         width: '100%',
         height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'var(--blue-bright)'
-      }}>
-        Loading...
-      </div>
+        background: 'var(--bg-deep)',
+      }} />
     )
   }
 
@@ -190,13 +180,8 @@ function PublicRoute({ children }) {
       <div style={{
         width: '100%',
         height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'var(--blue-bright)'
-      }}>
-        Loading...
-      </div>
+        background: 'var(--bg-deep)',
+      }} />
     )
   }
 

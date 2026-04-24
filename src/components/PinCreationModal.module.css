@@ -195,6 +195,14 @@
   margin-bottom: 1.5rem;
 }
 
+.locationDistrict {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--blue-bright);
+  letter-spacing: 0.04em;
+}
+
 .coords {
   font-size: 18px;
   color: var(--blue-bright);

@@ -53,6 +53,11 @@ export default function MapPage() {
   const [isScanning, setIsScanning] = useState(false)
   const [isFindingNearest, setIsFindingNearest] = useState(false)
   const [isMapLoading, setIsMapLoading] = useState(true)
+  // Map is not rendered until we have a real starting position (geolocation or fallback).
+  // This prevents a wasted tile load at (0, 0) that would fire onIdle early and dismiss
+  // the radar before tiles at the actual location are ready.
+  const [hasInitialPosition, setHasInitialPosition] = useState(false)
+  const [pendingPinId, setPendingPinId] = useState(null)
   const mapRef = useRef()
 
   useEffect(() => {
@@ -85,6 +90,8 @@ export default function MapPage() {
         lng = HONG_KONG_BOUNDS.center.lng
         setViewState({ longitude: lng, latitude: lat, zoom: HONG_KONG_BOUNDS.zoom })
       }
+
+      setHasInitialPosition(true)
 
       // Fetch weather at determined location (non-blocking — fails silently)
       const w = await fetchWeather(lat, lng)
@@ -167,8 +174,9 @@ export default function MapPage() {
     }
   }
 
-  // Load pins when map becomes idle (after user stops moving/zooming)
+  // onIdle (not onLoad) dismisses the radar — tiles are painted by then, so no grey flash after AppLoadAnimation fades.
   const handleMapIdle = () => {
+    if (isMapLoading) setIsMapLoading(false)
     loadPinsInViewport()
   }
 
@@ -179,14 +187,26 @@ export default function MapPage() {
     }
   }, [user])
 
-  // Handle pinId URL parameter - load and show specific pin
+  // Step 1: capture pinId from URL immediately and clear it, so the param
+  // doesn't linger while the map is still loading.
   useEffect(() => {
     const pinId = searchParams.get('pinId')
-    if (!pinId || !user) return
+    if (!pinId) return
+    setPendingPinId(pinId)
+    setSearchParams({})
+  }, [searchParams, setSearchParams])
+
+  // Step 2: once the map is loaded AND we have a pending pin, fetch + fly + open card.
+  // Splitting from Step 1 means navigating fresh from another tab works reliably —
+  // the URL param is captured immediately, and the flyTo only runs after onLoad fires.
+  useEffect(() => {
+    if (isMapLoading || !pendingPinId || !user) return
+
+    const pinId = pendingPinId
+    setPendingPinId(null)
 
     const loadAndShowPin = async () => {
       try {
-        // Fetch the specific pin
         const { data: pinData, error } = await supabase
           .from('pins')
           .select(`
@@ -201,36 +221,25 @@ export default function MapPage() {
           .eq('id', pinId)
           .single()
 
-        if (error) {
+        if (error || !pinData) {
           console.error('Error loading pin:', error)
           showToast('error', t('map.pinNotFound'))
-          // Clear the pinId parameter
-          setSearchParams({})
           return
         }
 
-        // Fly to pin location
-        if (mapRef.current && pinData) {
-          mapRef.current.flyTo({
-            center: [pinData.lng, pinData.lat],
-            zoom: 15,
-            duration: 1500
-          })
-
-          // Wait for map to fly, then show pin card
-          setTimeout(() => {
-            setSelectedPin(pinData)
-            // Clear the pinId parameter from URL
-            setSearchParams({})
-          }, 1600)
-        }
-      } catch (error) {
-        console.error('Error loading pin:', error)
+        mapRef.current.flyTo({
+          center: [pinData.lng, pinData.lat],
+          zoom: 15,
+          duration: 1500
+        })
+        setTimeout(() => setSelectedPin(pinData), 1600)
+      } catch (err) {
+        console.error('Error loading pin:', err)
       }
     }
 
     loadAndShowPin()
-  }, [searchParams, user, setSearchParams, t])
+  }, [isMapLoading, pendingPinId, user, showToast, t])
 
   // Handle successful pin creation
   const handlePinCreated = () => {
@@ -436,11 +445,11 @@ export default function MapPage() {
   return (
     <div className={styles.container}>
       <div className={styles.mapWrapper}>
+        {hasInitialPosition && (
         <Map
           ref={mapRef}
           {...viewState}
           onMove={(evt) => setViewState(evt.viewState)}
-          onLoad={() => setIsMapLoading(false)}
           onIdle={handleMapIdle}
           mapStyle={CARTO_DARK_MATTER}
           style={{ width: '100%', height: '100%' }}
@@ -493,11 +502,12 @@ export default function MapPage() {
             }}
           />
         </Map>
+        )}
 
         {/* App wordmark */}
         <div className={styles.wordmark}>
-          <span className={styles.wordmarkChinese}>數碼吉龍波</span>
-          <span className={styles.wordmarkRoman}>Digi-Gut</span>
+          <span className={styles.wordmarkChinese}>數碼吉士</span>
+          <span className={styles.wordmarkRoman}>Digi-Guts</span>
         </div>
 
         {/* Map loading overlay */}

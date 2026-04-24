@@ -43,7 +43,7 @@
     "logIn": "登入",
     "emailRequired": "請輸入電子郵件和密碼",
     "passwordsMatch": "密碼不相符",
-    "joinTitle": "加入數碼吉龍波"
+    "joinTitle": "加入數碼吉士"
   },
   "profile": {
     "title": "個人檔案",
@@ -122,13 +122,39 @@
     "btnReject": "拒絕",
     "btnRemove": "移除",
     "incomingRequests": "收到好友請求",
+    "sentRequests": "已發送請求",
+    "sentRequestsHint": "等待對方接受你的好友請求",
     "myFriends": "我的好友",
     "noFriendsYet": "暫時未有好友",
     "battleSomeone": "透過對戰並新增好友來建立你的網絡。",
     "battleContacts": "對戰聯絡人",
     "battleContactsHint": "曾對戰的對象 — 向他們發送好友請求",
     "noConnectionsYet": "暫時未有聯絡人",
-    "noConnectionsHint": "與其他玩家對戰來新增好友，或在上方搜尋用戶名稱。"
+    "noConnectionsHint": "與其他玩家對戰來新增好友，或在上方搜尋用戶名稱。",
+    "friendActivity": "好友動態",
+    "noFriendActivity": "好友目前沒有活動中的標記。",
+    "pinNoTitle": "未命名標記",
+    "pinExpiredLabel": "已過期"
+  },
+  "districts": {
+    "centralWestern": "中西區",
+    "wanChai": "灣仔區",
+    "eastern": "東區",
+    "southern": "南區",
+    "yauTsimMong": "油尖旺區",
+    "shamShuiPo": "深水埗區",
+    "kowloonCity": "九龍城區",
+    "wongTaiSin": "黃大仙區",
+    "kwunTong": "觀塘區",
+    "kwaiTsing": "葵青區",
+    "tsuenWan": "荃灣區",
+    "tuenMun": "屯門區",
+    "yuenLong": "元朗區",
+    "north": "北區",
+    "taiPo": "大埔區",
+    "shaTin": "沙田區",
+    "saiKung": "西貢區",
+    "islands": "離島區"
   },
   "myPins": {
     "title": "我的標記",
@@ -256,6 +282,7 @@
     "confirmBattleTooltip": "確認對戰已完成",
     "archivedDeleted": "此對話已封存 — 標記已被擁有者刪除",
     "archivedExpired": "此對話已封存 — 標記已過期",
+    "archivedInputNotice": "無法傳送新訊息",
     "addFriendPrompt": "將 {{name}} 新增為好友？",
     "maybeLater": "稍後再說",
     "friendRequestSent": "已向 {{name}} 發送好友請求 ✓",

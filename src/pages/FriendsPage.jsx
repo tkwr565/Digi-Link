@@ -1,23 +1,69 @@
 import { useState, useEffect, useRef } from 'react'
+import { Info, MapPin, Users, WifiOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Info, Users, WifiOff } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabase'
 import DigimonSprite from '../components/DigimonSprite'
 import EmptyState from '../components/EmptyState'
 import { useTranslation } from 'react-i18next'
+import { getDistrictKey } from '../utils/hkDistrict'
 import styles from './FriendsPage.module.css'
+
+// Shift a UTC ISO string by +8h and return a plain Date-like object in HKT
+const asHKT = (iso) => {
+  const d = new Date(iso)
+  return new Date(d.getTime() + 8 * 3_600_000)
+}
+
+// Format a UTC ISO time string as HH:MM in HKT
+const toHKTTime = (iso) => {
+  if (!iso) return null
+  const hkt = asHKT(iso)
+  return `${hkt.getUTCHours().toString().padStart(2, '0')}:${hkt.getUTCMinutes().toString().padStart(2, '0')}`
+}
+
+const formatPinWindow = (startTime, endTime) => {
+  const start = toHKTTime(startTime)
+  const end = toHKTTime(endTime)
+  if (!start) return null
+  return end ? `${start} – ${end}` : start
+}
+
+// Returns true when startTime falls on today's date in HKT
+const isPinToday = (startTime) => {
+  if (!startTime) return false
+  const now = asHKT(new Date().toISOString())
+  const pin = asHKT(startTime)
+  return now.getUTCFullYear() === pin.getUTCFullYear() &&
+         now.getUTCMonth()    === pin.getUTCMonth()    &&
+         now.getUTCDate()     === pin.getUTCDate()
+}
+
+// Returns a short locale date string for non-today pins, e.g. "Mon, 28 Apr" / "4月28日"
+const formatPinDate = (startTime, lang) => {
+  if (!startTime) return null
+  const d = new Date(startTime)
+  const locale = lang === 'zh-HK' ? 'zh-HK' : 'en-HK'
+  return d.toLocaleDateString(locale, {
+    timeZone: 'Asia/Hong_Kong',
+    weekday: 'short',
+    month:   'short',
+    day:     'numeric',
+  })
+}
 
 export default function FriendsPage() {
   const { user } = useAuth()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
-  const { t } = useTranslation()
 
   const [loading, setLoading] = useState(true)
   const [friends, setFriends] = useState([])
   const [incomingRequests, setIncomingRequests] = useState([])
+  const [outgoingRequests, setOutgoingRequests] = useState([])
   const [outgoingRequestIds, setOutgoingRequestIds] = useState(new Set())
   const [battleContacts, setBattleContacts] = useState([])
+  const [pinNotifications, setPinNotifications] = useState([])
   const [actionLoading, setActionLoading] = useState(null)
   const [error, setError] = useState('')
 
@@ -26,11 +72,49 @@ export default function FriendsPage() {
   const [searchResults, setSearchResults] = useState([])
   const [searching, setSearching] = useState(false)
   const searchTimer = useRef(null)
+  const channelRef = useRef(null)
 
   useEffect(() => {
     if (!user) return
     loadAll()
   }, [user])
+
+  // Realtime (primary): own dedicated channel for immediate page-content refresh
+  useEffect(() => {
+    if (!user?.id) return
+
+    const channel = supabase
+      .channel(`friends-page-${user.id}`)
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'friendships' },
+        () => loadAll(true)
+      )
+      .subscribe()
+
+    channelRef.current = channel
+
+    return () => {
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current)
+        channelRef.current = null
+      }
+    }
+  }, [user?.id])
+
+  // Realtime (fallback): hook dispatches this when its friendships channel fires first
+  useEffect(() => {
+    const handler = () => loadAll(true)
+    window.addEventListener('friendshipChanged', handler)
+    return () => window.removeEventListener('friendshipChanged', handler)
+  }, [])
+
+  // Realtime: new pin notification from a friend arrived
+  useEffect(() => {
+    const handler = () => loadPinNotifications()
+    window.addEventListener('pinNotificationChanged', handler)
+    return () => window.removeEventListener('pinNotificationChanged', handler)
+  }, [])
 
   // Debounced search — fires 400ms after the user stops typing
   useEffect(() => {
@@ -57,8 +141,40 @@ export default function FriendsPage() {
     setSearchResults(data || [])
   }
 
-  const loadAll = async () => {
-    setLoading(true)
+  // Fetch recent pin notifications, display them (capturing seen state for NEW badge),
+  // then mark all as seen and tell the hook to drop the badge count.
+  const loadPinNotifications = async () => {
+    const { data, error: notifErr } = await supabase
+      .from('friend_pin_notifications')
+      .select(`
+        id, seen, created_at,
+        pin:pins!pin_id(id, title, is_active, lat, lng, start_time, end_time),
+        friend:profiles!friend_id(id, username, favourite_digimon)
+      `)
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(20)
+
+    if (notifErr) { console.error('Failed to load pin notifications:', notifErr); return }
+
+    // Only surface notifications whose pin is still active
+    const active = (data || []).filter(n => n.pin?.is_active)
+    // Capture seen state before marking — used to render NEW badges this session
+    const withSeenSnapshot = active.map(n => ({ ...n, wasSeen: n.seen }))
+    setPinNotifications(withSeenSnapshot)
+
+    // Mark unseen as seen in DB (fire and forget — component state already captured
+    // seen=false for display, so NEW badges stay visible for this session)
+    supabase
+      .from('friend_pin_notifications')
+      .update({ seen: true })
+      .eq('user_id', user.id)
+      .eq('seen', false)
+      .then(() => window.dispatchEvent(new CustomEvent('friendsSeen')))
+  }
+
+  const loadAll = async (silent = false) => {
+    if (!silent) setLoading(true)
     setError('')
 
     try {
@@ -106,14 +222,27 @@ export default function FriendsPage() {
       }
       setIncomingRequests(requesterProfiles)
 
-      // 3. Outgoing pending request IDs
+      // 3. Outgoing pending request IDs + profiles
       const { data: outgoingRows, error: outgoingErr } = await supabase
         .from('friendships')
         .select('friend_id')
         .eq('user_id', user.id)
         .eq('status', 'pending')
       if (outgoingErr) throw outgoingErr
-      setOutgoingRequestIds(new Set((outgoingRows || []).map(r => r.friend_id)))
+
+      const outgoingIds = (outgoingRows || []).map(r => r.friend_id)
+      setOutgoingRequestIds(new Set(outgoingIds))
+
+      let outgoingProfiles = []
+      if (outgoingIds.length > 0) {
+        const { data, error: profErr } = await supabase
+          .from('profiles')
+          .select('id, username, favourite_digimon')
+          .in('id', outgoingIds)
+        if (profErr) throw profErr
+        outgoingProfiles = data || []
+      }
+      setOutgoingRequests(outgoingProfiles)
 
       // 4. Battle contacts — completed battles, other party not yet a friend or incoming request
       const { data: battles, error: battlesErr } = await supabase
@@ -140,6 +269,9 @@ export default function FriendsPage() {
         contactProfiles = data || []
       }
       setBattleContacts(contactProfiles)
+
+      // 5. Pin notifications — fetched separately so they can also be refreshed independently
+      await loadPinNotifications()
     } catch (err) {
       console.error('Failed to load friends data:', err)
       setError(t('friends.error'))
@@ -154,7 +286,6 @@ export default function FriendsPage() {
 
     const isIncoming = incomingRequests.some(r => r.id === targetId)
     if (isIncoming) {
-      // Accept their existing request — no new row needed, avoids duplicate
       const { error } = await supabase
         .from('friendships')
         .update({ status: 'accepted' })
@@ -172,7 +303,6 @@ export default function FriendsPage() {
     setActionLoading(null)
     if (error) { console.error('Failed to send friend request:', error); return }
 
-    // Optimistic update — no full reload needed, button state derives from this set
     setOutgoingRequestIds(prev => new Set([...prev, targetId]))
   }
 
@@ -222,7 +352,6 @@ export default function FriendsPage() {
     await loadAll()
   }
 
-  // Derive the relationship status for a search result (computed from live state)
   const friendIdSet = new Set(friends.map(f => f.id))
   const incomingIdSet = new Set(incomingRequests.map(r => r.id))
 
@@ -247,7 +376,6 @@ export default function FriendsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <button onClick={() => navigate('/profile')} className={styles.backBtn}>← {t('common.back')}</button>
         <h1 className={styles.title}>{t('friends.title')}</h1>
       </div>
 
@@ -265,69 +393,6 @@ export default function FriendsPage() {
           variant="error"
         />
       )}
-
-      {/* ── Username Search ── */}
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>{t('friends.findByUsername')}</h2>
-        <input
-          type="text"
-          className={styles.searchInput}
-          placeholder={t('friends.searchPlaceholder')}
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          autoComplete="off"
-          spellCheck="false"
-        />
-
-        {isSearchActive && (
-          <div className={styles.searchResults}>
-            {searching && <div className={styles.searchHint}>{t('friends.searching')}</div>}
-            {!searching && searchResults.length === 0 && (
-              <div className={styles.searchHint}>{t('friends.noTrainersFound')}</div>
-            )}
-            {!searching && searchResults.map(result => {
-              const status = getStatus(result.id)
-              return (
-                <div key={result.id} className={styles.contactCard}>
-                  <div className={styles.userInfo}>
-                    <DigimonSprite suffix={result.favourite_digimon} size="sm" />
-                    <div className={styles.userDetails}>
-                      <span className={styles.username}>{result.username}</span>
-                      <span className={styles.battleCount}>
-                        {t('friends.battlesCount', { count: result.total_battles })}
-                      </span>
-                    </div>
-                  </div>
-                  {status === 'friends' && (
-                    <span className={styles.tagFriends}>{t('friends.tagFriends')}</span>
-                  )}
-                  {status === 'incoming' && (
-                    <button
-                      className={styles.btnAccept}
-                      onClick={() => acceptRequest(result.id)}
-                      disabled={actionLoading === result.id}
-                    >
-                      {actionLoading === result.id ? '...' : t('friends.btnAccept')}
-                    </button>
-                  )}
-                  {status === 'outgoing' && (
-                    <span className={styles.btnPending}>{t('friends.btnPending')}</span>
-                  )}
-                  {status === 'none' && (
-                    <button
-                      className={styles.btnAdd}
-                      onClick={() => sendRequest(result.id)}
-                      disabled={actionLoading === result.id}
-                    >
-                      {actionLoading === result.id ? '...' : t('friends.btnAdd')}
-                    </button>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        )}
-      </section>
 
       {/* ── Incoming Requests ── */}
       {incomingRequests.length > 0 && (
@@ -359,6 +424,77 @@ export default function FriendsPage() {
           ))}
         </section>
       )}
+
+      {/* ── Sent Requests ── */}
+      {outgoingRequests.length > 0 && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>{t('friends.sentRequests')}</h2>
+          <p className={styles.sectionHint}>{t('friends.sentRequestsHint')}</p>
+          {outgoingRequests.map(req => (
+            <div key={req.id} className={styles.contactCard}>
+              <div className={styles.userInfo}>
+                <DigimonSprite suffix={req.favourite_digimon} size="sm" />
+                <span className={styles.username}>{req.username}</span>
+              </div>
+              <span className={styles.btnPending}>{t('friends.btnPending')}</span>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {/* ── Friend Activity (active pins from friends) ── */}
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>{t('friends.friendActivity')}</h2>
+        {pinNotifications.length === 0 ? (
+          <div className={styles.activityEmpty}>{t('friends.noFriendActivity')}</div>
+        ) : (
+          pinNotifications.map(notif => {
+            const districtKey = getDistrictKey(notif.pin?.lat, notif.pin?.lng)
+            const pinWindow   = formatPinWindow(notif.pin?.start_time, notif.pin?.end_time)
+            const today       = isPinToday(notif.pin?.start_time)
+            const dateStr     = today
+              ? t('common.today')
+              : formatPinDate(notif.pin?.start_time, i18n.language)
+            const metaParts   = [
+              districtKey ? t(`districts.${districtKey}`) : null,
+              dateStr,
+              pinWindow,
+            ].filter(Boolean)
+            return (
+              <div
+                key={notif.id}
+                className={styles.activityCard}
+                onClick={() => navigate(`/?pinId=${notif.pin.id}`)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e => e.key === 'Enter' && navigate(`/?pinId=${notif.pin.id}`)}
+              >
+                <div className={styles.userInfo}>
+                  <DigimonSprite suffix={notif.friend?.favourite_digimon} size="sm" />
+                  <div className={styles.userDetails}>
+                    <span className={styles.username}>{notif.friend?.username}</span>
+                    <span className={styles.activityPin}>
+                      {notif.pin?.title || t('friends.pinNoTitle')}
+                    </span>
+                    {metaParts.length > 0 && (
+                      <span className={styles.activityMeta}>
+                        {districtKey && <MapPin size={10} />}
+                        {metaParts.map((part, i) => (
+                          <span key={i}>
+                            {i > 0 && <span className={styles.metaDot}>·</span>}
+                            {part}
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                {!notif.wasSeen && <span className={styles.newBadge}>NEW</span>}
+              </div>
+            )
+          })
+        )}
+      </section>
 
       {/* ── My Friends ── */}
       <section className={styles.section}>
@@ -423,6 +559,69 @@ export default function FriendsPage() {
           })}
         </section>
       )}
+
+      {/* ── Find by Username ── */}
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>{t('friends.findByUsername')}</h2>
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder={t('friends.searchPlaceholder')}
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          autoComplete="off"
+          spellCheck="false"
+        />
+
+        {isSearchActive && (
+          <div className={styles.searchResults}>
+            {searching && <div className={styles.searchHint}>{t('friends.searching')}</div>}
+            {!searching && searchResults.length === 0 && (
+              <div className={styles.searchHint}>{t('friends.noTrainersFound')}</div>
+            )}
+            {!searching && searchResults.map(result => {
+              const status = getStatus(result.id)
+              return (
+                <div key={result.id} className={styles.contactCard}>
+                  <div className={styles.userInfo}>
+                    <DigimonSprite suffix={result.favourite_digimon} size="sm" />
+                    <div className={styles.userDetails}>
+                      <span className={styles.username}>{result.username}</span>
+                      <span className={styles.battleCount}>
+                        {t('friends.battlesCount', { count: result.total_battles })}
+                      </span>
+                    </div>
+                  </div>
+                  {status === 'friends' && (
+                    <span className={styles.tagFriends}>{t('friends.tagFriends')}</span>
+                  )}
+                  {status === 'incoming' && (
+                    <button
+                      className={styles.btnAccept}
+                      onClick={() => acceptRequest(result.id)}
+                      disabled={actionLoading === result.id}
+                    >
+                      {actionLoading === result.id ? '...' : t('friends.btnAccept')}
+                    </button>
+                  )}
+                  {status === 'outgoing' && (
+                    <span className={styles.btnPending}>{t('friends.btnPending')}</span>
+                  )}
+                  {status === 'none' && (
+                    <button
+                      className={styles.btnAdd}
+                      onClick={() => sendRequest(result.id)}
+                      disabled={actionLoading === result.id}
+                    >
+                      {actionLoading === result.id ? '...' : t('friends.btnAdd')}
+                    </button>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </section>
 
       {!hasContent && !isSearchActive && (
         <div className={styles.fullEmpty}>
