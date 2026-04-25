@@ -802,6 +802,8 @@ export default function MapPage() {
         onClose={() => setShowPinModal(false)}
         onSuccess={handlePinCreated}
         userLocation={userLocation}
+        showMtr={showMtr}
+        showMalls={showMalls}
       />
 
       {/* Pin Card Bottom Sheet */}

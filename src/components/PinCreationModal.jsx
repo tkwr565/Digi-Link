@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth'
 import { loadDeviceList, getDeviceFullDisplay, loadDigimonDb, getDigimonName } from '../utils/digimonUtils'
 import { getDistrictKey, DISTRICTS } from '../utils/hkDistrict'
 import DigimonSprite from './DigimonSprite'
+import { MtrMarker, MallMarker } from './PoiMarkers'
 import { useTranslation } from 'react-i18next'
 import styles from './PinCreationModal.module.css'
 
@@ -44,7 +45,7 @@ const DAYS_OF_WEEK = [
   { value: 'SUN', label: 'Sunday' },
 ]
 
-export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocation }) {
+export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocation, showMtr = false, showMalls = false }) {
   const { user } = useAuth()
   const { t, i18n } = useTranslation()
   const [step, setStep] = useState(1)
@@ -101,6 +102,12 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
   const [userProfile, setUserProfile] = useState(null)
   const [deviceList, setDeviceList] = useState(null) // Device list for name mapping
   const [digimonDb, setDigimonDb] = useState(null) // Digimon database for name mapping
+
+  // POI states for mini-map
+  const [mtrPois, setMtrPois] = useState([])
+  const [mallPois, setMallPois] = useState([])
+  const [isFetchingPois, setIsFetchingPois] = useState(false)
+  const lastPoiFetchRef = useRef(0)
 
   // Map state for location picker
   const [mapViewState, setMapViewState] = useState({
@@ -180,6 +187,92 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
       setLoading(false)
     }
   }
+
+  // Fetch MTR stations + shopping malls from Overpass for the mini-map viewport.
+  const loadPois = async () => {
+    if (!miniMapRef.current || isFetchingPois) return
+    const map = miniMapRef.current.getMap()
+    const zoom = map.getZoom()
+
+    // If both toggles are off, clear and exit
+    if (!showMtr && !showMalls) {
+      setMtrPois([])
+      setMallPois([])
+      return
+    }
+
+    if (zoom < 11) {
+      setMtrPois([])
+      setMallPois([])
+      return
+    }
+
+    const now = Date.now()
+    if (now - lastPoiFetchRef.current < 5000) return
+    
+    setIsFetchingPois(true)
+    lastPoiFetchRef.current = now
+
+    const b = map.getBounds()
+    const bbox = `${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`
+    
+    let queryParts = ''
+    if (showMtr) queryParts += `node["railway"="station"](${bbox});way["railway"="station"](${bbox});`
+    if (showMalls) queryParts += `node["shop"~"mall|shopping_centre"](${bbox});way["shop"~"mall|shopping_centre"](${bbox});relation["shop"~"mall|shopping_centre"](${bbox});`
+
+    if (!queryParts) {
+      setIsFetchingPois(false)
+      return
+    }
+
+    const query = `[out:json][timeout:25];(${queryParts});out center tags;`
+
+    try {
+      const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`)
+      if (!res.ok) throw new Error('Overpass error')
+      const { elements } = await res.json()
+
+      const mtr = []
+      const malls = []
+      const seen = new Set()
+
+      for (const el of elements) {
+        const lat = el.lat ?? el.center?.lat
+        const lng = el.lon ?? el.center?.lon
+        if (lat == null || lng == null) continue
+
+        const key = `${lat.toFixed(4)},${lng.toFixed(4)}`
+        if (seen.has(key)) continue
+        seen.add(key)
+
+        const tags = el.tags || {}
+        const nameEn = tags['name:en'] || tags.name || ''
+        const nameZh = tags['name:zh'] || tags['name:zh-Hant'] || tags.name || ''
+
+        if (tags.railway === 'station') {
+          mtr.push({ lat, lng, nameEn, nameZh })
+        } else if (tags.shop === 'mall' || tags.shop === 'shopping_centre') {
+          malls.push({ lat, lng, nameEn, nameZh })
+        }
+      }
+
+      setMtrPois(mtr)
+      setMallPois(malls)
+    } catch (err) {
+      console.error('Mini-map POI fetch error:', err)
+    } finally {
+      setIsFetchingPois(false)
+    }
+  }
+
+  // Trigger POI fetch when modal opens or settings change
+  useEffect(() => {
+    if (isOpen && step === 1) {
+      // Delay slightly to ensure map is mounted and bounds are available
+      const timer = setTimeout(loadPois, 500)
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen, step, showMtr, showMalls])
 
   const handleNext = () => {
     // Validation for each step
@@ -511,6 +604,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                   ref={miniMapRef}
                   {...mapViewState}
                   onMove={(evt) => setMapViewState(evt.viewState)}
+                  onIdle={loadPois}
                   onClick={handleMapClick}
                   mapStyle={CARTO_DARK_MATTER}
                   style={{ width: '100%', height: '250px', borderRadius: '8px' }}
@@ -524,6 +618,30 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       <MapPin size={32} color="#00d4ff" fill="#00d4ff" />
                     </Marker>
                   )}
+
+                  {/* MTR station markers */}
+                  {showMtr && mtrPois.map((station, i) => (
+                    <Marker
+                      key={`mtr-${i}`}
+                      longitude={station.lng}
+                      latitude={station.lat}
+                      anchor="bottom"
+                    >
+                      <MtrMarker station={station} />
+                    </Marker>
+                  ))}
+
+                  {/* Shopping mall markers */}
+                  {showMalls && mallPois.map((mall, i) => (
+                    <Marker
+                      key={`mall-${i}`}
+                      longitude={mall.lng}
+                      latitude={mall.lat}
+                      anchor="bottom"
+                    >
+                      <MallMarker mall={mall} lang={i18n.language} />
+                    </Marker>
+                  ))}
                 </Map>
               </div>
 
