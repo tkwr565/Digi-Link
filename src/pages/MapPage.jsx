@@ -10,6 +10,7 @@ import PinCreationModal from '../components/PinCreationModal'
 import PinMarker from '../components/PinMarker'
 import PinLegend from '../components/PinLegend'
 import PinCard from '../components/PinCard'
+import { MtrMarker, MallMarker } from '../components/PoiMarkers'
 import { DISTRICTS } from '../utils/hkDistrict'
 import { useToast } from '../hooks/useToast'
 import { supabase } from '../lib/supabase'
@@ -34,7 +35,7 @@ const WEATHER_CLASSES = {
 export default function MapPage() {
   const { user } = useAuth()
   const navigate = useNavigate()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [searchParams, setSearchParams] = useSearchParams()
   const [viewState, setViewState] = useState({
     longitude: 0,
@@ -61,8 +62,11 @@ export default function MapPage() {
   const [pendingPinId, setPendingPinId] = useState(null)
   const [selectedDistrict, setSelectedDistrict] = useState(null)
   const [districtOpen, setDistrictOpen] = useState(false)
+  const [mtrPois, setMtrPois] = useState([])
+  const [mallPois, setMallPois] = useState([])
   const mapRef = useRef()
   const districtRef = useRef()
+  const lastPoiFetchRef = useRef(0)
 
   useEffect(() => {
     ;(async () => {
@@ -185,13 +189,72 @@ export default function MapPage() {
     }
   }
 
+  // Fetch MTR stations + shopping malls from Overpass for the current viewport.
+  // Only runs at zoom >= 12 and throttles to at most one fetch every 5 s.
+  const loadPois = async () => {
+    if (!mapRef.current) return
+    const map = mapRef.current.getMap()
+    const zoom = map.getZoom()
+
+    if (zoom < 12) {
+      setMtrPois([])
+      setMallPois([])
+      return
+    }
+
+    const now = Date.now()
+    if (now - lastPoiFetchRef.current < 5000) return
+    lastPoiFetchRef.current = now
+
+    const b = map.getBounds()
+    // Overpass bbox: south,west,north,east
+    const bbox = `${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`
+    const query = `[out:json][timeout:15];(node["station"="subway"](${bbox});way["shop"~"mall|shopping_centre"](${bbox});node["shop"~"mall|shopping_centre"](${bbox});relation["shop"~"mall|shopping_centre"](${bbox}););out center tags;`
+
+    try {
+      const res = await fetch('https://overpass-api.de/api/interpreter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `data=${encodeURIComponent(query)}`,
+      })
+      if (!res.ok) return
+      const { elements } = await res.json()
+
+      const mtr = []
+      const malls = []
+
+      for (const el of elements) {
+        const lat = el.lat ?? el.center?.lat
+        const lng = el.lon ?? el.center?.lon
+        if (lat == null || lng == null) continue
+
+        const tags = el.tags || {}
+        const nameEn = tags['name:en'] || tags.name || ''
+        const nameZh = tags['name:zh'] || tags['name:zh-Hant'] || tags.name || ''
+
+        if (tags.station === 'subway') {
+          mtr.push({ lat, lng, nameEn, nameZh })
+        } else if (tags.shop === 'mall' || tags.shop === 'shopping_centre') {
+          malls.push({ lat, lng, nameEn, nameZh })
+        }
+      }
+
+      setMtrPois(mtr)
+      setMallPois(malls)
+    } catch (err) {
+      console.error('POI fetch error:', err)
+    }
+  }
+
   const handleMapLoad = () => {
     if (isMapLoading) setIsMapLoading(false)
     loadPinsInViewport()
+    loadPois()
   }
 
   const handleMapIdle = () => {
     loadPinsInViewport()
+    loadPois()
   }
 
   // Load relationship data on mount
@@ -521,6 +584,30 @@ export default function MapPage() {
               </Marker>
             )
           })}
+
+          {/* MTR station markers */}
+          {mtrPois.map((station, i) => (
+            <Marker
+              key={`mtr-${i}`}
+              longitude={station.lng}
+              latitude={station.lat}
+              anchor="bottom"
+            >
+              <MtrMarker station={station} lang={i18n.language} />
+            </Marker>
+          ))}
+
+          {/* Shopping mall markers */}
+          {mallPois.map((mall, i) => (
+            <Marker
+              key={`mall-${i}`}
+              longitude={mall.lng}
+              latitude={mall.lat}
+              anchor="bottom"
+            >
+              <MallMarker mall={mall} lang={i18n.language} />
+            </Marker>
+          ))}
 
           {/* Map controls */}
           <NavigationControl position="top-right" />

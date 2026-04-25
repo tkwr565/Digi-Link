@@ -1,0 +1,64 @@
+/* POI markers — MTR stations and shopping malls overlaid on Dark Matter */
+
+.pin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Shared label style */
+.label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  line-height: 1.25;
+  padding: 1px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+  max-width: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  color: #fff;
+  background: rgba(6, 12, 24, 0.85);
+}
+
+/* ── MTR station ─────────────────────────── */
+.mtrBadge {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c0021a;   /* MTR brand red */
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.65);
+  flex-shrink: 0;
+}
+
+.mtrLabel {
+  border: 0.5px solid rgba(192, 2, 26, 0.55);
+}
+
+/* ── Shopping mall ───────────────────────── */
+.mallBadge {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: #d97706;   /* amber */
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.65);
+  flex-shrink: 0;
+}
+
+.mallLabel {
+  border: 0.5px solid rgba(217, 119, 6, 0.55);
+}
