@@ -12,7 +12,7 @@ export function MtrMarker({ station, lang }) {
     <div className={styles.pin}>
       {name && <span className={`${styles.label} ${styles.mtrLabel}`}>{name}</span>}
       <div className={styles.mtrBadge}>
-        <Train size={9} strokeWidth={2.5} />
+        <Train size={12} strokeWidth={2.5} />
       </div>
     </div>
   )
@@ -24,7 +24,7 @@ export function MallMarker({ mall, lang }) {
     <div className={styles.pin}>
       {name && <span className={`${styles.label} ${styles.mallLabel}`}>{name}</span>}
       <div className={styles.mallBadge}>
-        <ShoppingBag size={9} strokeWidth={2.5} />
+        <ShoppingBag size={12} strokeWidth={2.5} />
       </div>
     </div>
   )

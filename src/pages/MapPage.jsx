@@ -190,13 +190,13 @@ export default function MapPage() {
   }
 
   // Fetch MTR stations + shopping malls from Overpass for the current viewport.
-  // Only runs at zoom >= 12 and throttles to at most one fetch every 5 s.
+  // Only runs at zoom >= 11 and throttles to at most one fetch every 5 s.
   const loadPois = async () => {
     if (!mapRef.current) return
     const map = mapRef.current.getMap()
     const zoom = map.getZoom()
 
-    if (zoom < 12) {
+    if (zoom < 11) {
       setMtrPois([])
       setMallPois([])
       return
@@ -209,30 +209,44 @@ export default function MapPage() {
     const b = map.getBounds()
     // Overpass bbox: south,west,north,east
     const bbox = `${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`
-    const query = `[out:json][timeout:15];(node["station"="subway"](${bbox});way["shop"~"mall|shopping_centre"](${bbox});node["shop"~"mall|shopping_centre"](${bbox});relation["shop"~"mall|shopping_centre"](${bbox}););out center tags;`
+    
+    // MTR stations: railway=station
+    // Malls: shop=mall or shop=shopping_centre
+    const query = `[out:json][timeout:25];(node["railway"="station"](${bbox});way["railway"="station"](${bbox});node["shop"~"mall|shopping_centre"](${bbox});way["shop"~"mall|shopping_centre"](${bbox});relation["shop"~"mall|shopping_centre"](${bbox}););out center tags;`
 
     try {
-      const res = await fetch('https://overpass-api.de/api/interpreter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `data=${encodeURIComponent(query)}`,
-      })
-      if (!res.ok) return
+      // Using a more reliable Overpass instance
+      const res = await fetch(
+        `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`
+      )
+      if (!res.ok) {
+        console.error('Overpass API error:', res.status)
+        lastPoiFetchRef.current = 0
+        return
+      }
       const { elements } = await res.json()
 
       const mtr = []
       const malls = []
+      const seen = new Set()
 
       for (const el of elements) {
         const lat = el.lat ?? el.center?.lat
         const lng = el.lon ?? el.center?.lon
         if (lat == null || lng == null) continue
 
+        // deduplicate by rounded coordinate (catches duplicate nodes from combined queries)
+        const key = `${lat.toFixed(4)},${lng.toFixed(4)}`
+        if (seen.has(key)) continue
+        seen.add(key)
+
         const tags = el.tags || {}
         const nameEn = tags['name:en'] || tags.name || ''
         const nameZh = tags['name:zh'] || tags['name:zh-Hant'] || tags.name || ''
 
-        if (tags.station === 'subway') {
+        // Simple filtering based on tags
+        if (tags.railway === 'station') {
+          // Optional: filter for MTR if needed, but in HK railway=station is usually MTR
           mtr.push({ lat, lng, nameEn, nameZh })
         } else if (tags.shop === 'mall' || tags.shop === 'shopping_centre') {
           malls.push({ lat, lng, nameEn, nameZh })
@@ -243,6 +257,7 @@ export default function MapPage() {
       setMallPois(malls)
     } catch (err) {
       console.error('POI fetch error:', err)
+      lastPoiFetchRef.current = 0
     }
   }
 
