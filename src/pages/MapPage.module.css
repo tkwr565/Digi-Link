@@ -441,8 +441,8 @@
 }
 
 .toggleActive .toggleIconMall {
-  color: #ffaa00; /* Amber */
-  filter: drop-shadow(0 0 4px rgba(255, 170, 0, 0.5));
+  color: #ffffff; /* Neutral White */
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
 }
 
 /* ─── District selector — bottom-left dropup ─── */
