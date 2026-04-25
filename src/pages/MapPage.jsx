@@ -319,7 +319,13 @@ export default function MapPage() {
     setIsFindingNearest(true)
 
     try {
-      // Get all active pins in Hong Kong region (to ensure we have pins to search)
+      const scanRadiusMeters = parseInt(localStorage.getItem('digimap_scan_radius') || '2000', 10)
+
+      // Compute a bounding box around user location for the scan radius
+      // 1 degree lat ≈ 111,320 m; 1 degree lng ≈ 111,320 * cos(lat) m
+      const latDelta = scanRadiusMeters / 111320
+      const lngDelta = scanRadiusMeters / (111320 * Math.cos((userLocation.latitude * Math.PI) / 180))
+
       const { data, error } = await supabase
         .from('pins')
         .select(`
@@ -332,10 +338,10 @@ export default function MapPage() {
           )
         `)
         .eq('is_active', true)
-        .gte('lng', HONG_KONG_BOUNDS.bounds.west)
-        .lte('lng', HONG_KONG_BOUNDS.bounds.east)
-        .gte('lat', HONG_KONG_BOUNDS.bounds.south)
-        .lte('lat', HONG_KONG_BOUNDS.bounds.north)
+        .gte('lat', userLocation.latitude - latDelta)
+        .lte('lat', userLocation.latitude + latDelta)
+        .gte('lng', userLocation.longitude - lngDelta)
+        .lte('lng', userLocation.longitude + lngDelta)
 
       if (error) {
         console.error('Error loading pins:', error)
@@ -344,21 +350,12 @@ export default function MapPage() {
         return
       }
 
-      if (!data || data.length === 0) {
-        showToast('info', t('map.noPinsFound'))
-        setIsFindingNearest(false)
-        return
-      }
-
-      // Calculate distance to each pin and find nearest (excluding own pins)
+      // Calculate exact distance and find nearest (excluding own pins, within radius)
       let nearestPin = null
       let minDistance = Infinity
 
-      data.forEach((pin) => {
-        // Skip user's own pins
-        if (pin.user_id === user?.id) {
-          return
-        }
+      ;(data || []).forEach((pin) => {
+        if (pin.user_id === user?.id) return
 
         const distance = calculateDistance(
           userLocation.latitude,
@@ -366,14 +363,15 @@ export default function MapPage() {
           pin.lat,
           pin.lng
         )
-        if (distance < minDistance) {
+        if (distance <= scanRadiusMeters && distance < minDistance) {
           minDistance = distance
           nearestPin = { ...pin, distance_meters: distance }
         }
       })
 
       if (!nearestPin) {
-        showToast('info', t('map.noPinsFound'))
+        const label = scanRadiusMeters >= 1000 ? `${scanRadiusMeters / 1000}km` : `${scanRadiusMeters}m`
+        showToast('info', t('map.noPinsInRadius', { distance: label }))
         setIsFindingNearest(false)
         return
       }
@@ -406,13 +404,15 @@ export default function MapPage() {
     setIsScanning(true)
 
     try {
-      // Fly to Hong Kong view
+      // Fit map to HK bounds — adapts zoom to actual screen aspect ratio
       if (mapRef.current) {
-        mapRef.current.flyTo({
-          center: [HONG_KONG_BOUNDS.center.lng, HONG_KONG_BOUNDS.center.lat],
-          zoom: HONG_KONG_BOUNDS.zoom,
-          duration: 2000
-        })
+        mapRef.current.fitBounds(
+          [
+            [HONG_KONG_BOUNDS.bounds.west, HONG_KONG_BOUNDS.bounds.south],
+            [HONG_KONG_BOUNDS.bounds.east, HONG_KONG_BOUNDS.bounds.north]
+          ],
+          { padding: 24, duration: 2000 }
+        )
       }
 
       // Load all pins in Hong Kong bounds

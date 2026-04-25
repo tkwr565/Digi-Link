@@ -64,7 +64,10 @@
     "selectPartners": "Select Active Partners",
     "checkingUsername": "Checking availability...",
     "usernameAvailable": "Username available!",
-    "battleStats": "Battle Statistics"
+    "battleStats": "Battle Statistics",
+    "appSettings": "App Settings",
+    "scanRadius": "Find Nearest Radius",
+    "scanRadiusHint": "Maximum distance searched by Find Nearest"
   },
   "map": {
     "scanHK": "Scan HK",
@@ -78,6 +81,7 @@
     "foundPins": "Found {{count}} pin near you",
     "foundPins_plural": "Found {{count}} pins near you",
     "noPinsFound": "No active pins found nearby",
+    "noPinsInRadius": "No pins found within {{distance}}",
     "foundNearest": "Found pin {{distance}}m away",
     "legendYourPins": "Your Pins",
     "legendAvailable": "Available",

@@ -64,7 +64,10 @@
     "selectPartners": "選擇現役拍檔",
     "checkingUsername": "正在檢查...",
     "usernameAvailable": "用戶名稱可以使用！",
-    "battleStats": "對戰統計"
+    "battleStats": "對戰統計",
+    "appSettings": "應用程式設定",
+    "scanRadius": "尋找最近距離",
+    "scanRadiusHint": "「尋找最近」功能的最大搜尋距離"
   },
   "map": {
     "scanHK": "掃描全港",
@@ -78,6 +81,7 @@
     "foundPins": "在你附近找到 {{count}} 個標記",
     "foundPins_plural": "在你附近找到 {{count}} 個標記",
     "noPinsFound": "附近沒有發現活動中的標記",
+    "noPinsInRadius": "在 {{distance}} 範圍內找不到標記",
     "foundNearest": "在 {{distance}}米外找到標記",
     "legendYourPins": "你的標記",
     "legendAvailable": "可對戰",

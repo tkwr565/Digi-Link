@@ -457,6 +457,74 @@
   cursor: not-allowed;
 }
 
+/* ── App Settings ── */
+.settingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.settingLabel {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.settingValue {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.875rem;
+  color: var(--blue-bright);
+}
+
+.settingHint {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0 0.625rem;
+}
+
+.scanRadiusOptions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.scanRadiusBtn {
+  flex: 1;
+  padding: 0.5rem 0;
+  background: var(--bg-deep);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 56px;
+}
+
+.scanRadiusBtn:hover:not(:disabled) {
+  border-color: var(--blue-mid);
+  color: var(--text-primary);
+}
+
+.scanRadiusActive {
+  background: rgba(0, 198, 255, 0.12);
+  border-color: var(--blue-bright);
+  color: var(--blue-bright);
+}
+
+.scanRadiusBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

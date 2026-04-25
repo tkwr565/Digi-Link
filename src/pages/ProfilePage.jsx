@@ -34,6 +34,13 @@ export default function ProfilePage() {
   const [usernameChecking, setUsernameChecking] = useState(false)
   const [usernameError, setUsernameError] = useState('')
 
+  const SCAN_RADIUS_OPTIONS = [500, 1000, 2000, 5000]
+  const [scanRadius, setScanRadius] = useState(() => {
+    const stored = localStorage.getItem('digimap_scan_radius')
+    return stored ? parseInt(stored, 10) : 2000
+  })
+  const [editScanRadius, setEditScanRadius] = useState(2000)
+
   // Load device list and digimon list
   useEffect(() => {
     fetch('/DIGIVICE_LIST.json')
@@ -155,6 +162,7 @@ export default function ProfilePage() {
       )
     setEditActiveDevices(active)
 
+    setEditScanRadius(scanRadius)
     setEditMode(true)
   }
 
@@ -272,6 +280,10 @@ export default function ProfilePage() {
 
       if (devicesError) throw devicesError
 
+      // Persist scan radius setting
+      localStorage.setItem('digimap_scan_radius', String(editScanRadius))
+      setScanRadius(editScanRadius)
+
       // Reload profile and exit edit mode
       await loadProfile()
       setEditMode(false)
@@ -386,6 +398,17 @@ export default function ProfilePage() {
                   <div className={styles.statValue}>{profile.total_battles}</div>
                   <div className={styles.statLabel}>{t('profile.totalBattles')}</div>
                 </div>
+              </div>
+            </div>
+
+            {/* App Settings */}
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{t('profile.appSettings')}</h2>
+              <div className={styles.settingRow}>
+                <span className={styles.settingLabel}>{t('profile.scanRadius')}</span>
+                <span className={styles.settingValue}>
+                  {scanRadius >= 1000 ? `${scanRadius / 1000}km` : `${scanRadius}m`}
+                </span>
               </div>
             </div>
 
@@ -515,6 +538,26 @@ export default function ProfilePage() {
                 </div>
               </div>
             )}
+
+            {/* App Settings */}
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{t('profile.appSettings')}</h2>
+              <label className={styles.settingLabel}>{t('profile.scanRadius')}</label>
+              <p className={styles.settingHint}>{t('profile.scanRadiusHint')}</p>
+              <div className={styles.scanRadiusOptions}>
+                {SCAN_RADIUS_OPTIONS.map(r => (
+                  <button
+                    key={r}
+                    type="button"
+                    className={`${styles.scanRadiusBtn} ${editScanRadius === r ? styles.scanRadiusActive : ''}`}
+                    onClick={() => setEditScanRadius(r)}
+                    disabled={saving}
+                  >
+                    {r >= 1000 ? `${r / 1000}km` : `${r}m`}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Action Buttons */}
             <div className={styles.buttonGroup}>
