@@ -634,7 +634,7 @@ export default function MapPage() {
               latitude={station.lat}
               anchor="bottom"
             >
-              <MtrMarker station={station} />
+              <MtrMarker station={station} lang={i18n.language} />
             </Marker>
           ))}
 

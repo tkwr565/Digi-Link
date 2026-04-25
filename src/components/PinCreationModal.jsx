@@ -627,7 +627,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       latitude={station.lat}
                       anchor="bottom"
                     >
-                      <MtrMarker station={station} />
+                      <MtrMarker station={station} lang={i18n.language} />
                     </Marker>
                   ))}
 

@@ -6,9 +6,8 @@ function pickName(poi, lang) {
   return poi.nameEn || poi.nameZh
 }
 
-export function MtrMarker({ station }) {
-  // User requested NO Chinese translation for MTR stations, so we default to nameEn
-  const name = station.nameEn || station.nameZh
+export function MtrMarker({ station, lang }) {
+  const name = pickName(station, lang)
   return (
     <div className={styles.pin}>
       {name && <span className={`${styles.label} ${styles.mtrLabel}`}>{name}</span>}
