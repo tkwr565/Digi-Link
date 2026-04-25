@@ -394,6 +394,57 @@
   100% { background-position: 0 11px; }
 }
 
+/* ─── POI Toggles — bottom-left, above district selector ─── */
+.poiToggles {
+  position: absolute;
+  bottom: calc(80px + 6.5rem);
+  left: 1rem;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: rgba(10, 22, 40, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toggleActive {
+  background: rgba(10, 22, 40, 0.72);
+  color: var(--blue-bright);
+  border-color: var(--blue-bright);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.toggleActive .toggleIconMtr {
+  color: #ff3860; /* MTR Red */
+  filter: drop-shadow(0 0 4px rgba(255, 56, 96, 0.5));
+}
+
+.toggleActive .toggleIconMall {
+  color: #ffaa00; /* Amber */
+  filter: drop-shadow(0 0 4px rgba(255, 170, 0, 0.5));
+}
+
 /* ─── District selector — bottom-left dropup ─── */
 .districtSelector {
   position: absolute;

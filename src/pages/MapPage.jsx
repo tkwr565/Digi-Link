@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Map, { Marker, NavigationControl, GeolocateControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { Plus, Radar, Crosshair, MapPin, ChevronUp } from 'lucide-react'
+import { Plus, Radar, Crosshair, MapPin, ChevronUp, Train, ShoppingBag } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import styles from './MapPage.module.css'
 import { useAuth } from '../hooks/useAuth'
@@ -64,6 +64,8 @@ export default function MapPage() {
   const [districtOpen, setDistrictOpen] = useState(false)
   const [mtrPois, setMtrPois] = useState([])
   const [mallPois, setMallPois] = useState([])
+  const [showMtr, setShowMtr] = useState(false)
+  const [showMalls, setShowMalls] = useState(false)
   const mapRef = useRef()
   const districtRef = useRef()
   const lastPoiFetchRef = useRef(0)
@@ -196,6 +198,13 @@ export default function MapPage() {
     const map = mapRef.current.getMap()
     const zoom = map.getZoom()
 
+    // If both toggles are off, clear and exit
+    if (!showMtr && !showMalls) {
+      setMtrPois([])
+      setMallPois([])
+      return
+    }
+
     if (zoom < 11) {
       setMtrPois([])
       setMallPois([])
@@ -210,9 +219,14 @@ export default function MapPage() {
     // Overpass bbox: south,west,north,east
     const bbox = `${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`
     
-    // MTR stations: railway=station
-    // Malls: shop=mall or shop=shopping_centre
-    const query = `[out:json][timeout:25];(node["railway"="station"](${bbox});way["railway"="station"](${bbox});node["shop"~"mall|shopping_centre"](${bbox});way["shop"~"mall|shopping_centre"](${bbox});relation["shop"~"mall|shopping_centre"](${bbox}););out center tags;`
+    // Build query parts conditionally
+    let queryParts = ''
+    if (showMtr) queryParts += `node["railway"="station"](${bbox});way["railway"="station"](${bbox});`
+    if (showMalls) queryParts += `node["shop"~"mall|shopping_centre"](${bbox});way["shop"~"mall|shopping_centre"](${bbox});relation["shop"~"mall|shopping_centre"](${bbox});`
+
+    if (!queryParts) return
+
+    const query = `[out:json][timeout:25];(${queryParts});out center tags;`
 
     try {
       // Using a more reliable Overpass instance
@@ -246,7 +260,6 @@ export default function MapPage() {
 
         // Simple filtering based on tags
         if (tags.railway === 'station') {
-          // Optional: filter for MTR if needed, but in HK railway=station is usually MTR
           mtr.push({ lat, lng, nameEn, nameZh })
         } else if (tags.shop === 'mall' || tags.shop === 'shopping_centre') {
           malls.push({ lat, lng, nameEn, nameZh })
@@ -260,6 +273,11 @@ export default function MapPage() {
       lastPoiFetchRef.current = 0
     }
   }
+
+  // Reload POIs when toggles change
+  useEffect(() => {
+    loadPois()
+  }, [showMtr, showMalls])
 
   const handleMapLoad = () => {
     if (isMapLoading) setIsMapLoading(false)
@@ -601,19 +619,19 @@ export default function MapPage() {
           })}
 
           {/* MTR station markers */}
-          {mtrPois.map((station, i) => (
+          {showMtr && mtrPois.map((station, i) => (
             <Marker
               key={`mtr-${i}`}
               longitude={station.lng}
               latitude={station.lat}
               anchor="bottom"
             >
-              <MtrMarker station={station} lang={i18n.language} />
+              <MtrMarker station={station} />
             </Marker>
           ))}
 
           {/* Shopping mall markers */}
-          {mallPois.map((mall, i) => (
+          {showMalls && mallPois.map((mall, i) => (
             <Marker
               key={`mall-${i}`}
               longitude={mall.lng}
@@ -659,6 +677,24 @@ export default function MapPage() {
         {weather && (
           <div className={`${styles.weatherOverlay} ${styles[WEATHER_CLASSES[weather]]}`} />
         )}
+      </div>
+
+      {/* POI Toggles — bottom-left, above district selector */}
+      <div className={styles.poiToggles}>
+        <button
+          className={`${styles.toggleBtn} ${showMtr ? styles.toggleActive : ''}`}
+          onClick={() => setShowMtr(prev => !prev)}
+        >
+          <Train size={14} className={showMtr ? styles.toggleIconMtr : ''} />
+          <span>MTR</span>
+        </button>
+        <button
+          className={`${styles.toggleBtn} ${showMalls ? styles.toggleActive : ''}`}
+          onClick={() => setShowMalls(prev => !prev)}
+        >
+          <ShoppingBag size={14} className={showMalls ? styles.toggleIconMall : ''} />
+          <span>{t('map.malls')}</span>
+        </button>
       </div>
 
       {/* District selector — bottom-left dropup */}

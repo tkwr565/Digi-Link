@@ -88,7 +88,9 @@
     "legendYourPins": "你的標記",
     "legendAvailable": "可對戰",
     "legendContacted": "已聯絡",
-    "legendBattled": "已對戰"
+    "legendBattled": "已對戰",
+    "mtr": "MTR",
+    "malls": "商場"
   },
   "leaderboard": {
     "title": "排行榜",
