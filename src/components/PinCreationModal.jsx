@@ -70,31 +70,6 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
   const [recurringStartTime, setRecurringStartTime] = useState('09:00')
   const [recurringEndTime, setRecurringEndTime] = useState('17:00')
 
-  // Generate next 6 days (starting from tomorrow)
-  const getNextSixDays = () => {
-    const days = []
-    const today = new Date()
-    const locale = i18n.language === 'zh-HK' ? 'zh-HK' : 'en-US'
-
-    for (let i = 1; i <= 6; i++) {
-      const date = new Date(today)
-      date.setDate(today.getDate() + i)
-
-      const dayName = date.toLocaleDateString(locale, { weekday: 'short' })
-      const dateStr = date.toLocaleDateString(locale, { month: 'short', day: 'numeric' })
-
-      days.push({
-        date: date,
-        value: date.toISOString().split('T')[0], // YYYY-MM-DD format
-        label: `${dayName}, ${dateStr}` // e.g., "Tue, Apr 22"
-      })
-    }
-
-    return days
-  }
-
-  const nextSixDays = getNextSixDays()
-
   // User data
   const [userDevices, setUserDevices] = useState([])
   const [selectedDevices, setSelectedDevices] = useState([]) // Track selected devices
@@ -747,7 +722,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                   className={`${styles.timeModeButton} ${timeMode === TIME_MODES.THIS_WEEK ? styles.timeModeButtonActive : ''}`}
                   onClick={() => setTimeMode(TIME_MODES.THIS_WEEK)}
                 >
-                  {t('createPin.modeThisWeek')}
+                  {t('createPin.modePickDate')}
                 </button>
                 <button
                   className={`${styles.timeModeButton} ${timeMode === TIME_MODES.RECURRING ? styles.timeModeButtonActive : ''}`}
@@ -807,17 +782,17 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                 </div>
               )}
 
-              {/* This Week mode */}
+              {/* Pick Date mode */}
               {timeMode === TIME_MODES.THIS_WEEK && (
                 <div className={styles.timeModeContent}>
                   <div className={styles.timeInputGroup}>
                     <label className="section-label">{t('createPin.selectDate')}</label>
-                    <select value={weekDate} onChange={(e) => setWeekDate(e.target.value)}>
-                      <option value="">{t('createPin.selectDatePlaceholder')}</option>
-                      {nextSixDays.map(day => (
-                        <option key={day.value} value={day.value}>{day.label}</option>
-                      ))}
-                    </select>
+                    <input
+                      type="date"
+                      value={weekDate}
+                      min={new Date().toLocaleDateString('en-CA')}
+                      onChange={(e) => setWeekDate(e.target.value)}
+                    />
                   </div>
                   <div className={styles.timeInputRow}>
                     <div className={styles.timeInputGroup}>

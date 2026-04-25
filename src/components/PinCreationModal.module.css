@@ -327,7 +327,8 @@
 }
 
 .timeInputGroup select,
-.timeInputGroup input[type="time"] {
+.timeInputGroup input[type="time"],
+.timeInputGroup input[type="date"] {
   width: 100%;
 }
 
