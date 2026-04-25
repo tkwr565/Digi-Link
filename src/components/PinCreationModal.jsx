@@ -642,8 +642,8 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       longitude={location.longitude}
                       latitude={location.latitude}
                       anchor="center"
-                      zIndex={400}
-                      style={{ zIndex: 400 }}
+                      zIndex={3}
+                      style={{ zIndex: 3 }}
                     >
                       <MapPin size={32} color="#00d4ff" fill="#00d4ff" />
                     </Marker>

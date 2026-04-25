@@ -625,8 +625,8 @@ export default function MapPage() {
               longitude={userLocation.longitude}
               latitude={userLocation.latitude}
               anchor="center"
-              zIndex={400}
-              style={{ zIndex: 400 }}
+              zIndex={3}
+              style={{ zIndex: 3 }}
             >
               <div className={styles.userMarker} />
             </Marker>
@@ -646,8 +646,8 @@ export default function MapPage() {
                 longitude={pin.lng}
                 latitude={pin.lat}
                 anchor="bottom"
-                zIndex={500}
-                style={{ zIndex: 500 }}
+                zIndex={2}
+                style={{ zIndex: 2 }}
               >
                 <PinMarker
                   relationshipState={relationshipState}
