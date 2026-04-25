@@ -617,6 +617,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       latitude={station.lat}
                       anchor="bottom"
                       zIndex={1}
+                      style={{ zIndex: 1 }}
                     >
                       <MtrMarker station={station} lang={i18n.language} />
                     </Marker>
@@ -630,6 +631,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       latitude={mall.lat}
                       anchor="bottom"
                       zIndex={1}
+                      style={{ zIndex: 1 }}
                     >
                       <MallMarker mall={mall} lang={i18n.language} />
                     </Marker>
@@ -640,7 +642,8 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       longitude={location.longitude}
                       latitude={location.latitude}
                       anchor="center"
-                      zIndex={10}
+                      zIndex={400}
+                      style={{ zIndex: 400 }}
                     >
                       <MapPin size={32} color="#00d4ff" fill="#00d4ff" />
                     </Marker>

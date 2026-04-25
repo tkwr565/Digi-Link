@@ -599,6 +599,7 @@ export default function MapPage() {
               latitude={station.lat}
               anchor="bottom"
               zIndex={1}
+              style={{ zIndex: 1 }}
             >
               <MtrMarker station={station} lang={i18n.language} />
             </Marker>
@@ -612,6 +613,7 @@ export default function MapPage() {
               latitude={mall.lat}
               anchor="bottom"
               zIndex={1}
+              style={{ zIndex: 1 }}
             >
               <MallMarker mall={mall} lang={i18n.language} />
             </Marker>
@@ -623,7 +625,8 @@ export default function MapPage() {
               longitude={userLocation.longitude}
               latitude={userLocation.latitude}
               anchor="center"
-              zIndex={10}
+              zIndex={400}
+              style={{ zIndex: 400 }}
             >
               <div className={styles.userMarker} />
             </Marker>
@@ -643,7 +646,8 @@ export default function MapPage() {
                 longitude={pin.lng}
                 latitude={pin.lat}
                 anchor="bottom"
-                zIndex={5}
+                zIndex={500}
+                style={{ zIndex: 500 }}
               >
                 <PinMarker
                   relationshipState={relationshipState}
