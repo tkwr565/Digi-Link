@@ -167,8 +167,9 @@
 }
 
 /* Step 1: Location */
-.miniMapSearch {
+.districtJump {
   margin-bottom: 0.625rem;
+  width: 100%;
 }
 
 .mapContainer {

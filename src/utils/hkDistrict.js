@@ -3,7 +3,7 @@
 // is good enough at HK's scale (~50km span, no projection distortion needed).
 // Pins are snapped to a 3-decimal (~100m) grid so precision is already limited.
 
-const DISTRICTS = [
+export const DISTRICTS = [
   { key: 'centralWestern', lat: 22.2846, lng: 114.1540 },
   { key: 'wanChai',        lat: 22.2793, lng: 114.1724 },
   { key: 'eastern',        lat: 22.2838, lng: 114.2226 },

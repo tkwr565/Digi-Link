@@ -70,7 +70,8 @@
     "scanRadiusHint": "「尋找最近」功能的最大搜尋距離"
   },
   "map": {
-    "searchPlaceholder": "搜尋香港地點...",
+    "districtSelect": "地區",
+    "districtClear": "— 我的位置 —",
     "scanHK": "掃描全港",
     "findNearest": "尋找最近",
     "scanArea": "掃描附近",
@@ -190,6 +191,7 @@
     "noActiveDevicesError": "你必須至少標記一個使用中的裝置才能建立標記。請到個人檔案更新設定。",
     "goToProfile": "前往個人檔案",
     "stepLocation": "選擇位置",
+    "jumpToDistrict": "跳至地區...",
     "stepLocationDesc": "使用目前位置或在地圖上點擊來放置標記。為了保護隱私，位置會對齊到約 100 米的網格。",
     "useCurrentLocation": "使用目前位置",
     "pickLocationOnMap": "在地圖上選取位置",

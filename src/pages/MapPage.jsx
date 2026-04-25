@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Map, { Marker, NavigationControl, GeolocateControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { Plus, Radar, Crosshair, MapPin } from 'lucide-react'
+import { Plus, Radar, Crosshair, MapPin, ChevronUp } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import styles from './MapPage.module.css'
 import { useAuth } from '../hooks/useAuth'
@@ -10,7 +10,7 @@ import PinCreationModal from '../components/PinCreationModal'
 import PinMarker from '../components/PinMarker'
 import PinLegend from '../components/PinLegend'
 import PinCard from '../components/PinCard'
-import PlaceSearch from '../components/PlaceSearch'
+import { DISTRICTS } from '../utils/hkDistrict'
 import { useToast } from '../hooks/useToast'
 import { supabase } from '../lib/supabase'
 import { getPinRelationshipState } from '../utils/pinUtils'
@@ -59,7 +59,10 @@ export default function MapPage() {
   // the radar before tiles at the actual location are ready.
   const [hasInitialPosition, setHasInitialPosition] = useState(false)
   const [pendingPinId, setPendingPinId] = useState(null)
+  const [selectedDistrict, setSelectedDistrict] = useState(null)
+  const [districtOpen, setDistrictOpen] = useState(false)
   const mapRef = useRef()
+  const districtRef = useRef()
 
   useEffect(() => {
     ;(async () => {
@@ -262,10 +265,38 @@ export default function MapPage() {
     setShowPinModal(false)
   }
 
-  // Fly to a geocoded search result
-  const handlePlaceSelect = ({ lat, lng }) => {
+  // Close district dropup on outside tap/click
+  useEffect(() => {
+    const close = (e) => {
+      if (districtRef.current && !districtRef.current.contains(e.target)) {
+        setDistrictOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', close)
+    document.addEventListener('touchstart', close)
+    return () => {
+      document.removeEventListener('mousedown', close)
+      document.removeEventListener('touchstart', close)
+    }
+  }, [])
+
+  const handleDistrictSelect = (district) => {
+    setSelectedDistrict(district.key)
+    setDistrictOpen(false)
     if (mapRef.current) {
-      mapRef.current.flyTo({ center: [lng, lat], zoom: 15, duration: 1200 })
+      mapRef.current.flyTo({ center: [district.lng, district.lat], zoom: 13, duration: 1500 })
+    }
+  }
+
+  const handleDistrictClear = () => {
+    setSelectedDistrict(null)
+    setDistrictOpen(false)
+    if (mapRef.current && userLocation) {
+      mapRef.current.flyTo({
+        center: [userLocation.longitude, userLocation.latitude],
+        zoom: 13,
+        duration: 1000,
+      })
     }
   }
 
@@ -521,11 +552,6 @@ export default function MapPage() {
         </Map>
         )}
 
-        {/* Place search bar */}
-        <div className={styles.searchBar}>
-          <PlaceSearch onSelect={handlePlaceSelect} />
-        </div>
-
         {/* App wordmark */}
         <div className={styles.wordmark}>
           <span className={styles.wordmarkRoman}>Digi-Link</span>
@@ -545,6 +571,37 @@ export default function MapPage() {
         {/* Weather overlay — CSS tint over map, pointer-events: none */}
         {weather && (
           <div className={`${styles.weatherOverlay} ${styles[WEATHER_CLASSES[weather]]}`} />
+        )}
+      </div>
+
+      {/* District selector — bottom-left dropup */}
+      <div ref={districtRef} className={styles.districtSelector}>
+        <button
+          className={`${styles.districtBtn} ${selectedDistrict ? styles.districtBtnActive : ''}`}
+          onClick={() => setDistrictOpen(o => !o)}
+        >
+          <MapPin size={13} />
+          <span>{selectedDistrict ? t(`districts.${selectedDistrict}`) : t('map.districtSelect')}</span>
+          <ChevronUp size={13} className={districtOpen ? styles.chevronFlipped : ''} />
+        </button>
+
+        {districtOpen && (
+          <ul className={styles.districtDropup}>
+            {selectedDistrict && (
+              <li className={`${styles.districtOption} ${styles.districtClear}`} onClick={handleDistrictClear}>
+                {t('map.districtClear')}
+              </li>
+            )}
+            {DISTRICTS.map(d => (
+              <li
+                key={d.key}
+                className={`${styles.districtOption} ${selectedDistrict === d.key ? styles.districtOptionActive : ''}`}
+                onClick={() => handleDistrictSelect(d)}
+              >
+                {t(`districts.${d.key}`)}
+              </li>
+            ))}
+          </ul>
         )}
       </div>
 

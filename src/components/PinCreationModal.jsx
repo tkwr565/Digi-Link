@@ -6,9 +6,8 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
 import { loadDeviceList, getDeviceFullDisplay, loadDigimonDb, getDigimonName } from '../utils/digimonUtils'
-import { getDistrictKey } from '../utils/hkDistrict'
+import { getDistrictKey, DISTRICTS } from '../utils/hkDistrict'
 import DigimonSprite from './DigimonSprite'
-import PlaceSearch from './PlaceSearch'
 import { useTranslation } from 'react-i18next'
 import styles from './PinCreationModal.module.css'
 
@@ -111,10 +110,13 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
   })
   const miniMapRef = useRef()
 
-  const handlePlaceSelect = ({ lat, lng }) => {
-    setMapViewState({ longitude: lng, latitude: lat, zoom: 15 })
+  const handleDistrictJump = (key) => {
+    if (!key) return
+    const district = DISTRICTS.find(d => d.key === key)
+    if (!district) return
+    setMapViewState({ longitude: district.lng, latitude: district.lat, zoom: 13 })
     if (miniMapRef.current) {
-      miniMapRef.current.flyTo({ center: [lng, lat], zoom: 15, duration: 800 })
+      miniMapRef.current.flyTo({ center: [district.lng, district.lat], zoom: 13, duration: 800 })
     }
   }
 
@@ -491,8 +493,17 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                 {t('createPin.stepLocationDesc')}
               </p>
 
-              {/* Place search for minimap */}
-              <PlaceSearch onSelect={handlePlaceSelect} className={styles.miniMapSearch} />
+              {/* District jump — pan minimap to a district */}
+              <select
+                className={styles.districtJump}
+                value=""
+                onChange={(e) => handleDistrictJump(e.target.value)}
+              >
+                <option value="">{t('createPin.jumpToDistrict')}</option>
+                {DISTRICTS.map(d => (
+                  <option key={d.key} value={d.key}>{t(`districts.${d.key}`)}</option>
+                ))}
+              </select>
 
               {/* Map for location picking */}
               <div className={styles.mapContainer}>

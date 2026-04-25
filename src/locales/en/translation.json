@@ -70,7 +70,8 @@
     "scanRadiusHint": "Maximum distance searched by Find Nearest"
   },
   "map": {
-    "searchPlaceholder": "Search a place in HK...",
+    "districtSelect": "District",
+    "districtClear": "— My Location —",
     "scanHK": "Scan HK",
     "findNearest": "Find Nearest",
     "scanArea": "Scan Area",
@@ -190,6 +191,7 @@
     "noActiveDevicesError": "You must have at least one active device to create a pin. Please update your profile.",
     "goToProfile": "Go to Profile",
     "stepLocation": "Choose Location",
+    "jumpToDistrict": "Jump to district...",
     "stepLocationDesc": "Use your current location or tap on the map to place your pin. Location is snapped to ~100m grid for privacy.",
     "useCurrentLocation": "Use Current Location",
     "pickLocationOnMap": "Pick Location on Map",

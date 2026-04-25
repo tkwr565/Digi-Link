@@ -73,16 +73,6 @@
   text-transform: uppercase;
 }
 
-/* Place search bar — below the wordmark, right edge clears MapLibre controls */
-.searchBar {
-  position: absolute;
-  /* below wordmark (≈22px Digi-Link + 11px Chinese + 1px gap + 0.75rem top) */
-  top: calc(env(safe-area-inset-top, 0px) + 3.75rem);
-  left: 0.875rem;
-  right: 3rem; /* 48px — room for MapLibre zoom/geolocate controls */
-  z-index: 25;
-}
-
 /* Error banner */
 .errorBanner {
   position: absolute;
@@ -402,6 +392,101 @@
 @keyframes rainFall {
   0%   { background-position: 0 0; }
   100% { background-position: 0 11px; }
+}
+
+/* ─── District selector — bottom-left dropup ─── */
+.districtSelector {
+  position: absolute;
+  /* Sits above the weather badge (weather badge is at calc(80px + 1rem) ≈ 96px) */
+  bottom: calc(80px + 3.5rem);
+  left: 1rem;
+  z-index: 20;
+}
+
+.districtBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: 16px;
+  background: rgba(10, 22, 40, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s;
+  max-width: 160px;
+  overflow: hidden;
+}
+
+.districtBtn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.districtBtnActive {
+  color: var(--blue-bright);
+  border-color: var(--blue-bright);
+  background: rgba(10, 22, 40, 0.72);
+  box-shadow: 0 2px 10px rgba(0, 212, 255, 0.2);
+}
+
+.chevronFlipped {
+  transform: rotate(180deg);
+}
+
+.districtDropup {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  min-width: 170px;
+  max-height: 240px;
+  overflow-y: auto;
+  background: rgba(8, 18, 34, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--blue-mid);
+  border-radius: 8px;
+  list-style: none;
+  padding: 0.2rem 0;
+  margin: 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.65);
+  z-index: 30;
+}
+
+.districtOption {
+  padding: 0.5rem 0.875rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.districtOption:hover,
+.districtOption:active {
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.districtOptionActive {
+  color: var(--blue-bright);
+}
+
+.districtClear {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.2rem;
 }
 
 /* ─── Weather badge — bottom-left of map ─── */
