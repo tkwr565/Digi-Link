@@ -17,6 +17,7 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [editMode, setEditMode] = useState(false)
+  const [codeCopied, setCodeCopied] = useState(false)
 
   // View mode data
   const [profile, setProfile] = useState(null)
@@ -295,6 +296,14 @@ export default function ProfilePage() {
     }
   }
 
+  const copyFriendCode = () => {
+    if (!profile?.friend_code) return
+    navigator.clipboard.writeText(profile.friend_code).then(() => {
+      setCodeCopied(true)
+      setTimeout(() => setCodeCopied(false), 2000)
+    })
+  }
+
   const handleCancel = () => {
     setEditMode(false)
     setError('')
@@ -398,6 +407,18 @@ export default function ProfilePage() {
                   <div className={styles.statValue}>{profile.total_battles}</div>
                   <div className={styles.statLabel}>{t('profile.totalBattles')}</div>
                 </div>
+              </div>
+            </div>
+
+            {/* Friend Code */}
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>{t('profile.friendCode')}</h2>
+              <p className={styles.hint}>{t('profile.friendCodeHint')}</p>
+              <div className={styles.friendCodeRow}>
+                <span className={styles.friendCode}>{profile.friend_code}</span>
+                <button className={styles.btnCopyCode} onClick={copyFriendCode}>
+                  {codeCopied ? t('profile.codeCopied') : t('profile.copyCode')}
+                </button>
               </div>
             </div>
 

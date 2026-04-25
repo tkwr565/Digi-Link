@@ -67,11 +67,11 @@ export default function FriendsPage() {
   const [actionLoading, setActionLoading] = useState(null)
   const [error, setError] = useState('')
 
-  // Search state
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState([])
+  // Code search state
+  const [codeQuery, setCodeQuery] = useState('')
+  const [codeResult, setCodeResult] = useState(null)   // single profile or null
+  const [codeSearched, setCodeSearched] = useState(false)
   const [searching, setSearching] = useState(false)
-  const searchTimer = useRef(null)
   const channelRef = useRef(null)
 
   useEffect(() => {
@@ -116,29 +116,22 @@ export default function FriendsPage() {
     return () => window.removeEventListener('pinNotificationChanged', handler)
   }, [])
 
-  // Debounced search — fires 400ms after the user stops typing
-  useEffect(() => {
-    clearTimeout(searchTimer.current)
-    const trimmed = searchQuery.trim()
-    if (trimmed.length < 2) {
-      setSearchResults([])
-      return
-    }
-    searchTimer.current = setTimeout(() => runSearch(trimmed), 400)
-    return () => clearTimeout(searchTimer.current)
-  }, [searchQuery])
-
-  const runSearch = async (query) => {
+  const searchByCode = async () => {
+    const code = codeQuery.trim().toUpperCase()
+    if (!code) return
     setSearching(true)
+    setCodeSearched(false)
+    setCodeResult(null)
     const { data, error } = await supabase
       .from('profiles')
       .select('id, username, favourite_digimon, total_battles')
-      .ilike('username', `%${query}%`)
+      .eq('friend_code', code)
       .neq('id', user.id)
-      .limit(8)
+      .maybeSingle()
     setSearching(false)
-    if (error) { console.error('Search failed:', error); return }
-    setSearchResults(data || [])
+    setCodeSearched(true)
+    if (error) { console.error('Code search failed:', error); return }
+    setCodeResult(data || null)
   }
 
   // Fetch recent pin notifications, display them (capturing seen state for NEW badge),
@@ -370,7 +363,6 @@ export default function FriendsPage() {
     )
   }
 
-  const isSearchActive = searchQuery.trim().length >= 2
   const hasContent = friends.length > 0 || incomingRequests.length > 0 || battleContacts.length > 0
 
   return (
@@ -560,35 +552,46 @@ export default function FriendsPage() {
         </section>
       )}
 
-      {/* ── Find by Username ── */}
+      {/* ── Find by Code ── */}
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>{t('friends.findByUsername')}</h2>
-        <input
-          type="text"
-          className={styles.searchInput}
-          placeholder={t('friends.searchPlaceholder')}
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          autoComplete="off"
-          spellCheck="false"
-        />
+        <h2 className={styles.sectionTitle}>{t('friends.findByCode')}</h2>
+        <p className={styles.sectionHint}>{t('friends.findByCodeHint')}</p>
+        <div className={styles.codeSearchRow}>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder={t('friends.codePlaceholder')}
+            value={codeQuery}
+            onChange={e => { setCodeQuery(e.target.value.toUpperCase()); setCodeSearched(false); setCodeResult(null) }}
+            onKeyDown={e => e.key === 'Enter' && searchByCode()}
+            autoComplete="off"
+            spellCheck="false"
+            maxLength={8}
+          />
+          <button
+            className={styles.codeSearchBtn}
+            onClick={searchByCode}
+            disabled={searching || !codeQuery.trim()}
+          >
+            {searching ? '...' : t('friends.btnSearch')}
+          </button>
+        </div>
 
-        {isSearchActive && (
+        {codeSearched && (
           <div className={styles.searchResults}>
-            {searching && <div className={styles.searchHint}>{t('friends.searching')}</div>}
-            {!searching && searchResults.length === 0 && (
-              <div className={styles.searchHint}>{t('friends.noTrainersFound')}</div>
+            {!codeResult && (
+              <div className={styles.searchHint}>{t('friends.noTrainerWithCode')}</div>
             )}
-            {!searching && searchResults.map(result => {
-              const status = getStatus(result.id)
+            {codeResult && (() => {
+              const status = getStatus(codeResult.id)
               return (
-                <div key={result.id} className={styles.contactCard}>
+                <div className={styles.contactCard}>
                   <div className={styles.userInfo}>
-                    <DigimonSprite suffix={result.favourite_digimon} size="sm" />
+                    <DigimonSprite suffix={codeResult.favourite_digimon} size="sm" />
                     <div className={styles.userDetails}>
-                      <span className={styles.username}>{result.username}</span>
+                      <span className={styles.username}>{codeResult.username}</span>
                       <span className={styles.battleCount}>
-                        {t('friends.battlesCount', { count: result.total_battles })}
+                        {t('friends.battlesCount', { count: codeResult.total_battles })}
                       </span>
                     </div>
                   </div>
@@ -598,10 +601,10 @@ export default function FriendsPage() {
                   {status === 'incoming' && (
                     <button
                       className={styles.btnAccept}
-                      onClick={() => acceptRequest(result.id)}
-                      disabled={actionLoading === result.id}
+                      onClick={() => acceptRequest(codeResult.id)}
+                      disabled={actionLoading === codeResult.id}
                     >
-                      {actionLoading === result.id ? '...' : t('friends.btnAccept')}
+                      {actionLoading === codeResult.id ? '...' : t('friends.btnAccept')}
                     </button>
                   )}
                   {status === 'outgoing' && (
@@ -610,20 +613,20 @@ export default function FriendsPage() {
                   {status === 'none' && (
                     <button
                       className={styles.btnAdd}
-                      onClick={() => sendRequest(result.id)}
-                      disabled={actionLoading === result.id}
+                      onClick={() => sendRequest(codeResult.id)}
+                      disabled={actionLoading === codeResult.id}
                     >
-                      {actionLoading === result.id ? '...' : t('friends.btnAdd')}
+                      {actionLoading === codeResult.id ? '...' : t('friends.btnAdd')}
                     </button>
                   )}
                 </div>
               )
-            })}
+            })()}
           </div>
         )}
       </section>
 
-      {!hasContent && !isSearchActive && (
+      {!hasContent && (
         <div className={styles.fullEmpty}>
           <div className={styles.fullEmptyTitle}>{t('friends.noConnectionsYet')}</div>
           <div className={styles.fullEmptyHint}>

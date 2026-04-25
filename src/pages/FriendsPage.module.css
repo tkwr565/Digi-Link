@@ -140,6 +140,44 @@
   color: var(--text-dim);
 }
 
+.codeSearchRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.codeSearchRow .searchInput {
+  flex: 1;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.codeSearchBtn {
+  padding: 0 1rem;
+  background: var(--blue-dim);
+  border: 1px solid var(--blue-bright);
+  border-radius: 6px;
+  color: var(--blue-bright);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.codeSearchBtn:hover:not(:disabled) {
+  background: var(--blue-bright);
+  color: var(--bg-deepest);
+}
+
+.codeSearchBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .searchResults {
   margin-top: 0.625rem;
   display: flex;
