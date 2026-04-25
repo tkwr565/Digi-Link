@@ -10,6 +10,7 @@ import PinCreationModal from '../components/PinCreationModal'
 import PinMarker from '../components/PinMarker'
 import PinLegend from '../components/PinLegend'
 import PinCard from '../components/PinCard'
+import PlaceSearch from '../components/PlaceSearch'
 import { useToast } from '../hooks/useToast'
 import { supabase } from '../lib/supabase'
 import { getPinRelationshipState } from '../utils/pinUtils'
@@ -259,6 +260,13 @@ export default function MapPage() {
 
     // Close modal
     setShowPinModal(false)
+  }
+
+  // Fly to a geocoded search result
+  const handlePlaceSelect = ({ lat, lng }) => {
+    if (mapRef.current) {
+      mapRef.current.flyTo({ center: [lng, lat], zoom: 15, duration: 1200 })
+    }
   }
 
   // Scan area around user location
@@ -512,6 +520,11 @@ export default function MapPage() {
           />
         </Map>
         )}
+
+        {/* Place search bar */}
+        <div className={styles.searchBar}>
+          <PlaceSearch onSelect={handlePlaceSelect} />
+        </div>
 
         {/* App wordmark */}
         <div className={styles.wordmark}>

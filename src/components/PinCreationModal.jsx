@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { X, MapPin } from 'lucide-react'
 import Map, { Marker } from 'react-map-gl/maplibre'
@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth'
 import { loadDeviceList, getDeviceFullDisplay, loadDigimonDb, getDigimonName } from '../utils/digimonUtils'
 import { getDistrictKey } from '../utils/hkDistrict'
 import DigimonSprite from './DigimonSprite'
+import PlaceSearch from './PlaceSearch'
 import { useTranslation } from 'react-i18next'
 import styles from './PinCreationModal.module.css'
 
@@ -108,6 +109,14 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
     latitude: 22.3193,
     zoom: 15
   })
+  const miniMapRef = useRef()
+
+  const handlePlaceSelect = ({ lat, lng }) => {
+    setMapViewState({ longitude: lng, latitude: lat, zoom: 15 })
+    if (miniMapRef.current) {
+      miniMapRef.current.flyTo({ center: [lng, lat], zoom: 15, duration: 800 })
+    }
+  }
 
   // Load user data on mount
   useEffect(() => {
@@ -482,9 +491,13 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                 {t('createPin.stepLocationDesc')}
               </p>
 
+              {/* Place search for minimap */}
+              <PlaceSearch onSelect={handlePlaceSelect} className={styles.miniMapSearch} />
+
               {/* Map for location picking */}
               <div className={styles.mapContainer}>
                 <Map
+                  ref={miniMapRef}
                   {...mapViewState}
                   onMove={(evt) => setMapViewState(evt.viewState)}
                   onClick={handleMapClick}

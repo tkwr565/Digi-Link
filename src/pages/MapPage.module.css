@@ -73,6 +73,16 @@
   text-transform: uppercase;
 }
 
+/* Place search bar — below the wordmark, right edge clears MapLibre controls */
+.searchBar {
+  position: absolute;
+  /* below wordmark (≈22px Digi-Link + 11px Chinese + 1px gap + 0.75rem top) */
+  top: calc(env(safe-area-inset-top, 0px) + 3.75rem);
+  left: 0.875rem;
+  right: 3rem; /* 48px — room for MapLibre zoom/geolocate controls */
+  z-index: 25;
+}
+
 /* Error banner */
 .errorBanner {
   position: absolute;

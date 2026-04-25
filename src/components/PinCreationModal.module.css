@@ -167,6 +167,10 @@
 }
 
 /* Step 1: Location */
+.miniMapSearch {
+  margin-bottom: 0.625rem;
+}
+
 .mapContainer {
   margin-bottom: 1rem;
   border-radius: 8px;

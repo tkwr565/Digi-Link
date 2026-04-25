@@ -70,6 +70,7 @@
     "scanRadiusHint": "「尋找最近」功能的最大搜尋距離"
   },
   "map": {
+    "searchPlaceholder": "搜尋香港地點...",
     "scanHK": "掃描全港",
     "findNearest": "尋找最近",
     "scanArea": "掃描附近",

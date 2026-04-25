@@ -70,6 +70,7 @@
     "scanRadiusHint": "Maximum distance searched by Find Nearest"
   },
   "map": {
+    "searchPlaceholder": "Search a place in HK...",
     "scanHK": "Scan HK",
     "findNearest": "Find Nearest",
     "scanArea": "Scan Area",
