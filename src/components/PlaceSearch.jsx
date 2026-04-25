@@ -3,10 +3,21 @@ import { Search, X, Loader } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import styles from './PlaceSearch.module.css'
 
-const NOMINATIM = 'https://nominatim.openstreetmap.org/search'
+const PHOTON = 'https://photon.komoot.io/api/'
+const HK_LAT = 22.3193
+const HK_LNG = 114.1694
 
-// HK bounding box: west, north, east, south
-const HK_VIEWBOX = '113.83,22.56,114.44,22.15'
+// Build a readable label from Photon feature properties
+function featureLabel(props) {
+  const parts = [
+    props.name,
+    props.district || props.county,
+    props.city,
+  ].filter(Boolean)
+  // deduplicate adjacent identical parts
+  const unique = parts.filter((v, i) => v !== parts[i - 1])
+  return unique.join(', ') || props.name || ''
+}
 
 export default function PlaceSearch({ onSelect, className }) {
   const { t, i18n } = useTranslation()
@@ -17,6 +28,7 @@ export default function PlaceSearch({ onSelect, className }) {
   const debounceRef = useRef(null)
   const containerRef = useRef(null)
 
+  // Close dropdown on outside tap/click
   useEffect(() => {
     const close = (e) => {
       if (containerRef.current && !containerRef.current.contains(e.target)) {
@@ -32,28 +44,32 @@ export default function PlaceSearch({ onSelect, className }) {
   }, [])
 
   const search = useCallback(async (q) => {
-    if (!q || q.trim().length < 2) {
+    const trimmed = q?.trim()
+    if (!trimmed || trimmed.length < 2) {
       setResults([])
       setOpen(false)
       return
     }
     setLoading(true)
     try {
-      const lang = i18n.language === 'zh-HK' ? 'zh-HK,zh,en' : 'en,zh-HK,zh'
+      // Photon supports 'en', 'de', 'fr' — fall back to 'en' for zh-HK
       const params = new URLSearchParams({
-        format: 'json',
-        q: q.trim(),
-        viewbox: HK_VIEWBOX,
-        bounded: '1',
+        q: trimmed,
         limit: '6',
-        'accept-language': lang,
+        lat: String(HK_LAT),
+        lon: String(HK_LNG),
+        lang: 'en',
       })
-      const res = await fetch(`${NOMINATIM}?${params}`)
-      const data = await res.json()
-      setResults(data)
-      setOpen(data.length > 0)
-    } catch {
-      // Silently fail — map still usable without search
+      const res = await fetch(`${PHOTON}?${params}`)
+      if (!res.ok) throw new Error(`Photon HTTP ${res.status}`)
+      const json = await res.json()
+      const features = json.features || []
+      setResults(features)
+      setOpen(features.length > 0)
+    } catch (err) {
+      console.error('PlaceSearch:', err)
+      setResults([])
+      setOpen(false)
     } finally {
       setLoading(false)
     }
@@ -66,16 +82,22 @@ export default function PlaceSearch({ onSelect, className }) {
     debounceRef.current = setTimeout(() => search(val), 400)
   }
 
-  const handleSelect = (result) => {
-    // Show first two comma-parts as a tidy label
-    const label = result.display_name.split(',').slice(0, 2).join(', ')
+  // Enter key triggers immediate search (important for phone keyboards)
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      if (debounceRef.current) clearTimeout(debounceRef.current)
+      search(query)
+    } else if (e.key === 'Escape') {
+      setOpen(false)
+    }
+  }
+
+  const handleSelect = (feature) => {
+    const [lng, lat] = feature.geometry.coordinates
+    const label = featureLabel(feature.properties)
     setQuery(label)
     setOpen(false)
-    onSelect({
-      lat: parseFloat(result.lat),
-      lng: parseFloat(result.lon),
-      displayName: result.display_name,
-    })
+    onSelect({ lat, lng, displayName: label })
   }
 
   const handleClear = () => {
@@ -90,9 +112,12 @@ export default function PlaceSearch({ onSelect, className }) {
         <Search size={15} className={styles.icon} />
         <input
           className={styles.input}
-          type="text"
+          type="search"
+          inputMode="search"
+          enterKeyHint="search"
           value={query}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           onFocus={() => results.length > 0 && setOpen(true)}
           placeholder={t('map.searchPlaceholder')}
           autoComplete="off"
@@ -109,14 +134,14 @@ export default function PlaceSearch({ onSelect, className }) {
 
       {open && results.length > 0 && (
         <ul className={styles.dropdown}>
-          {results.map((r) => (
+          {results.map((feature, i) => (
             <li
-              key={r.place_id}
+              key={feature.properties.osm_id ?? i}
               className={styles.item}
-              onMouseDown={() => handleSelect(r)}
+              onMouseDown={() => handleSelect(feature)}
             >
               <Search size={11} className={styles.itemIcon} />
-              <span className={styles.itemText}>{r.display_name}</span>
+              <span className={styles.itemText}>{featureLabel(feature.properties)}</span>
             </li>
           ))}
         </ul>
