@@ -143,9 +143,9 @@ export default function MapPage() {
     }
   }
 
-  // Load pins within viewport bounds
+  // Load pins within viewport bounds; returns the count of loaded pins
   const loadPinsInViewport = async () => {
-    if (!mapRef.current) return
+    if (!mapRef.current) return 0
 
     try {
       setLoadingPins(true)
@@ -172,12 +172,14 @@ export default function MapPage() {
 
       if (error) {
         console.error('Error loading pins:', error)
-        return
+        return 0
       }
 
       setPins(data || [])
+      return data?.length ?? 0
     } catch (error) {
       console.error('Error loading pins:', error)
+      return 0
     } finally {
       setLoadingPins(false)
     }
@@ -301,33 +303,16 @@ export default function MapPage() {
   }
 
   // Scan area around user location
+  // Scan whatever area the map is currently showing
   const handleScan = async () => {
-    if (!userLocation) {
-      showToast('error', t('map.locationRequired'))
-      return
-    }
-
     setIsScanning(true)
-
     try {
-      // Fly to user location with zoom 14 (neighborhood view)
-      if (mapRef.current) {
-        mapRef.current.flyTo({
-          center: [userLocation.longitude, userLocation.latitude],
-          zoom: 14,
-          duration: 1500
-        })
-      }
-
-      // Wait for map to finish flying, then load pins
-      setTimeout(async () => {
-        await loadPinsInViewport()
-        showToast('info', t('map.foundPins', { count: pins.length }))
-        setIsScanning(false)
-      }, 1600)
+      const count = await loadPinsInViewport()
+      showToast('info', t('map.foundPins', { count }))
     } catch (error) {
       console.error('Error scanning area:', error)
       showToast('error', t('common.error'))
+    } finally {
       setIsScanning(false)
     }
   }
@@ -658,7 +643,7 @@ export default function MapPage() {
         <button
           className={`${styles.mapButton} ${isScanning ? styles.active : ''}`}
           onClick={handleScan}
-          disabled={isScanning || !userLocation}
+          disabled={isScanning}
         >
           <Radar size={18} />
           <span className={styles.buttonLabel}>{t('map.scanArea')}</span>
