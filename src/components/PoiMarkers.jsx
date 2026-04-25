@@ -27,7 +27,6 @@ export function MallMarker({ mall, lang }) {
         <div className={styles.mallIconInner}>
           <ShoppingBag size={12} strokeWidth={2.5} />
         </div>
-        <div className={styles.mallPulse} />
       </div>
     </div>
   )
