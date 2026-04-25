@@ -101,6 +101,20 @@ export const markConversationAsRead = async (conversationId, currentUserId, supa
   if (error) {
     console.error('Error marking messages as read:', error)
   }
+
+  // Clear the unread flag on the conversation for the current user.
+  // Two targeted updates — only the one where currentUserId matches will affect a row.
+  await supabase
+    .from('conversations')
+    .update({ user1_has_unread: false })
+    .eq('id', conversationId)
+    .eq('user1_id', currentUserId)
+
+  await supabase
+    .from('conversations')
+    .update({ user2_has_unread: false })
+    .eq('id', conversationId)
+    .eq('user2_id', currentUserId)
 }
 
 /**
