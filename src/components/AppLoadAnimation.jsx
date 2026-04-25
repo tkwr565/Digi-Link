@@ -35,7 +35,7 @@ export default function AppLoadAnimation() {
         <span className={styles.loadingText}>Loading...</span>
         {digimon && (
           <>
-            <DigimonSprite suffix={digimon.suffix} size="lg" />
+            <DigimonSprite suffix={digimon.suffix} size="md" />
             <span className={styles.digimonName}>{digimon.name}</span>
           </>
         )}
