@@ -609,16 +609,6 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                   mapStyle={CARTO_DARK_MATTER}
                   style={{ width: '100%', height: '250px', borderRadius: '8px' }}
                 >
-                  {location && (
-                    <Marker
-                      longitude={location.longitude}
-                      latitude={location.latitude}
-                      anchor="center"
-                    >
-                      <MapPin size={32} color="#00d4ff" fill="#00d4ff" />
-                    </Marker>
-                  )}
-
                   {/* MTR station markers */}
                   {showMtr && mtrPois.map((station, i) => (
                     <Marker
@@ -642,6 +632,16 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                       <MallMarker mall={mall} lang={i18n.language} />
                     </Marker>
                   ))}
+
+                  {location && (
+                    <Marker
+                      longitude={location.longitude}
+                      latitude={location.latitude}
+                      anchor="center"
+                    >
+                      <MapPin size={32} color="#00d4ff" fill="#00d4ff" />
+                    </Marker>
+                  )}
                 </Map>
               </div>
 

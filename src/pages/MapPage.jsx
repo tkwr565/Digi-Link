@@ -591,6 +591,30 @@ export default function MapPage() {
           mapStyle={CARTO_DARK_MATTER}
           style={{ width: '100%', height: '100%' }}
         >
+          {/* MTR station markers */}
+          {showMtr && mtrPois.map((station, i) => (
+            <Marker
+              key={`mtr-${i}`}
+              longitude={station.lng}
+              latitude={station.lat}
+              anchor="bottom"
+            >
+              <MtrMarker station={station} lang={i18n.language} />
+            </Marker>
+          ))}
+
+          {/* Shopping mall markers */}
+          {showMalls && mallPois.map((mall, i) => (
+            <Marker
+              key={`mall-${i}`}
+              longitude={mall.lng}
+              latitude={mall.lat}
+              anchor="bottom"
+            >
+              <MallMarker mall={mall} lang={i18n.language} />
+            </Marker>
+          ))}
+
           {/* User location marker */}
           {userLocation && (
             <Marker
@@ -625,30 +649,6 @@ export default function MapPage() {
               </Marker>
             )
           })}
-
-          {/* MTR station markers */}
-          {showMtr && mtrPois.map((station, i) => (
-            <Marker
-              key={`mtr-${i}`}
-              longitude={station.lng}
-              latitude={station.lat}
-              anchor="bottom"
-            >
-              <MtrMarker station={station} lang={i18n.language} />
-            </Marker>
-          ))}
-
-          {/* Shopping mall markers */}
-          {showMalls && mallPois.map((mall, i) => (
-            <Marker
-              key={`mall-${i}`}
-              longitude={mall.lng}
-              latitude={mall.lat}
-              anchor="bottom"
-            >
-              <MallMarker mall={mall} lang={i18n.language} />
-            </Marker>
-          ))}
 
           {/* Map controls */}
           <NavigationControl position="top-right" />
