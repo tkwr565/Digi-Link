@@ -66,6 +66,7 @@ export default function MapPage() {
   const [mallPois, setMallPois] = useState([])
   const [showMtr, setShowMtr] = useState(false)
   const [showMalls, setShowMalls] = useState(false)
+  const [isFetchingPois, setIsFetchingPois] = useState(false)
   const mapRef = useRef()
   const districtRef = useRef()
   const lastPoiFetchRef = useRef(0)
@@ -194,7 +195,7 @@ export default function MapPage() {
   // Fetch MTR stations + shopping malls from Overpass for the current viewport.
   // Only runs at zoom >= 11 and throttles to at most one fetch every 5 s.
   const loadPois = async () => {
-    if (!mapRef.current) return
+    if (!mapRef.current || isFetchingPois) return
     const map = mapRef.current.getMap()
     const zoom = map.getZoom()
 
@@ -213,6 +214,8 @@ export default function MapPage() {
 
     const now = Date.now()
     if (now - lastPoiFetchRef.current < 5000) return
+    
+    setIsFetchingPois(true)
     lastPoiFetchRef.current = now
 
     const b = map.getBounds()
@@ -224,7 +227,10 @@ export default function MapPage() {
     if (showMtr) queryParts += `node["railway"="station"](${bbox});way["railway"="station"](${bbox});`
     if (showMalls) queryParts += `node["shop"~"mall|shopping_centre"](${bbox});way["shop"~"mall|shopping_centre"](${bbox});relation["shop"~"mall|shopping_centre"](${bbox});`
 
-    if (!queryParts) return
+    if (!queryParts) {
+      setIsFetchingPois(false)
+      return
+    }
 
     const query = `[out:json][timeout:25];(${queryParts});out center tags;`
 
@@ -271,6 +277,8 @@ export default function MapPage() {
     } catch (err) {
       console.error('POI fetch error:', err)
       lastPoiFetchRef.current = 0
+    } finally {
+      setIsFetchingPois(false)
     }
   }
 
