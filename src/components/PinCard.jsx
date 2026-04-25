@@ -6,6 +6,7 @@ import Toast from './Toast'
 import { useTranslation } from 'react-i18next'
 import styles from './PinCard.module.css'
 import { getDigimonName, getDeviceFullDisplay, loadDigimonDb, loadDeviceList } from '../utils/digimonUtils'
+import { getDistrictKey } from '../utils/hkDistrict'
 import { getBattleRequestForPin, createBattleRequest } from '../utils/messageUtils'
 import { supabase } from '../lib/supabase'
 
@@ -124,7 +125,11 @@ export default function PinCard({ pin, onClose, currentUserId }) {
             <h3 className={styles.pinTitle}>{pin.title || 'Pin'}</h3>
             {pin.message && <p className={styles.pinMessage}>{pin.message}</p>}
             <div className={styles.pinMeta}>
-              <div className={styles.metaItem}>📍 {pin.title || t('pinCard.locationPin')}</div>
+              <div className={styles.metaItem}>
+                📍 {getDistrictKey(pin.lat, pin.lng) 
+                  ? t(`districts.${getDistrictKey(pin.lat, pin.lng)}`) 
+                  : `${pin.lat.toFixed(3)}, ${pin.lng.toFixed(3)}`}
+              </div>
               <div className={styles.metaItem}>🕐 {formatTimeWindow()}</div>
             </div>
           </div>
