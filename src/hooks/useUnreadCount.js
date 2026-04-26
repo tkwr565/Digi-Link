@@ -6,21 +6,24 @@ export function useUnreadCount() {
   const { user } = useAuth()
   const [unreadCount, setUnreadCount] = useState(0)
   const channelRef = useRef(null)
+  const mountedRef = useRef(true)  // ✅ Added
 
   useEffect(() => {
+    mountedRef.current = true  // ✅ Added
+    
     if (!user?.id) {
       setUnreadCount(0)
       return
     }
 
     const loadUnreadCount = async () => {
-      // Unread conversations (accepted requests with new messages)
+      if (!mountedRef.current) return  // ✅ Added
+      
       const { data: convData } = await supabase
         .from('conversations')
         .select('id, user1_id, user2_id, user1_has_unread, user2_has_unread')
         .or(`user1_id.eq.${user.id},user2_id.eq.${user.id}`)
 
-      // Pending battle requests where current user is the pin owner (responder)
       const { data: battleData } = await supabase
         .from('battles')
         .select('id')
@@ -40,37 +43,37 @@ export function useUnreadCount() {
         count += battleData.length
       }
 
-      setUnreadCount(count)
+      if (mountedRef.current) {  // ✅ Added
+        setUnreadCount(count)
+      }
     }
 
     loadUnreadCount()
 
-    // Subscribe to conversation changes (both users' conversations)
-    // Supabase realtime doesn't support OR filters, so subscribe without filter
-    // and re-query on any change — safe because query itself is scoped to user
     const channel = supabase
-      .channel(`unread-${user.id}`)
+      .channel(`unread-messages-${user.id}`)  // ✅ Unique name
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'conversations' },
-        () => loadUnreadCount()
+        () => mountedRef.current && loadUnreadCount()  // ✅ Check mounted
       )
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'battles' },
-        () => loadUnreadCount()
+        () => mountedRef.current && loadUnreadCount()  // ✅ Check mounted
       )
       .subscribe()
 
     channelRef.current = channel
 
     return () => {
+      mountedRef.current = false  // ✅ Added
       if (channelRef.current) {
         supabase.removeChannel(channelRef.current)
         channelRef.current = null
       }
     }
-  }, [user?.id])
+  }, [user?.id])  // ✅ Only user.id
 
   return unreadCount
 }
