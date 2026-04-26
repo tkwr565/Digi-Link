@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom'
 import { AuthProvider, useAuth } from './hooks/useAuth.jsx'
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
+import { prefetchAllSprites } from './utils/spritePrefetcher'
 import AppLoadAnimation from './components/AppLoadAnimation'
 import { ToastProvider } from './hooks/useToast'
 import LoginPage from './pages/LoginPage'
@@ -192,11 +193,19 @@ function PublicRoute({ children }) {
   return children
 }
 
+function SpritePrefetcher() {
+  useEffect(() => {
+    prefetchAllSprites()
+  }, [])
+  return null
+}
+
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <ToastProvider>
+          <SpritePrefetcher />
           <AppLoadAnimation />
           <Routes>
           {/* Protected routes - wrapped with AppLayout for persistent bottom nav */}

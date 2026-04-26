@@ -7,6 +7,7 @@ import DigimonPicker from '../components/DigimonPicker'
 import DeviceChecklist from '../components/DeviceChecklist'
 import { useTranslation } from 'react-i18next'
 import styles from './ProfilePage.module.css'
+import { loadDigimonDb } from '../utils/digimonUtils'
 
 export default function ProfilePage() {
   const { user, signOut } = useAuth()
@@ -138,17 +139,15 @@ export default function ProfilePage() {
     setEditUsername(profile.username)
 
     // Load Digimon data for edit mode
-    fetch('/sprites/digimon_db.json')
-      .then(res => res.json())
-      .then(digimonList => {
-        const favourite = digimonList.find(d => d.suffix === profile.favourite_digimon)
-        setEditFavouriteDigimon(favourite || null)
+    loadDigimonDb().then(digimonList => {
+      const favourite = digimonList.find(d => d.suffix === profile.favourite_digimon)
+      setEditFavouriteDigimon(favourite || null)
 
-        const partners = profile.active_partners
-          .map(suffix => digimonList.find(d => d.suffix === suffix))
-          .filter(Boolean)
-        setEditActivePartners(partners)
-      })
+      const partners = profile.active_partners
+        .map(suffix => digimonList.find(d => d.suffix === suffix))
+        .filter(Boolean)
+      setEditActivePartners(partners)
+    })
 
     // Convert devices to the format expected by DeviceChecklist
     const owned = devices.map(d =>
