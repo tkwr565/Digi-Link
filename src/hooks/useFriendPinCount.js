@@ -2,23 +2,23 @@ import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './useAuth'
 
-// Badge count = pending incoming friend requests + unseen pin notifications from friends.
-// Both figures come straight from the DB — no localStorage timestamp hacks.
-// Two dedicated channels keep each concern isolated so a broken table subscription
-// cannot spill over and silence the other.
 export function useFriendPinCount() {
   const { user } = useAuth()
   const [count, setCount] = useState(0)
-  const friendsChannelRef = useRef(null)
-  const notifsChannelRef = useRef(null)
+  const channelRef = useRef(null)  // ✅ Single ref for tracking
+  const mountedRef = useRef(true)  // ✅ Track if component is mounted
 
   useEffect(() => {
+    mountedRef.current = true
+    
     if (!user?.id) {
       setCount(0)
       return
     }
 
     const loadCount = async () => {
+      if (!mountedRef.current) return  // ✅ Don't update unmounted component
+      
       const [{ count: reqCount }, { count: pinCount }] = await Promise.all([
         supabase
           .from('friendships')
@@ -31,60 +31,55 @@ export function useFriendPinCount() {
           .eq('user_id', user.id)
           .eq('seen', false),
       ])
-      setCount((reqCount || 0) + (pinCount || 0))
+      
+      if (mountedRef.current) {
+        setCount((reqCount || 0) + (pinCount || 0))
+      }
     }
 
     loadCount()
 
-    // FriendsPage dispatches this after marking notifications seen — re-query so badge drops
     const handleSeen = () => loadCount()
     window.addEventListener('friendsSeen', handleSeen)
 
-    // Channel 1: friendships only
-    const friendsChannel = supabase
-      .channel(`friend-requests-${user.id}`)
+    // ✅ SINGLE CHANNEL with multiple listeners
+    const channel = supabase
+      .channel(`user-activity-${user.id}`)  // Unique channel name
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'friendships' },
         () => {
-          loadCount()
-          window.dispatchEvent(new CustomEvent('friendshipChanged'))
+          if (mountedRef.current) {
+            loadCount()
+            window.dispatchEvent(new CustomEvent('friendshipChanged'))
+          }
         }
       )
-      .subscribe()
-    friendsChannelRef.current = friendsChannel
-
-    // Channel 2: pin notifications only — INSERT updates badge + signals FriendsPage activity list
-    const notifsChannel = supabase
-      .channel(`pin-notifs-${user.id}`)
       .on(
         'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'friend_pin_notifications' },
+        { event: '*', schema: 'public', table: 'friend_pin_notifications' },
         () => {
-          loadCount()
-          window.dispatchEvent(new CustomEvent('pinNotificationChanged'))
+          if (mountedRef.current) {
+            loadCount()
+            window.dispatchEvent(new CustomEvent('pinNotificationChanged'))
+          }
         }
       )
-      .on(
-        'postgres_changes',
-        { event: 'UPDATE', schema: 'public', table: 'friend_pin_notifications' },
-        () => loadCount()
-      )
       .subscribe()
-    notifsChannelRef.current = notifsChannel
+
+    channelRef.current = channel
 
     return () => {
+      mountedRef.current = false  // ✅ Mark as unmounted
       window.removeEventListener('friendsSeen', handleSeen)
-      if (friendsChannelRef.current) {
-        supabase.removeChannel(friendsChannelRef.current)
-        friendsChannelRef.current = null
-      }
-      if (notifsChannelRef.current) {
-        supabase.removeChannel(notifsChannelRef.current)
-        notifsChannelRef.current = null
+      
+      // ✅ GUARANTEED cleanup
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current)
+        channelRef.current = null
       }
     }
-  }, [user?.id])
+  }, [user?.id])  // ✅ Only user.id, not entire user object
 
   return count
 }
