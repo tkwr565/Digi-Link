@@ -61,12 +61,16 @@ export default function DigimonSprite({ suffix, size = 'md' }) {
       <img
         src={getSpriteUrl(suffix, 0)}
         alt=""
+        loading="lazy"
+        decoding="async"
         className={styles.image}
         style={frame === 0 ? style0 : { ...style0, display: 'none' }}
       />
       <img
         src={getSpriteUrl(suffix, 1)}
         alt=""
+        loading="lazy"
+        decoding="async"
         className={styles.image}
         style={frame === 1 ? style1 : { ...style1, display: 'none' }}
       />

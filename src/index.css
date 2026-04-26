@@ -1,9 +1,6 @@
 /* Digi-Link — Global Styles & CSS Variables */
 
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+/* Google Fonts loaded via <link> in index.html — no @import needed here */
 
 :root {
   /* Backgrounds */
