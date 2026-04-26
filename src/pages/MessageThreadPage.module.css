@@ -2,7 +2,7 @@
 
 .container {
   width: 100%;
-  height: calc(100vh - 80px); /* 80px = fixed bottom nav height */
+  height: 100%;
   background: var(--bg-deepest);
   color: var(--text-primary);
   display: flex;
