@@ -1,0 +1,5366 @@
+[
+    {
+        "name": "Gizamon",
+        "sprite_folder": "spr_mon_giza",
+        "type": "Virus",
+        "suffix": "giza"
+    },
+    {
+        "name": "Betamon",
+        "sprite_folder": "spr_mon_beta",
+        "type": "Virus",
+        "suffix": "beta"
+    },
+    {
+        "name": "Patamon",
+        "sprite_folder": "spr_mon_pata",
+        "type": "Data",
+        "suffix": "pata"
+    },
+    {
+        "name": "Plotmon",
+        "sprite_folder": "spr_mon_plot",
+        "type": "Vaccine",
+        "suffix": "plot"
+    },
+    {
+        "name": "Gazimon",
+        "sprite_folder": "spr_mon_gazi",
+        "type": "Virus",
+        "suffix": "gazi"
+    },
+    {
+        "name": "Elecmon",
+        "sprite_folder": "spr_mon_elec",
+        "type": "Data",
+        "suffix": "elec"
+    },
+    {
+        "name": "Kunemon",
+        "sprite_folder": "spr_mon_kune",
+        "type": "Virus",
+        "suffix": "kune"
+    },
+    {
+        "name": "Zubamon",
+        "sprite_folder": "spr_mon_zuba",
+        "type": "Vaccine",
+        "suffix": "zuba"
+    },
+    {
+        "name": "Palmon",
+        "sprite_folder": "spr_mon_pal",
+        "type": "Data",
+        "suffix": "pal"
+    },
+    {
+        "name": "Piyomon",
+        "sprite_folder": "spr_mon_piyo",
+        "type": "Vaccine",
+        "suffix": "piyo"
+    },
+    {
+        "name": "Lunamon",
+        "sprite_folder": "spr_mon_luna",
+        "type": "Data",
+        "suffix": "luna"
+    },
+    {
+        "name": "Coronamon",
+        "sprite_folder": "spr_mon_corona",
+        "type": "Vaccine",
+        "suffix": "corona"
+    },
+    {
+        "name": "Dorumon",
+        "sprite_folder": "spr_mon_doru",
+        "type": "Data",
+        "suffix": "doru"
+    },
+    {
+        "name": "Dracomon",
+        "sprite_folder": "spr_mon_draco",
+        "type": "Data",
+        "suffix": "draco"
+    },
+    {
+        "name": "Agumon",
+        "sprite_folder": "spr_mon_agu",
+        "type": "Vaccine",
+        "suffix": "agu"
+    },
+    {
+        "name": "Gabumon",
+        "sprite_folder": "spr_mon_gabu",
+        "type": "Data",
+        "suffix": "gabu"
+    },
+    {
+        "name": "Hackmon",
+        "sprite_folder": "spr_mon_hack",
+        "type": "Data",
+        "suffix": "hack"
+    },
+    {
+        "name": "Bakemon",
+        "sprite_folder": "spr_mon_bake",
+        "type": "Virus",
+        "suffix": "bake"
+    },
+    {
+        "name": "Numemon",
+        "sprite_folder": "spr_mon_nume",
+        "type": "Virus",
+        "suffix": "nume"
+    },
+    {
+        "name": "Monochromon",
+        "sprite_folder": "spr_mon_monochro",
+        "type": "Data",
+        "suffix": "monochro"
+    },
+    {
+        "name": "Raremon",
+        "sprite_folder": "spr_mon_rare",
+        "type": "Virus",
+        "suffix": "rare"
+    },
+    {
+        "name": "Veggiemon",
+        "sprite_folder": "spr_mon_vegie",
+        "type": "Virus",
+        "suffix": "vegie"
+    },
+    {
+        "name": "Meramon",
+        "sprite_folder": "spr_mon_mera",
+        "type": "Data",
+        "suffix": "mera"
+    },
+    {
+        "name": "Sukamon",
+        "sprite_folder": "spr_mon_scu",
+        "type": "Virus",
+        "suffix": "scu"
+    },
+    {
+        "name": "Mojyamon",
+        "sprite_folder": "spr_mon_mojya",
+        "type": "Vaccine",
+        "suffix": "mojya"
+    },
+    {
+        "name": "Coelamon",
+        "sprite_folder": "spr_mon_coela",
+        "type": "Data",
+        "suffix": "coela"
+    },
+    {
+        "name": "Ogremon",
+        "sprite_folder": "spr_mon_ogre",
+        "type": "Virus",
+        "suffix": "ogre"
+    },
+    {
+        "name": "Drimogemon",
+        "sprite_folder": "spr_mon_drimoge",
+        "type": "Data",
+        "suffix": "drimoge"
+    },
+    {
+        "name": "Nanimon",
+        "sprite_folder": "spr_mon_nano",
+        "type": "Virus",
+        "suffix": "nano"
+    },
+    {
+        "name": "Seadramon",
+        "sprite_folder": "spr_mon_seadra",
+        "type": "Data",
+        "suffix": "seadra"
+    },
+    {
+        "name": "Shellmon",
+        "sprite_folder": "spr_mon_shell",
+        "type": "Data",
+        "suffix": "shell"
+    },
+    {
+        "name": "Airdramon",
+        "sprite_folder": "spr_mon_airdra",
+        "type": "Vaccine",
+        "suffix": "airdra"
+    },
+    {
+        "name": "Deltamon",
+        "sprite_folder": "spr_mon_delta",
+        "type": "Virus",
+        "suffix": "delta"
+    },
+    {
+        "name": "Coredramon (Blue)",
+        "sprite_folder": "spr_mon_coredrab",
+        "type": "Vaccine",
+        "suffix": "coredrab"
+    },
+    {
+        "name": "Coredramon (Green)",
+        "sprite_folder": "spr_mon_coredrag",
+        "type": "Virus",
+        "suffix": "coredrag"
+    },
+    {
+        "name": "Devidramon",
+        "sprite_folder": "spr_mon_devidra",
+        "type": "Virus",
+        "suffix": "devidra"
+    },
+    {
+        "name": "Centalmon",
+        "sprite_folder": "spr_mon_cental",
+        "type": "Data",
+        "suffix": "cental"
+    },
+    {
+        "name": "Cyclomon",
+        "sprite_folder": "spr_mon_cyclo",
+        "type": "Virus",
+        "suffix": "cyclo"
+    },
+    {
+        "name": "Lekismon",
+        "sprite_folder": "spr_mon_lekis",
+        "type": "Data",
+        "suffix": "lekis"
+    },
+    {
+        "name": "Yukidarumon",
+        "sprite_folder": "spr_mon_yukidaru",
+        "type": "Vaccine",
+        "suffix": "yukidaru"
+    },
+    {
+        "name": "Firamon",
+        "sprite_folder": "spr_mon_fira",
+        "type": "Vaccine",
+        "suffix": "fira"
+    },
+    {
+        "name": "Unimon",
+        "sprite_folder": "spr_mon_uni",
+        "type": "Vaccine",
+        "suffix": "uni"
+    },
+    {
+        "name": "Kabuterimon",
+        "sprite_folder": "spr_mon_kabuteri",
+        "type": "Vaccine",
+        "suffix": "kabuteri"
+    },
+    {
+        "name": "Tuskmon",
+        "sprite_folder": "spr_mon_tusk",
+        "type": "Virus",
+        "suffix": "tusk"
+    },
+    {
+        "name": "Tyrannomon",
+        "sprite_folder": "spr_mon_tyranno",
+        "type": "Data",
+        "suffix": "tyranno"
+    },
+    {
+        "name": "Cockatrimon",
+        "sprite_folder": "spr_mon_cockatri",
+        "type": "Data",
+        "suffix": "cockatri"
+    },
+    {
+        "name": "Dark Tyrannomon",
+        "sprite_folder": "spr_mon_darktyranno",
+        "type": "Virus",
+        "suffix": "darktyranno"
+    },
+    {
+        "name": "Flymon",
+        "sprite_folder": "spr_mon_fly",
+        "type": "Virus",
+        "suffix": "fly"
+    },
+    {
+        "name": "Kuwagamon",
+        "sprite_folder": "spr_mon_kuwaga",
+        "type": "Virus",
+        "suffix": "kuwaga"
+    },
+    {
+        "name": "Meicoomon",
+        "sprite_folder": "spr_mon_meicoo",
+        "type": "Free",
+        "suffix": "meicoo"
+    },
+    {
+        "name": "Whamon",
+        "sprite_folder": "spr_mon_wha",
+        "type": "Vaccine",
+        "suffix": "wha"
+    },
+    {
+        "name": "Birdramon",
+        "sprite_folder": "spr_mon_birdra",
+        "type": "Vaccine",
+        "suffix": "birdra"
+    },
+    {
+        "name": "Zubaeagermon",
+        "sprite_folder": "spr_mon_zubaeager",
+        "type": "Vaccine",
+        "suffix": "zubaeager"
+    },
+    {
+        "name": "Dorugamon",
+        "sprite_folder": "spr_mon_doruga",
+        "type": "Data",
+        "suffix": "doruga"
+    },
+    {
+        "name": "Garurumon",
+        "sprite_folder": "spr_mon_garuru",
+        "type": "Vaccine",
+        "suffix": "garuru"
+    },
+    {
+        "name": "Greymon",
+        "sprite_folder": "spr_mon_grey",
+        "type": "Vaccine",
+        "suffix": "grey"
+    },
+    {
+        "name": "Devimon",
+        "sprite_folder": "spr_mon_devi",
+        "type": "Virus",
+        "suffix": "devi"
+    },
+    {
+        "name": "Leomon",
+        "sprite_folder": "spr_mon_leo",
+        "type": "Vaccine",
+        "suffix": "leo"
+    },
+    {
+        "name": "Angemon",
+        "sprite_folder": "spr_mon_ange",
+        "type": "Vaccine",
+        "suffix": "ange"
+    },
+    {
+        "name": "Bao Hackmon",
+        "sprite_folder": "spr_mon_baohack",
+        "type": "Data",
+        "suffix": "baohack"
+    },
+    {
+        "name": "Nanomon",
+        "sprite_folder": "spr_mon_datamon",
+        "type": "Virus",
+        "suffix": "datamon"
+    },
+    {
+        "name": "Giromon",
+        "sprite_folder": "spr_mon_giro",
+        "type": "Vaccine",
+        "suffix": "giro"
+    },
+    {
+        "name": "Mamemon",
+        "sprite_folder": "spr_mon_mame",
+        "type": "Data",
+        "suffix": "mame"
+    },
+    {
+        "name": "Monzaemon",
+        "sprite_folder": "spr_mon_monzae",
+        "type": "Vaccine",
+        "suffix": "monzae"
+    },
+    {
+        "name": "Digitamamon",
+        "sprite_folder": "spr_mon_digitama",
+        "type": "Data",
+        "suffix": "digitama"
+    },
+    {
+        "name": "Ex-Tyrannomon",
+        "sprite_folder": "spr_mon_extyrano",
+        "type": "Vaccine",
+        "suffix": "extyrano"
+    },
+    {
+        "name": "Duramon",
+        "sprite_folder": "spr_mon_dura",
+        "type": "Vaccine",
+        "suffix": "dura"
+    },
+    {
+        "name": "Megadramon",
+        "sprite_folder": "spr_mon_megadra",
+        "type": "Virus",
+        "suffix": "megadra"
+    },
+    {
+        "name": "Flaremon",
+        "sprite_folder": "spr_mon_flare",
+        "type": "Vaccine",
+        "suffix": "flare"
+    },
+    {
+        "name": "Savior Hackmon",
+        "sprite_folder": "spr_mon_saviorhack",
+        "type": "Data",
+        "suffix": "saviorhack"
+    },
+    {
+        "name": "Crescemon",
+        "sprite_folder": "spr_mon_cresce",
+        "type": "Data",
+        "suffix": "cresce"
+    },
+    {
+        "name": "Metal Mamemon",
+        "sprite_folder": "spr_mon_metalmame",
+        "type": "Data",
+        "suffix": "metalmame"
+    },
+    {
+        "name": "Andromon",
+        "sprite_folder": "spr_mon_andro",
+        "type": "Vaccine",
+        "suffix": "andro"
+    },
+    {
+        "name": "Vademon",
+        "sprite_folder": "spr_mon_vade",
+        "type": "Virus",
+        "suffix": "vade"
+    },
+    {
+        "name": "Doruguremon",
+        "sprite_folder": "spr_mon_dorugure",
+        "type": "Data",
+        "suffix": "dorugure"
+    },
+    {
+        "name": "Piccolomon",
+        "sprite_folder": "spr_mon_piccolo",
+        "type": "Data",
+        "suffix": "piccolo"
+    },
+    {
+        "name": "Etemon",
+        "sprite_folder": "spr_mon_ete",
+        "type": "Virus",
+        "suffix": "ete"
+    },
+    {
+        "name": "Skull Greymon",
+        "sprite_folder": "spr_mon_skullgrey",
+        "type": "Virus",
+        "suffix": "skullgrey"
+    },
+    {
+        "name": "Metal Tyrannomon",
+        "sprite_folder": "spr_mon_metaltyranno",
+        "type": "Virus",
+        "suffix": "metaltyranno"
+    },
+    {
+        "name": "Metal Greymon (Virus)",
+        "sprite_folder": "spr_mon_metalgrey",
+        "type": "Virus",
+        "suffix": "metalgrey"
+    },
+    {
+        "name": "Were Garurumon",
+        "sprite_folder": "spr_mon_weregaruru",
+        "type": "Vaccine",
+        "suffix": "weregaruru"
+    },
+    {
+        "name": "Meicrackmon",
+        "sprite_folder": "spr_mon_meicrack",
+        "type": "Vaccine",
+        "suffix": "meicrack"
+    },
+    {
+        "name": "Metal Greymon",
+        "sprite_folder": "spr_mon_metalgreyp",
+        "type": "Vaccine",
+        "suffix": "metalgreyp"
+    },
+    {
+        "name": "Groundramon",
+        "sprite_folder": "spr_mon_groundra",
+        "type": "Virus",
+        "suffix": "groundra"
+    },
+    {
+        "name": "Wingdramon",
+        "sprite_folder": "spr_mon_wingdra",
+        "type": "Vaccine",
+        "suffix": "wingdra"
+    },
+    {
+        "name": "Hi Andromon",
+        "sprite_folder": "spr_mon_hiandro",
+        "type": "Vaccine",
+        "suffix": "hiandro"
+    },
+    {
+        "name": "Pinochimon",
+        "sprite_folder": "spr_mon_pinochi",
+        "type": "Virus",
+        "suffix": "pinochi"
+    },
+    {
+        "name": "King Etemon",
+        "sprite_folder": "spr_mon_kingete",
+        "type": "Virus",
+        "suffix": "kingete"
+    },
+    {
+        "name": "Aegisdramon",
+        "sprite_folder": "spr_mon_aegisdra",
+        "type": "Vaccine",
+        "suffix": "aegisdra"
+    },
+    {
+        "name": "Mugendramon",
+        "sprite_folder": "spr_mon_mugendra",
+        "type": "Virus",
+        "suffix": "mugendra"
+    },
+    {
+        "name": "Skull Mammon",
+        "sprite_folder": "spr_mon_skullmam",
+        "type": "Vaccine",
+        "suffix": "skullmam"
+    },
+    {
+        "name": "Breakdramon",
+        "sprite_folder": "spr_mon_breakdra",
+        "type": "Virus",
+        "suffix": "breakdra"
+    },
+    {
+        "name": "Bancho Mamemon",
+        "sprite_folder": "spr_mon_banchomame",
+        "type": "Data",
+        "suffix": "banchomame"
+    },
+    {
+        "name": "Slayerdramon",
+        "sprite_folder": "spr_mon_slayerdra",
+        "type": "Vaccine",
+        "suffix": "slayerdra"
+    },
+    {
+        "name": "Durandamon",
+        "sprite_folder": "spr_mon_duranda",
+        "type": "Vaccine",
+        "suffix": "duranda"
+    },
+    {
+        "name": "Cres Garurumon",
+        "sprite_folder": "spr_mon_cresgaruru",
+        "type": "Data",
+        "suffix": "cresgaruru"
+    },
+    {
+        "name": "Dianamon",
+        "sprite_folder": "spr_mon_diana",
+        "type": "Data",
+        "suffix": "diana"
+    },
+    {
+        "name": "Rasielmon",
+        "sprite_folder": "spr_mon_rasiel",
+        "type": "Vaccine",
+        "suffix": "rasiel"
+    },
+    {
+        "name": "Titamon",
+        "sprite_folder": "spr_mon_tita",
+        "type": "Virus",
+        "suffix": "tita"
+    },
+    {
+        "name": "Apollomon",
+        "sprite_folder": "spr_mon_apollo",
+        "type": "Vaccine",
+        "suffix": "apollo"
+    },
+    {
+        "name": "Metal Garurumon",
+        "sprite_folder": "spr_mon_metalgaruru",
+        "type": "Data",
+        "suffix": "metalgaruru"
+    },
+    {
+        "name": "War Greymon",
+        "sprite_folder": "spr_mon_wargrey",
+        "type": "Vaccine",
+        "suffix": "wargrey"
+    },
+    {
+        "name": "Blitz Greymon",
+        "sprite_folder": "spr_mon_blitzgrey",
+        "type": "Virus",
+        "suffix": "blitzgrey"
+    },
+    {
+        "name": "Alphamon",
+        "sprite_folder": "spr_mon_alpha",
+        "type": "Vaccine",
+        "suffix": "alpha"
+    },
+    {
+        "name": "Jesmon",
+        "sprite_folder": "spr_mon_jes",
+        "type": "Data",
+        "suffix": "jes"
+    },
+    {
+        "name": "Rust Tyrannomon",
+        "sprite_folder": "spr_mon_rusttyranno",
+        "type": "Virus",
+        "suffix": "rusttyranno"
+    },
+    {
+        "name": "Omegamon Alter-S",
+        "sprite_folder": "spr_mon_omegas",
+        "type": "Virus",
+        "suffix": "omegas"
+    },
+    {
+        "name": "Omegamon",
+        "sprite_folder": "spr_mon_omega",
+        "type": "Vaccine",
+        "suffix": "omega"
+    },
+    {
+        "name": "Examon",
+        "sprite_folder": "spr_mon_exa",
+        "type": "Data",
+        "suffix": "exa"
+    },
+    {
+        "name": "Grace Novamon",
+        "sprite_folder": "spr_mon_gracenova",
+        "type": "Vaccine",
+        "suffix": "gracenova"
+    },
+    {
+        "name": "Otamamon",
+        "sprite_folder": "spr_mon_otama",
+        "type": "Virus",
+        "suffix": "otama"
+    },
+    {
+        "name": "Tentomon",
+        "sprite_folder": "spr_mon_tento",
+        "type": "Vaccine",
+        "suffix": "tento"
+    },
+    {
+        "name": "Karatuki Numemon",
+        "sprite_folder": "spr_mon_shellnume",
+        "type": "Virus",
+        "suffix": "shellnume"
+    },
+    {
+        "name": "Tortomon",
+        "sprite_folder": "spr_mon_torta",
+        "type": "Vaccine",
+        "suffix": "torta"
+    },
+    {
+        "name": "Gekomon",
+        "sprite_folder": "spr_mon_geko",
+        "type": "Virus",
+        "suffix": "geko"
+    },
+    {
+        "name": "Starmon",
+        "sprite_folder": "spr_mon_star",
+        "type": "Data",
+        "suffix": "star"
+    },
+    {
+        "name": "Tonosama Gekomon",
+        "sprite_folder": "spr_mon_tonosamageko",
+        "type": "Virus",
+        "suffix": "tonosamageko"
+    },
+    {
+        "name": "Atlur Kabuterimon (Blue)",
+        "sprite_folder": "spr_mon_megakabuteri",
+        "type": "Vaccine",
+        "suffix": "megakabuteri"
+    },
+    {
+        "name": "Tekkamon",
+        "sprite_folder": "spr_mon_tekka",
+        "type": "Data",
+        "suffix": "tekka"
+    },
+    {
+        "name": "Tokomon X",
+        "sprite_folder": "spr_mon_tokoX",
+        "type": "Free",
+        "suffix": "tokoX"
+    },
+    {
+        "name": "Sistermon Blanc",
+        "sprite_folder": "spr_mon_sisterB",
+        "type": "Vaccine",
+        "suffix": "sisterB"
+    },
+    {
+        "name": "Herissmon",
+        "sprite_folder": "spr_mon_heriss",
+        "type": "Data",
+        "suffix": "heriss"
+    },
+    {
+        "name": "Dracomon X",
+        "sprite_folder": "spr_mon_dracoX",
+        "type": "Data",
+        "suffix": "dracoX"
+    },
+    {
+        "name": "Renamon X",
+        "sprite_folder": "spr_mon_rena_x",
+        "type": "Data",
+        "suffix": "rena_x"
+    },
+    {
+        "name": "Agumon X",
+        "sprite_folder": "spr_mon_aguX",
+        "type": "Vaccine",
+        "suffix": "aguX"
+    },
+    {
+        "name": "Gabumon X",
+        "sprite_folder": "spr_mon_gabu_x",
+        "type": "Data",
+        "suffix": "gabu_x"
+    },
+    {
+        "name": "Tobucatmon",
+        "sprite_folder": "spr_mon_tobucat",
+        "type": "Data",
+        "suffix": "tobucat"
+    },
+    {
+        "name": "Damemon",
+        "sprite_folder": "spr_mon_damemon",
+        "type": "Free",
+        "suffix": "damemon"
+    },
+    {
+        "name": "Sistermon Ciel",
+        "sprite_folder": "spr_mon_sisterC",
+        "type": "Data",
+        "suffix": "sisterC"
+    },
+    {
+        "name": "Tyrannomon X",
+        "sprite_folder": "spr_mon_tyranoX",
+        "type": "Data",
+        "suffix": "tyranoX"
+    },
+    {
+        "name": "Growmon X",
+        "sprite_folder": "spr_mon_growx",
+        "type": "Virus",
+        "suffix": "growx"
+    },
+    {
+        "name": "Sangloupmon",
+        "sprite_folder": "spr_mon_sangloup",
+        "type": "Virus",
+        "suffix": "sangloup"
+    },
+    {
+        "name": "Leomon X",
+        "sprite_folder": "spr_mon_leo_x",
+        "type": "Vaccine",
+        "suffix": "leo_x"
+    },
+    {
+        "name": "Rhinomon X",
+        "sprite_folder": "spr_mon_rhinoX",
+        "type": "Vaccine",
+        "suffix": "rhinoX"
+    },
+    {
+        "name": "Yatagaramon",
+        "sprite_folder": "spr_mon_yagattari",
+        "type": "Vaccine",
+        "suffix": "yagattari"
+    },
+    {
+        "name": "Cerberumon X",
+        "sprite_folder": "spr_mon_cerberuX",
+        "type": "Vaccine",
+        "suffix": "cerberuX"
+    },
+    {
+        "name": "Cho-Hakkaimon",
+        "sprite_folder": "spr_mon_cho_hakkai",
+        "type": "Data",
+        "suffix": "cho_hakkai"
+    },
+    {
+        "name": "Lilimon X",
+        "sprite_folder": "spr_mon_liliX",
+        "type": "Data",
+        "suffix": "liliX"
+    },
+    {
+        "name": "Lucemon: Falldown Mode",
+        "sprite_folder": "spr_mon_luceFM",
+        "type": "Virus",
+        "suffix": "luceFM"
+    },
+    {
+        "name": "Megalo Growmon X",
+        "sprite_folder": "spr_mon_megalogrowx",
+        "type": "Virus",
+        "suffix": "megalogrowx"
+    },
+    {
+        "name": "Skull Baluchimon",
+        "sprite_folder": "spr_mon_skullbaluchi",
+        "type": "Data",
+        "suffix": "skullbaluchi"
+    },
+    {
+        "name": "Metal Greymon X",
+        "sprite_folder": "spr_mon_metalgreyX",
+        "type": "Vaccine",
+        "suffix": "metalgreyX"
+    },
+    {
+        "name": "Metal Tyrannomon X",
+        "sprite_folder": "spr_mon_metaltyranoX",
+        "type": "Virus",
+        "suffix": "metaltyranoX"
+    },
+    {
+        "name": "Were Garurumon X",
+        "sprite_folder": "spr_mon_weregarurux",
+        "type": "Data",
+        "suffix": "weregarurux"
+    },
+    {
+        "name": "Platinum Numemon",
+        "sprite_folder": "spr_mon_platinumnume",
+        "type": "Virus",
+        "suffix": "platinumnume"
+    },
+    {
+        "name": "Belial Vamdemon",
+        "sprite_folder": "spr_mon_belialvamde",
+        "type": "Virus",
+        "suffix": "belialvamde"
+    },
+    {
+        "name": "Beel Starmon X",
+        "sprite_folder": "spr_mon_beelstarX",
+        "type": "Virus",
+        "suffix": "beelstarX"
+    },
+    {
+        "name": "Megidramon X",
+        "sprite_folder": "spr_mon_megidramonX",
+        "type": "Virus",
+        "suffix": "megidramonX"
+    },
+    {
+        "name": "Rafflesimon",
+        "sprite_folder": "spr_mon_rafflesi",
+        "type": "Data",
+        "suffix": "rafflesi"
+    },
+    {
+        "name": "Jesmon X",
+        "sprite_folder": "spr_mon_jes_x",
+        "type": "Vaccine",
+        "suffix": "jes_x"
+    },
+    {
+        "name": "Sakuyamon X",
+        "sprite_folder": "spr_mon_sakuyaX",
+        "type": "Data",
+        "suffix": "sakuyaX"
+    },
+    {
+        "name": "Beelzebumon X",
+        "sprite_folder": "spr_mon_beelzebux",
+        "type": "Virus",
+        "suffix": "beelzebux"
+    },
+    {
+        "name": "Craniummon X",
+        "sprite_folder": "spr_mon_craniumX",
+        "type": "Vaccine",
+        "suffix": "craniumX"
+    },
+    {
+        "name": "Valdurmon",
+        "sprite_folder": "spr_mon_valdur",
+        "type": "Vaccine",
+        "suffix": "valdur"
+    },
+    {
+        "name": "War Greymon X",
+        "sprite_folder": "spr_mon_wargreyx",
+        "type": "Vaccine",
+        "suffix": "wargreyx"
+    },
+    {
+        "name": "Metal Garurumon X",
+        "sprite_folder": "spr_mon_metalgaruruX",
+        "type": "Data",
+        "suffix": "metalgaruruX"
+    },
+    {
+        "name": "Sleipmon X",
+        "sprite_folder": "spr_mon_sleip_x",
+        "type": "Vaccine",
+        "suffix": "sleip_x"
+    },
+    {
+        "name": "Minervamon X",
+        "sprite_folder": "spr_mon_minervaX",
+        "type": "Virus",
+        "suffix": "minervaX"
+    },
+    {
+        "name": "Lord Knightmon X",
+        "sprite_folder": "spr_mon_lordknightx",
+        "type": "Virus",
+        "suffix": "lordknightx"
+    },
+    {
+        "name": "Diablomon X",
+        "sprite_folder": "spr_mon_diabloX",
+        "type": "Free",
+        "suffix": "diabloX"
+    },
+    {
+        "name": "Dukemon X",
+        "sprite_folder": "spr_mon_dukeX",
+        "type": "Virus",
+        "suffix": "dukeX"
+    },
+    {
+        "name": "Omegamon X",
+        "sprite_folder": "spr_mon_omega_x",
+        "type": "Vaccine",
+        "suffix": "omega_x"
+    },
+    {
+        "name": "Yarmon",
+        "sprite_folder": "spr_mon_yaa",
+        "type": "Free",
+        "suffix": "yaa"
+    },
+    {
+        "name": "Otamamon X",
+        "sprite_folder": "spr_mon_otamax",
+        "type": "Virus",
+        "suffix": "otamax"
+    },
+    {
+        "name": "Plotmon X",
+        "sprite_folder": "spr_mon_plotx",
+        "type": "Vaccine",
+        "suffix": "plotx"
+    },
+    {
+        "name": "Kokuwamon X",
+        "sprite_folder": "spr_mon_kokuwax",
+        "type": "Data",
+        "suffix": "kokuwax"
+    },
+    {
+        "name": "Gomamon X",
+        "sprite_folder": "spr_mon_gomax",
+        "type": "Vaccine",
+        "suffix": "gomax"
+    },
+    {
+        "name": "Impmon X",
+        "sprite_folder": "spr_mon_impx",
+        "type": "Virus",
+        "suffix": "impx"
+    },
+    {
+        "name": "Agumon X (Black)",
+        "sprite_folder": "spr_mon_agubx",
+        "type": "Virus",
+        "suffix": "agubx"
+    },
+    {
+        "name": "Duskmon",
+        "sprite_folder": "spr_mon_dusk",
+        "type": "Free",
+        "suffix": "dusk"
+    },
+    {
+        "name": "Numemon X",
+        "sprite_folder": "spr_mon_numex",
+        "type": "Virus",
+        "suffix": "numex"
+    },
+    {
+        "name": "Allomon X",
+        "sprite_folder": "spr_mon_allox",
+        "type": "Data",
+        "suffix": "allox"
+    },
+    {
+        "name": "Seadramon X",
+        "sprite_folder": "spr_mon_seadrax",
+        "type": "Data",
+        "suffix": "seadrax"
+    },
+    {
+        "name": "Mantaraymon X",
+        "sprite_folder": "spr_mon_mantarayx",
+        "type": "Vaccine",
+        "suffix": "mantarayx"
+    },
+    {
+        "name": "Filmon",
+        "sprite_folder": "spr_mon_filx",
+        "type": "Data",
+        "suffix": "filx"
+    },
+    {
+        "name": "Ogremon X",
+        "sprite_folder": "spr_mon_ogrex",
+        "type": "Virus",
+        "suffix": "ogrex"
+    },
+    {
+        "name": "Velgrmon",
+        "sprite_folder": "spr_mon_velgr",
+        "type": "Free",
+        "suffix": "velgr"
+    },
+    {
+        "name": "Kuwagamon X",
+        "sprite_folder": "spr_mon_kuwagax",
+        "type": "Virus",
+        "suffix": "kuwagax"
+    },
+    {
+        "name": "Nefertimon X",
+        "sprite_folder": "spr_mon_nerfertix",
+        "type": "Vaccine",
+        "suffix": "nerfertix"
+    },
+    {
+        "name": "Dark Tyrannomon X",
+        "sprite_folder": "spr_mon_darktyranox",
+        "type": "Virus",
+        "suffix": "darktyranox"
+    },
+    {
+        "name": "Mammon X",
+        "sprite_folder": "spr_mon_mamx",
+        "type": "Vaccine",
+        "suffix": "mamx"
+    },
+    {
+        "name": "Okuwamon X",
+        "sprite_folder": "spr_mon_okuwax",
+        "type": "Virus",
+        "suffix": "okuwax"
+    },
+    {
+        "name": "Triceramon X",
+        "sprite_folder": "spr_mon_tricerax",
+        "type": "Data",
+        "suffix": "tricerax"
+    },
+    {
+        "name": "Mametyramon",
+        "sprite_folder": "spr_mon_mametyra",
+        "type": "Data",
+        "suffix": "mametyra"
+    },
+    {
+        "name": "Mega Seadramon X",
+        "sprite_folder": "spr_mon_megaseadrax",
+        "type": "Data",
+        "suffix": "megaseadrax"
+    },
+    {
+        "name": "Kaiser Leomon",
+        "sprite_folder": "spr_mon_kaiserleo",
+        "type": "Free",
+        "suffix": "kaiserleo"
+    },
+    {
+        "name": "Metal Fantomon",
+        "sprite_folder": "spr_mon_metalfanto",
+        "type": "Data",
+        "suffix": "metalfanto"
+    },
+    {
+        "name": "Lady Devimon X",
+        "sprite_folder": "spr_mon_ladydevix",
+        "type": "Virus",
+        "suffix": "ladydevix"
+    },
+    {
+        "name": "Mephismon X",
+        "sprite_folder": "spr_mon_mephisx",
+        "type": "Virus",
+        "suffix": "mephisx"
+    },
+    {
+        "name": "Stiffilmon",
+        "sprite_folder": "spr_mon_stiffil",
+        "type": "Data",
+        "suffix": "stiffil"
+    },
+    {
+        "name": "Metal Greymon X (Virus)",
+        "sprite_folder": "spr_mon_metalgreyvx",
+        "type": "Virus",
+        "suffix": "metalgreyvx"
+    },
+    {
+        "name": "Vamdemon X",
+        "sprite_folder": "spr_mon_vamdex",
+        "type": "Virus",
+        "suffix": "vamdex"
+    },
+    {
+        "name": "Metal Piranimon",
+        "sprite_folder": "spr_mon_metalpirani",
+        "type": "Virus",
+        "suffix": "metalpirani"
+    },
+    {
+        "name": "Ultimate Brachimon",
+        "sprite_folder": "spr_mon_ultimatebrachi",
+        "type": "Data",
+        "suffix": "ultimatebrachi"
+    },
+    {
+        "name": "Dinorexmon",
+        "sprite_folder": "spr_mon_dinorex",
+        "type": "Data",
+        "suffix": "dinorex"
+    },
+    {
+        "name": "Giga Seadramon",
+        "sprite_folder": "spr_mon_gigaseadra",
+        "type": "Data",
+        "suffix": "gigaseadra"
+    },
+    {
+        "name": "Bagramon",
+        "sprite_folder": "spr_mon_bagra",
+        "type": "Free",
+        "suffix": "bagra"
+    },
+    {
+        "name": "Rosemon X",
+        "sprite_folder": "spr_mon_rosex",
+        "type": "Data",
+        "suffix": "rosex"
+    },
+    {
+        "name": "Dark Knightmon X",
+        "sprite_folder": "spr_mon_darkknightx",
+        "type": "Virus",
+        "suffix": "darkknightx"
+    },
+    {
+        "name": "Grandis Kuwagamon",
+        "sprite_folder": "spr_mon_grandiskuwag",
+        "type": "Virus",
+        "suffix": "grandiskuwag"
+    },
+    {
+        "name": "Prince Mamemon X",
+        "sprite_folder": "spr_mon_princemamex",
+        "type": "Data",
+        "suffix": "princemamex"
+    },
+    {
+        "name": "Skull Mammon X",
+        "sprite_folder": "spr_mon_skullmamx",
+        "type": "Vaccine",
+        "suffix": "skullmamx"
+    },
+    {
+        "name": "Chaosdramon X",
+        "sprite_folder": "spr_mon_chaosdrax",
+        "type": "Virus",
+        "suffix": "chaosdrax"
+    },
+    {
+        "name": "Cherubimon X (Vice)",
+        "sprite_folder": "spr_mon_cherubix",
+        "type": "Virus",
+        "suffix": "cherubix"
+    },
+    {
+        "name": "Raihimon",
+        "sprite_folder": "spr_mon_raihi",
+        "type": "Free",
+        "suffix": "raihi"
+    },
+    {
+        "name": "Rasenmon: Fury Mode",
+        "sprite_folder": "spr_mon_rasenfury",
+        "type": "Data",
+        "suffix": "rasenfury"
+    },
+    {
+        "name": "Black War Greymon X",
+        "sprite_folder": "spr_mon_blackwargreyx",
+        "type": "Virus",
+        "suffix": "blackwargreyx"
+    },
+    {
+        "name": "Ofanimon X: Falldown Mode",
+        "sprite_folder": "spr_mon_ofanifmx",
+        "type": "Vaccine",
+        "suffix": "ofanifmx"
+    },
+    {
+        "name": "Ancient Sphinxmon",
+        "sprite_folder": "spr_mon_ancientsphinx",
+        "type": "Virus",
+        "suffix": "ancientsphinx"
+    },
+    {
+        "name": "Rasenmon",
+        "sprite_folder": "spr_mon_rasen",
+        "type": "Data",
+        "suffix": "rasen"
+    },
+    {
+        "name": "Barbamon X",
+        "sprite_folder": "spr_mon_barbax",
+        "type": "Virus",
+        "suffix": "barbax"
+    },
+    {
+        "name": "Lilithmon X",
+        "sprite_folder": "spr_mon_lilithx",
+        "type": "Virus",
+        "suffix": "lilithx"
+    },
+    {
+        "name": "Demon X",
+        "sprite_folder": "spr_mon_dex",
+        "type": "Virus",
+        "suffix": "dex"
+    },
+    {
+        "name": "Leviamon X",
+        "sprite_folder": "spr_mon_leviax",
+        "type": "Virus",
+        "suffix": "leviax"
+    },
+    {
+        "name": "Belphemon X",
+        "sprite_folder": "spr_mon_belphex",
+        "type": "Virus",
+        "suffix": "belphex"
+    },
+    {
+        "name": "Darkness Bagramon",
+        "sprite_folder": "spr_mon_darknessbagra",
+        "type": "Free",
+        "suffix": "darknessbagra"
+    },
+    {
+        "name": "Lucemon X",
+        "sprite_folder": "spr_mon_lucex",
+        "type": "Virus",
+        "suffix": "lucex"
+    },
+    {
+        "name": "Penmon",
+        "sprite_folder": "spr_mon_pen",
+        "type": "Vaccine",
+        "suffix": "pen"
+    },
+    {
+        "name": "Goblimon",
+        "sprite_folder": "spr_mon_goburi",
+        "type": "Virus",
+        "suffix": "goburi"
+    },
+    {
+        "name": "Bokomon",
+        "sprite_folder": "spr_mon_bokomon",
+        "type": "Vaccine",
+        "suffix": "bokomon"
+    },
+    {
+        "name": "Neamon",
+        "sprite_folder": "spr_mon_neem",
+        "type": "Data",
+        "suffix": "neem"
+    },
+    {
+        "name": "Chuumon",
+        "sprite_folder": "spr_mon_chu",
+        "type": "Virus",
+        "suffix": "chu"
+    },
+    {
+        "name": "Mushmon",
+        "sprite_folder": "spr_mon_mush",
+        "type": "Virus",
+        "suffix": "mush"
+    },
+    {
+        "name": "Arbormon",
+        "sprite_folder": "spr_mon_arbormon",
+        "type": "Data",
+        "suffix": "arbormon"
+    },
+    {
+        "name": "Ebi Burgermon",
+        "sprite_folder": "spr_mon_ebiburg",
+        "type": "Data",
+        "suffix": "ebiburg"
+    },
+    {
+        "name": "Arkadimon Child",
+        "sprite_folder": "spr_mon_arcadiaC",
+        "type": "Virus",
+        "suffix": "arcadiaC"
+    },
+    {
+        "name": "Kotemon",
+        "sprite_folder": "spr_mon_kote",
+        "type": "Virus",
+        "suffix": "kote"
+    },
+    {
+        "name": "Flamon",
+        "sprite_folder": "spr_mon_flamon",
+        "type": "Free",
+        "suffix": "flamon"
+    },
+    {
+        "name": "Gotsumon",
+        "sprite_folder": "spr_mon_gottsu",
+        "type": "Data",
+        "suffix": "gottsu"
+    },
+    {
+        "name": "Bearmon",
+        "sprite_folder": "spr_mon_bearmon",
+        "type": "Vaccine",
+        "suffix": "bearmon"
+    },
+    {
+        "name": "Ranamon",
+        "sprite_folder": "spr_mon_ranamon",
+        "type": "Free",
+        "suffix": "ranamon"
+    },
+    {
+        "name": "Wormmon",
+        "sprite_folder": "spr_mon_worm",
+        "type": "Free",
+        "suffix": "worm"
+    },
+    {
+        "name": "Impmon",
+        "sprite_folder": "spr_mon_imp",
+        "type": "Virus",
+        "suffix": "imp"
+    },
+    {
+        "name": "Monodramon",
+        "sprite_folder": "spr_mon_monodra",
+        "type": "Vaccine",
+        "suffix": "monodra"
+    },
+    {
+        "name": "V-mon",
+        "sprite_folder": "spr_mon_V",
+        "type": "Free",
+        "suffix": "V"
+    },
+    {
+        "name": "Renamon",
+        "sprite_folder": "spr_mon_renamon",
+        "type": "Data",
+        "suffix": "renamon"
+    },
+    {
+        "name": "Terriermon",
+        "sprite_folder": "spr_mon_terrier",
+        "type": "Vaccine",
+        "suffix": "terrier"
+    },
+    {
+        "name": "Fairymon",
+        "sprite_folder": "spr_mon_fairy",
+        "type": "Free",
+        "suffix": "fairy"
+    },
+    {
+        "name": "Guilmon",
+        "sprite_folder": "spr_mon_guil",
+        "type": "Virus",
+        "suffix": "guil"
+    },
+    {
+        "name": "Koemon",
+        "sprite_folder": "spr_mon_koe",
+        "type": "Virus",
+        "suffix": "koe"
+    },
+    {
+        "name": "Agnimon",
+        "sprite_folder": "spr_mon_agni",
+        "type": "Free",
+        "suffix": "agni"
+    },
+    {
+        "name": "Blitzmon",
+        "sprite_folder": "spr_mon_blitzmon",
+        "type": "Free",
+        "suffix": "blitzmon"
+    },
+    {
+        "name": "Chackmon",
+        "sprite_folder": "spr_mon_chakm",
+        "type": "Free",
+        "suffix": "chakm"
+    },
+    {
+        "name": "Wolfmon",
+        "sprite_folder": "spr_mon_wolf",
+        "type": "Free",
+        "suffix": "wolf"
+    },
+    {
+        "name": "Lucemon (Child)",
+        "sprite_folder": "spr_mon_luce",
+        "type": "Free",
+        "suffix": "luce"
+    },
+    {
+        "name": "Dobermon",
+        "sprite_folder": "spr_mon_dober",
+        "type": "Vaccine",
+        "suffix": "dober"
+    },
+    {
+        "name": "Fla Wizarmon",
+        "sprite_folder": "spr_mon_flarewizar",
+        "type": "Virus",
+        "suffix": "flarewizar"
+    },
+    {
+        "name": "Blimpmon",
+        "sprite_folder": "spr_mon_blimp",
+        "type": "Data",
+        "suffix": "blimp"
+    },
+    {
+        "name": "Fangmon",
+        "sprite_folder": "spr_mon_fangmon",
+        "type": "Data",
+        "suffix": "fangmon"
+    },
+    {
+        "name": "Wizarmon",
+        "sprite_folder": "spr_mon_wizard",
+        "type": "Data",
+        "suffix": "wizard"
+    },
+    {
+        "name": "Darcmon",
+        "sprite_folder": "spr_mon_darc",
+        "type": "Vaccine",
+        "suffix": "darc"
+    },
+    {
+        "name": "Goatmon",
+        "sprite_folder": "spr_mon_goat",
+        "type": "Free",
+        "suffix": "goat"
+    },
+    {
+        "name": "Arkadimon Adult",
+        "sprite_folder": "spr_mon_arcadiaA",
+        "type": "Data",
+        "suffix": "arcadiaA"
+    },
+    {
+        "name": "Lynxmon",
+        "sprite_folder": "spr_mon_lynx",
+        "type": "Free",
+        "suffix": "lynx"
+    },
+    {
+        "name": "Siesamon",
+        "sprite_folder": "spr_mon_siesa",
+        "type": "Vaccine",
+        "suffix": "siesa"
+    },
+    {
+        "name": "Mikemon",
+        "sprite_folder": "spr_mon_mike",
+        "type": "Data",
+        "suffix": "mike"
+    },
+    {
+        "name": "Thunderbirmon",
+        "sprite_folder": "spr_mon_thunderbir",
+        "type": "Data",
+        "suffix": "thunderbir"
+    },
+    {
+        "name": "Gryzmon",
+        "sprite_folder": "spr_mon_grizz",
+        "type": "Vaccine",
+        "suffix": "grizz"
+    },
+    {
+        "name": "Stingmon",
+        "sprite_folder": "spr_mon_sting",
+        "type": "Free",
+        "suffix": "sting"
+    },
+    {
+        "name": "Growmon",
+        "sprite_folder": "spr_mon_grow",
+        "type": "Virus",
+        "suffix": "grow"
+    },
+    {
+        "name": "Kyubimon",
+        "sprite_folder": "spr_mon_kyubi",
+        "type": "Data",
+        "suffix": "kyubi"
+    },
+    {
+        "name": "Makuramon",
+        "sprite_folder": "spr_mon_makura",
+        "type": "Free",
+        "suffix": "makura"
+    },
+    {
+        "name": "XV-mon",
+        "sprite_folder": "spr_mon_xv",
+        "type": "Free",
+        "suffix": "xv"
+    },
+    {
+        "name": "Strikedramon",
+        "sprite_folder": "spr_mon_strikedra",
+        "type": "Vaccine",
+        "suffix": "strikedra"
+    },
+    {
+        "name": "Salamandamon",
+        "sprite_folder": "spr_mon_salamande",
+        "type": "Virus",
+        "suffix": "salamande"
+    },
+    {
+        "name": "Tailmon",
+        "sprite_folder": "spr_mon_tail",
+        "type": "Vaccine",
+        "suffix": "tail"
+    },
+    {
+        "name": "Garummon",
+        "sprite_folder": "spr_mon_garum",
+        "type": "Free",
+        "suffix": "garum"
+    },
+    {
+        "name": "V-dramon",
+        "sprite_folder": "spr_mon_Vdra",
+        "type": "Vaccine",
+        "suffix": "Vdra"
+    },
+    {
+        "name": "Galgomon",
+        "sprite_folder": "spr_mon_galgo",
+        "type": "Vaccine",
+        "suffix": "galgo"
+    },
+    {
+        "name": "Shutumon",
+        "sprite_folder": "spr_mon_shutum",
+        "type": "Free",
+        "suffix": "shutum"
+    },
+    {
+        "name": "Grottemon",
+        "sprite_folder": "spr_mon_grotto",
+        "type": "Free",
+        "suffix": "grotto"
+    },
+    {
+        "name": "Blizzarmon",
+        "sprite_folder": "spr_mon_blizzaramon",
+        "type": "Free",
+        "suffix": "blizzaramon"
+    },
+    {
+        "name": "Vritramon",
+        "sprite_folder": "spr_mon_vritra",
+        "type": "Free",
+        "suffix": "vritra"
+    },
+    {
+        "name": "Bastemon",
+        "sprite_folder": "spr_mon_baste",
+        "type": "Virus",
+        "suffix": "baste"
+    },
+    {
+        "name": "Betsumon",
+        "sprite_folder": "spr_mon_betsu",
+        "type": "Virus",
+        "suffix": "betsu"
+    },
+    {
+        "name": "Mummymon",
+        "sprite_folder": "spr_mon_mummy",
+        "type": "Virus",
+        "suffix": "mummy"
+    },
+    {
+        "name": "Archnemon",
+        "sprite_folder": "spr_mon_archne",
+        "type": "Virus",
+        "suffix": "archne"
+    },
+    {
+        "name": "Asuramon",
+        "sprite_folder": "spr_mon_asura",
+        "type": "Vaccine",
+        "suffix": "asura"
+    },
+    {
+        "name": "Cyberdramon",
+        "sprite_folder": "spr_mon_cyberdra",
+        "type": "Vaccine",
+        "suffix": "cyberdra"
+    },
+    {
+        "name": "Majiramon",
+        "sprite_folder": "spr_mon_majira",
+        "type": "Data",
+        "suffix": "majira"
+    },
+    {
+        "name": "Okuwamon",
+        "sprite_folder": "spr_mon_okuwa",
+        "type": "Virus",
+        "suffix": "okuwa"
+    },
+    {
+        "name": "Chimairamon",
+        "sprite_folder": "spr_mon_chimaira",
+        "type": "Data",
+        "suffix": "chimaira"
+    },
+    {
+        "name": "Andiramon (Deva)",
+        "sprite_folder": "spr_mon_andiradeva",
+        "type": "Data",
+        "suffix": "andiradeva"
+    },
+    {
+        "name": "Hippogriffomon",
+        "sprite_folder": "spr_mon_hippogriffo",
+        "type": "Data",
+        "suffix": "hippogriffo"
+    },
+    {
+        "name": "Daipenmon",
+        "sprite_folder": "spr_mon_daipen",
+        "type": "Free",
+        "suffix": "daipen"
+    },
+    {
+        "name": "Silphymon",
+        "sprite_folder": "spr_mon_silphy",
+        "type": "Free",
+        "suffix": "silphy"
+    },
+    {
+        "name": "Mihiramon",
+        "sprite_folder": "spr_mon_mihira",
+        "type": "Data",
+        "suffix": "mihira"
+    },
+    {
+        "name": "Cerberumon",
+        "sprite_folder": "spr_mon_cerberu",
+        "type": "Vaccine",
+        "suffix": "cerberu"
+    },
+    {
+        "name": "Lilimon",
+        "sprite_folder": "spr_mon_lily",
+        "type": "Data",
+        "suffix": "lily"
+    },
+    {
+        "name": "Rapidmon",
+        "sprite_folder": "spr_mon_rapid",
+        "type": "Vaccine",
+        "suffix": "rapid"
+    },
+    {
+        "name": "Calamaramon",
+        "sprite_folder": "spr_mon_calamara",
+        "type": "Free",
+        "suffix": "calamara"
+    },
+    {
+        "name": "Jewelbeemon",
+        "sprite_folder": "spr_mon_jewelbee",
+        "type": "Vaccine",
+        "suffix": "jewelbee"
+    },
+    {
+        "name": "Jet Silphymon",
+        "sprite_folder": "spr_mon_jetsilphy",
+        "type": "Free",
+        "suffix": "jetsilphy"
+    },
+    {
+        "name": "Caturamon",
+        "sprite_folder": "spr_mon_chatsura",
+        "type": "Data",
+        "suffix": "chatsura"
+    },
+    {
+        "name": "Gigasmon",
+        "sprite_folder": "spr_mon_gigas",
+        "type": "Free",
+        "suffix": "gigas"
+    },
+    {
+        "name": "Mephismon",
+        "sprite_folder": "spr_mon_mephis",
+        "type": "Virus",
+        "suffix": "mephis"
+    },
+    {
+        "name": "Lady Devimon",
+        "sprite_folder": "spr_mon_ladydevi",
+        "type": "Virus",
+        "suffix": "ladydevi"
+    },
+    {
+        "name": "Dagomon",
+        "sprite_folder": "spr_mon_dago",
+        "type": "Virus",
+        "suffix": "dago"
+    },
+    {
+        "name": "Pajiramon",
+        "sprite_folder": "spr_mon_pajira",
+        "type": "Virus",
+        "suffix": "pajira"
+    },
+    {
+        "name": "Angewomon",
+        "sprite_folder": "spr_mon_angewo",
+        "type": "Vaccine",
+        "suffix": "angewo"
+    },
+    {
+        "name": "Megalo Growmon",
+        "sprite_folder": "spr_mon_megalogrow",
+        "type": "Virus",
+        "suffix": "megalogrow"
+    },
+    {
+        "name": "Taomon",
+        "sprite_folder": "spr_mon_tao",
+        "type": "Data",
+        "suffix": "tao"
+    },
+    {
+        "name": "Volcamon",
+        "sprite_folder": "spr_mon_volca",
+        "type": "Data",
+        "suffix": "volca"
+    },
+    {
+        "name": "Skull Satamon",
+        "sprite_folder": "spr_mon_skullsata",
+        "type": "Virus",
+        "suffix": "skullsata"
+    },
+    {
+        "name": "Phelesmon",
+        "sprite_folder": "spr_mon_pheles",
+        "type": "Virus",
+        "suffix": "pheles"
+    },
+    {
+        "name": "Zudomon",
+        "sprite_folder": "spr_mon_zudo",
+        "type": "Vaccine",
+        "suffix": "zudo"
+    },
+    {
+        "name": "Garudamon",
+        "sprite_folder": "spr_mon_garuda",
+        "type": "Vaccine",
+        "suffix": "garuda"
+    },
+    {
+        "name": "Sandiramon",
+        "sprite_folder": "spr_mon_sandira",
+        "type": "Virus",
+        "suffix": "sandira"
+    },
+    {
+        "name": "Mercuremon",
+        "sprite_folder": "spr_mon_mercure",
+        "type": "Free",
+        "suffix": "mercure"
+    },
+    {
+        "name": "Parrotmon",
+        "sprite_folder": "spr_mon_parrot",
+        "type": "Vaccine",
+        "suffix": "parrot"
+    },
+    {
+        "name": "Vajramon",
+        "sprite_folder": "spr_mon_vajiram",
+        "type": "Vaccine",
+        "suffix": "vajiram"
+    },
+    {
+        "name": "Beowolfmon",
+        "sprite_folder": "spr_mon_beowolf",
+        "type": "Free",
+        "suffix": "beowolf"
+    },
+    {
+        "name": "Sinduramon",
+        "sprite_folder": "spr_mon_shindura",
+        "type": "Data",
+        "suffix": "shindura"
+    },
+    {
+        "name": "Aero V-dramon",
+        "sprite_folder": "spr_mon_aeorvdra",
+        "type": "Vaccine",
+        "suffix": "aeorvdra"
+    },
+    {
+        "name": "Petaldramon",
+        "sprite_folder": "spr_mon_petaldra",
+        "type": "Free",
+        "suffix": "petaldra"
+    },
+    {
+        "name": "Vikaralamon",
+        "sprite_folder": "spr_mon_vikara",
+        "type": "Vaccine",
+        "suffix": "vikara"
+    },
+    {
+        "name": "Kumbhiramon",
+        "sprite_folder": "spr_mon_kunbira",
+        "type": "Vaccine",
+        "suffix": "kunbira"
+    },
+    {
+        "name": "Arkadimon Perfect",
+        "sprite_folder": "spr_mon_arcadiaP",
+        "type": "Free",
+        "suffix": "arcadiaP"
+    },
+    {
+        "name": "Paildramon",
+        "sprite_folder": "spr_mon_paildra",
+        "type": "Free",
+        "suffix": "paildra"
+    },
+    {
+        "name": "Vamdemon",
+        "sprite_folder": "spr_mon_vamde",
+        "type": "Virus",
+        "suffix": "vamde"
+    },
+    {
+        "name": "Holy Angemon",
+        "sprite_folder": "spr_mon_holyange",
+        "type": "Vaccine",
+        "suffix": "holyange"
+    },
+    {
+        "name": "Indramon",
+        "sprite_folder": "spr_mon_indara",
+        "type": "Virus",
+        "suffix": "indara"
+    },
+    {
+        "name": "Sephirothmon",
+        "sprite_folder": "spr_mon_sefirot",
+        "type": "Free",
+        "suffix": "sefirot"
+    },
+    {
+        "name": "Aldamon",
+        "sprite_folder": "spr_mon_alda",
+        "type": "Free",
+        "suffix": "alda"
+    },
+    {
+        "name": "Lowemon",
+        "sprite_folder": "spr_mon_lowe",
+        "type": "Free",
+        "suffix": "lowe"
+    },
+    {
+        "name": "Bolgmon",
+        "sprite_folder": "spr_mon_bolg",
+        "type": "Free",
+        "suffix": "bolg"
+    },
+    {
+        "name": "Ornismon",
+        "sprite_folder": "spr_mon_ornis",
+        "type": "Virus",
+        "suffix": "ornis"
+    },
+    {
+        "name": "Pharaohmon",
+        "sprite_folder": "spr_mon_pharoh",
+        "type": "Virus",
+        "suffix": "pharoh"
+    },
+    {
+        "name": "Baihumon",
+        "sprite_folder": "spr_mon_baihu",
+        "type": "Data",
+        "suffix": "baihu"
+    },
+    {
+        "name": "Marine Angemon",
+        "sprite_folder": "spr_mon_marinange",
+        "type": "Vaccine",
+        "suffix": "marinange"
+    },
+    {
+        "name": "Rosemon",
+        "sprite_folder": "spr_mon_rose",
+        "type": "Data",
+        "suffix": "rose"
+    },
+    {
+        "name": "Zhuqiaomon",
+        "sprite_folder": "spr_mon_zhuqiao",
+        "type": "Virus",
+        "suffix": "zhuqiao"
+    },
+    {
+        "name": "Gran Kuwagamon",
+        "sprite_folder": "spr_mon_grankuwaga",
+        "type": "Vaccine",
+        "suffix": "grankuwaga"
+    },
+    {
+        "name": "Justimon",
+        "sprite_folder": "spr_mon_justi",
+        "type": "Vaccine",
+        "suffix": "justi"
+    },
+    {
+        "name": "Metal Seadramon",
+        "sprite_folder": "spr_mon_metalseadra",
+        "type": "Data",
+        "suffix": "metalseadra"
+    },
+    {
+        "name": "Holydramon",
+        "sprite_folder": "spr_mon_holydra",
+        "type": "Vaccine",
+        "suffix": "holydra"
+    },
+    {
+        "name": "Megidramon",
+        "sprite_folder": "spr_mon_megidra",
+        "type": "Virus",
+        "suffix": "megidra"
+    },
+    {
+        "name": "Saber Leomon",
+        "sprite_folder": "spr_mon_saberleo",
+        "type": "Data",
+        "suffix": "saberleo"
+    },
+    {
+        "name": "Anubimon",
+        "sprite_folder": "spr_mon_anubi",
+        "type": "Vaccine",
+        "suffix": "anubi"
+    },
+    {
+        "name": "Prince Mamemon",
+        "sprite_folder": "spr_mon_princemame",
+        "type": "Data",
+        "suffix": "princemame"
+    },
+    {
+        "name": "Cherubimon (Virtue)",
+        "sprite_folder": "spr_mon_cherubi",
+        "type": "Vaccine",
+        "suffix": "cherubi"
+    },
+    {
+        "name": "Gulfmon",
+        "sprite_folder": "spr_mon_gulf",
+        "type": "Virus",
+        "suffix": "gulf"
+    },
+    {
+        "name": "Ancient Mermaimon",
+        "sprite_folder": "spr_mon_ancientmermai",
+        "type": "Data",
+        "suffix": "ancientmermai"
+    },
+    {
+        "name": "Herakle Kabuterimon",
+        "sprite_folder": "spr_mon_heraclekabuteri",
+        "type": "Vaccine",
+        "suffix": "heraclekabuteri"
+    },
+    {
+        "name": "Kaiser Greymon",
+        "sprite_folder": "spr_mon_kaisergrey",
+        "type": "Free",
+        "suffix": "kaisergrey"
+    },
+    {
+        "name": "Ancient Beatmon",
+        "sprite_folder": "spr_mon_ancientbeat",
+        "type": "Vaccine",
+        "suffix": "ancientbeat"
+    },
+    {
+        "name": "Imperialdramon: Dragon Mode",
+        "sprite_folder": "spr_mon_imperialdradm",
+        "type": "Free",
+        "suffix": "imperialdradm"
+    },
+    {
+        "name": "Sakuyamon",
+        "sprite_folder": "spr_mon_sakuya",
+        "type": "Data",
+        "suffix": "sakuya"
+    },
+    {
+        "name": "Arkadimon Ultimate",
+        "sprite_folder": "spr_mon_arkadimega",
+        "type": "Virus",
+        "suffix": "arkadimega"
+    },
+    {
+        "name": "Magna Garurumon",
+        "sprite_folder": "spr_mon_magnagarurun",
+        "type": "Free",
+        "suffix": "magnagarurun"
+    },
+    {
+        "name": "Rhino Kabuterimon",
+        "sprite_folder": "spr_mon_rhinokabu",
+        "type": "Free",
+        "suffix": "rhinokabu"
+    },
+    {
+        "name": "Saint Galgomon",
+        "sprite_folder": "spr_mon_megalogargo",
+        "type": "Vaccine",
+        "suffix": "megalogargo"
+    },
+    {
+        "name": "Valkyrimon",
+        "sprite_folder": "spr_mon_valkyrie",
+        "type": "Free",
+        "suffix": "valkyrie"
+    },
+    {
+        "name": "Ancient Troiamon",
+        "sprite_folder": "spr_mon_ancienttroia",
+        "type": "Data",
+        "suffix": "ancienttroia"
+    },
+    {
+        "name": "Ofanimon",
+        "sprite_folder": "spr_mon_ofani",
+        "type": "Vaccine",
+        "suffix": "ofani"
+    },
+    {
+        "name": "Xuanwumon",
+        "sprite_folder": "spr_mon_xuanwu",
+        "type": "Vaccine",
+        "suffix": "xuanwu"
+    },
+    {
+        "name": "Beelzebumon",
+        "sprite_folder": "spr_mon_beelzebu",
+        "type": "Virus",
+        "suffix": "beelzebu"
+    },
+    {
+        "name": "Seraphimon",
+        "sprite_folder": "spr_mon_seraphi",
+        "type": "Vaccine",
+        "suffix": "seraphi"
+    },
+    {
+        "name": "Venom Vamdemon",
+        "sprite_folder": "spr_mon_venomVamde",
+        "type": "Virus",
+        "suffix": "venomVamde"
+    },
+    {
+        "name": "Ancient Irismon",
+        "sprite_folder": "spr_mon_ancientiris",
+        "type": "Vaccine",
+        "suffix": "ancientiris"
+    },
+    {
+        "name": "Dukemon",
+        "sprite_folder": "spr_mon_duke",
+        "type": "Virus",
+        "suffix": "duke"
+    },
+    {
+        "name": "Magnamon",
+        "sprite_folder": "spr_mon_magna",
+        "type": "Vaccine",
+        "suffix": "magna"
+    },
+    {
+        "name": "Murmuxmon",
+        "sprite_folder": "spr_mon_murmux",
+        "type": "Virus",
+        "suffix": "murmux"
+    },
+    {
+        "name": "Slash Angemon",
+        "sprite_folder": "spr_mon_slashange",
+        "type": "Vaccine",
+        "suffix": "slashange"
+    },
+    {
+        "name": "Ancient Megatheriumon",
+        "sprite_folder": "spr_mon_ancientmegatheriu",
+        "type": "Data",
+        "suffix": "ancientmegatheriu"
+    },
+    {
+        "name": "Ancient Volcamon",
+        "sprite_folder": "spr_mon_ancientvolca",
+        "type": "Virus",
+        "suffix": "ancientvolca"
+    },
+    {
+        "name": "Demon",
+        "sprite_folder": "spr_mon_de",
+        "type": "Virus",
+        "suffix": "de"
+    },
+    {
+        "name": "Goddramon",
+        "sprite_folder": "spr_mon_goddra",
+        "type": "Vaccine",
+        "suffix": "goddra"
+    },
+    {
+        "name": "Marsmon",
+        "sprite_folder": "spr_mon_mars",
+        "type": "Vaccine",
+        "suffix": "mars"
+    },
+    {
+        "name": "Ancient Wisemon",
+        "sprite_folder": "spr_mon_ancientwise",
+        "type": "Virus",
+        "suffix": "ancientwise"
+    },
+    {
+        "name": "Ancient Garurumon",
+        "sprite_folder": "spr_mon_ancientgaruru",
+        "type": "Data",
+        "suffix": "ancientgaruru"
+    },
+    {
+        "name": "Deathmon",
+        "sprite_folder": "spr_mon_death",
+        "type": "Data",
+        "suffix": "death"
+    },
+    {
+        "name": "Piemon",
+        "sprite_folder": "spr_mon_pied",
+        "type": "Virus",
+        "suffix": "pied"
+    },
+    {
+        "name": "Qinglongmon",
+        "sprite_folder": "spr_mon_qinglong",
+        "type": "Data",
+        "suffix": "qinglong"
+    },
+    {
+        "name": "Ancient Greymon",
+        "sprite_folder": "spr_mon_ancientgrey",
+        "type": "Vaccine",
+        "suffix": "ancientgrey"
+    },
+    {
+        "name": "Dynasmon",
+        "sprite_folder": "spr_mon_dynas",
+        "type": "Data",
+        "suffix": "dynas"
+    },
+    {
+        "name": "Lord Knightmon",
+        "sprite_folder": "spr_mon_lordknight",
+        "type": "Virus",
+        "suffix": "lordknight"
+    },
+    {
+        "name": "Imperialdramon: Fighter Mode",
+        "sprite_folder": "spr_mon_imperialdrafm",
+        "type": "Free",
+        "suffix": "imperialdrafm"
+    },
+    {
+        "name": "Magna Garurumon + Armor",
+        "sprite_folder": "spr_mon_magnagaruru",
+        "type": "Free",
+        "suffix": "magnagaruru"
+    },
+    {
+        "name": "Huanglongmon",
+        "sprite_folder": "spr_mon_huanglong",
+        "type": "Free",
+        "suffix": "huanglong"
+    },
+    {
+        "name": "Kaiser Greymon + Ryugonken",
+        "sprite_folder": "spr_mon_kaisergreyr",
+        "type": "Free",
+        "suffix": "kaisergreyr"
+    },
+    {
+        "name": "Armagemon",
+        "sprite_folder": "spr_mon_armage",
+        "type": "Free",
+        "suffix": "armage"
+    },
+    {
+        "name": "Diablomon",
+        "sprite_folder": "spr_mon_diablo",
+        "type": "Virus",
+        "suffix": "diablo"
+    },
+    {
+        "name": "Millenniumon",
+        "sprite_folder": "spr_mon_millenium",
+        "type": "Virus",
+        "suffix": "millenium"
+    },
+    {
+        "name": "Susanoomon",
+        "sprite_folder": "spr_mon_susanoo",
+        "type": "Free",
+        "suffix": "susanoo"
+    },
+    {
+        "name": "Susanoomon + Zero Arms: Orochi",
+        "sprite_folder": "spr_mon_susanoozao",
+        "type": "Free",
+        "suffix": "susanoozao"
+    },
+    {
+        "name": "Lucemon: Satan Mode",
+        "sprite_folder": "spr_mon_luceSM",
+        "type": "Virus",
+        "suffix": "luceSM"
+    },
+    {
+        "name": "Koromon",
+        "sprite_folder": "spr_mon_koro",
+        "type": "Free",
+        "suffix": "koro"
+    },
+    {
+        "name": "Triceramon",
+        "sprite_folder": "spr_mon_tricera",
+        "type": "Data",
+        "suffix": "tricera"
+    },
+    {
+        "name": "Bakumon",
+        "sprite_folder": "spr_mon_baku",
+        "type": "Vaccine",
+        "suffix": "baku"
+    },
+    {
+        "name": "Ganimon",
+        "sprite_folder": "spr_mon_gani",
+        "type": "Data",
+        "suffix": "gani"
+    },
+    {
+        "name": "Shakomon",
+        "sprite_folder": "spr_mon_shako",
+        "type": "Virus",
+        "suffix": "shako"
+    },
+    {
+        "name": "Hagurumon",
+        "sprite_folder": "spr_mon_haguru",
+        "type": "Virus",
+        "suffix": "haguru"
+    },
+    {
+        "name": "Candmon",
+        "sprite_folder": "spr_mon_cand",
+        "type": "Data",
+        "suffix": "cand"
+    },
+    {
+        "name": "Floramon",
+        "sprite_folder": "spr_mon_flora",
+        "type": "Data",
+        "suffix": "flora"
+    },
+    {
+        "name": "Kokuwamon",
+        "sprite_folder": "spr_mon_kokuwa",
+        "type": "Data",
+        "suffix": "kokuwa"
+    },
+    {
+        "name": "Pico Devimon",
+        "sprite_folder": "spr_mon_picodevi",
+        "type": "Virus",
+        "suffix": "picodevi"
+    },
+    {
+        "name": "Gomamon",
+        "sprite_folder": "spr_mon_goma",
+        "type": "Vaccine",
+        "suffix": "goma"
+    },
+    {
+        "name": "Toy Agumon",
+        "sprite_folder": "spr_mon_toyagu",
+        "type": "Vaccine",
+        "suffix": "toyagu"
+    },
+    {
+        "name": "Octmon",
+        "sprite_folder": "spr_mon_oct",
+        "type": "Virus",
+        "suffix": "oct"
+    },
+    {
+        "name": "Igamon",
+        "sprite_folder": "spr_mon_iga",
+        "type": "Data",
+        "suffix": "iga"
+    },
+    {
+        "name": "Woodmon",
+        "sprite_folder": "spr_mon_wood",
+        "type": "Virus",
+        "suffix": "wood"
+    },
+    {
+        "name": "Kiwimon",
+        "sprite_folder": "spr_mon_kiwi",
+        "type": "Data",
+        "suffix": "kiwi"
+    },
+    {
+        "name": "Mechanorimon",
+        "sprite_folder": "spr_mon_mechanori",
+        "type": "Virus",
+        "suffix": "mechanori"
+    },
+    {
+        "name": "Red Veggiemon",
+        "sprite_folder": "spr_mon_redVegi",
+        "type": "Virus",
+        "suffix": "redVegi"
+    },
+    {
+        "name": "Hanumon",
+        "sprite_folder": "spr_mon_hanu",
+        "type": "Vaccine",
+        "suffix": "hanu"
+    },
+    {
+        "name": "Gesomon",
+        "sprite_folder": "spr_mon_geso",
+        "type": "Virus",
+        "suffix": "geso"
+    },
+    {
+        "name": "Revolmon",
+        "sprite_folder": "spr_mon_revol",
+        "type": "Vaccine",
+        "suffix": "revol"
+    },
+    {
+        "name": "Rukamon",
+        "sprite_folder": "spr_mon_ruka",
+        "type": "Vaccine",
+        "suffix": "ruka"
+    },
+    {
+        "name": "Tankmon",
+        "sprite_folder": "spr_mon_tank",
+        "type": "Data",
+        "suffix": "tank"
+    },
+    {
+        "name": "Clockmon",
+        "sprite_folder": "spr_mon_clock",
+        "type": "Data",
+        "suffix": "clock"
+    },
+    {
+        "name": "Togemon",
+        "sprite_folder": "spr_mon_toge",
+        "type": "Data",
+        "suffix": "toge"
+    },
+    {
+        "name": "Guardromon",
+        "sprite_folder": "spr_mon_guardro",
+        "type": "Virus",
+        "suffix": "guardro"
+    },
+    {
+        "name": "Ikkakumon",
+        "sprite_folder": "spr_mon_ikaku",
+        "type": "Vaccine",
+        "suffix": "ikaku"
+    },
+    {
+        "name": "Pumpmon",
+        "sprite_folder": "spr_mon_pump",
+        "type": "Data",
+        "suffix": "pump"
+    },
+    {
+        "name": "Delumon",
+        "sprite_folder": "spr_mon_delu",
+        "type": "Data",
+        "suffix": "delu"
+    },
+    {
+        "name": "Big Mamemon",
+        "sprite_folder": "spr_mon_bigMame",
+        "type": "Data",
+        "suffix": "bigMame"
+    },
+    {
+        "name": "Mammon",
+        "sprite_folder": "spr_mon_mam",
+        "type": "Vaccine",
+        "suffix": "mam"
+    },
+    {
+        "name": "Anomalocarimon",
+        "sprite_folder": "spr_mon_anomalocari",
+        "type": "Data",
+        "suffix": "anomalocari"
+    },
+    {
+        "name": "Blossomon",
+        "sprite_folder": "spr_mon_blosso",
+        "type": "Data",
+        "suffix": "blosso"
+    },
+    {
+        "name": "Death Meramon",
+        "sprite_folder": "spr_mon_deathmera",
+        "type": "Data",
+        "suffix": "deathmera"
+    },
+    {
+        "name": "Jyagamon",
+        "sprite_folder": "spr_mon_jyaga",
+        "type": "Vaccine",
+        "suffix": "jyaga"
+    },
+    {
+        "name": "Gerbemon",
+        "sprite_folder": "spr_mon_gerbe",
+        "type": "Virus",
+        "suffix": "gerbe"
+    },
+    {
+        "name": "Jyureimon",
+        "sprite_folder": "spr_mon_jyurei",
+        "type": "Virus",
+        "suffix": "jyurei"
+    },
+    {
+        "name": "Waru Monzaemon",
+        "sprite_folder": "spr_mon_waruMonzae",
+        "type": "Virus",
+        "suffix": "waruMonzae"
+    },
+    {
+        "name": "Mega Seadramon",
+        "sprite_folder": "spr_mon_megaseadra",
+        "type": "Data",
+        "suffix": "megaseadra"
+    },
+    {
+        "name": "Fantomon",
+        "sprite_folder": "spr_mon_phanto",
+        "type": "Virus",
+        "suffix": "phanto"
+    },
+    {
+        "name": "Marine Devimon",
+        "sprite_folder": "spr_mon_marinDevi",
+        "type": "Virus",
+        "suffix": "marinDevi"
+    },
+    {
+        "name": "Knightmon",
+        "sprite_folder": "spr_mon_knight",
+        "type": "Data",
+        "suffix": "knight"
+    },
+    {
+        "name": "Boltmon",
+        "sprite_folder": "spr_mon_bolt",
+        "type": "Data",
+        "suffix": "bolt"
+    },
+    {
+        "name": "Pukumon",
+        "sprite_folder": "spr_mon_puku",
+        "type": "Virus",
+        "suffix": "puku"
+    },
+    {
+        "name": "Griffomon",
+        "sprite_folder": "spr_mon_griffo",
+        "type": "Data",
+        "suffix": "griffo"
+    },
+    {
+        "name": "Hououmon",
+        "sprite_folder": "spr_mon_houhou",
+        "type": "Vaccine",
+        "suffix": "houhou"
+    },
+    {
+        "name": "Metal Etemon",
+        "sprite_folder": "spr_mon_metalete",
+        "type": "Virus",
+        "suffix": "metalete"
+    },
+    {
+        "name": "Dokugumon",
+        "sprite_folder": "spr_mon_dokugu",
+        "type": "Virus",
+        "suffix": "dokugu"
+    },
+    {
+        "name": "Thunderballmon",
+        "sprite_folder": "spr_mon_thunderball",
+        "type": "Data",
+        "suffix": "thunderball"
+    },
+    {
+        "name": "Ebidramon",
+        "sprite_folder": "spr_mon_ebidra",
+        "type": "Data",
+        "suffix": "ebidra"
+    },
+    {
+        "name": "Hangyomon",
+        "sprite_folder": "spr_mon_hangyo",
+        "type": "Data",
+        "suffix": "hangyo"
+    },
+    {
+        "name": "Plesiomon",
+        "sprite_folder": "spr_mon_plesio",
+        "type": "Data",
+        "suffix": "plesio"
+    },
+    {
+        "name": "Lalamon",
+        "sprite_folder": "spr_mon_lala",
+        "type": "Data",
+        "suffix": "lala"
+    },
+    {
+        "name": "Phascomon",
+        "sprite_folder": "spr_mon_phasco",
+        "type": "Virus",
+        "suffix": "phasco"
+    },
+    {
+        "name": "Lopmon",
+        "sprite_folder": "spr_mon_lop",
+        "type": "Data",
+        "suffix": "lop"
+    },
+    {
+        "name": "Ludomon",
+        "sprite_folder": "spr_mon_ludo",
+        "type": "Data",
+        "suffix": "ludo"
+    },
+    {
+        "name": "Ryudamon",
+        "sprite_folder": "spr_mon_ryuda",
+        "type": "Vaccine",
+        "suffix": "ryuda"
+    },
+    {
+        "name": "DORUmon",
+        "sprite_folder": "spr_mon_doru",
+        "type": "Data",
+        "suffix": "doru"
+    },
+    {
+        "name": "Vorvomon",
+        "sprite_folder": "spr_mon_vorvo",
+        "type": "Virus",
+        "suffix": "vorvo"
+    },
+    {
+        "name": "Agumon Hakase",
+        "sprite_folder": "spr_mon_aguH",
+        "type": "Vaccine",
+        "suffix": "aguH"
+    },
+    {
+        "name": "Bushi Agumon",
+        "sprite_folder": "spr_mon_bushiAgu",
+        "type": "Vaccine",
+        "suffix": "bushiAgu"
+    },
+    {
+        "name": "Porcupamon",
+        "sprite_folder": "spr_mon_porcupa",
+        "type": "Virus",
+        "suffix": "porcupa"
+    },
+    {
+        "name": "Manbomon",
+        "sprite_folder": "spr_mon_manbo",
+        "type": "Free",
+        "suffix": "manbo"
+    },
+    {
+        "name": "Targetmon",
+        "sprite_folder": "spr_mon_target",
+        "type": "Virus",
+        "suffix": "target"
+    },
+    {
+        "name": "Troopmon",
+        "sprite_folder": "spr_mon_troop",
+        "type": "Free",
+        "suffix": "troop"
+    },
+    {
+        "name": "Sunflowmon",
+        "sprite_folder": "spr_mon_sunflow",
+        "type": "Data",
+        "suffix": "sunflow"
+    },
+    {
+        "name": "Mad Leomon",
+        "sprite_folder": "spr_mon_madLeo",
+        "type": "Free",
+        "suffix": "madLeo"
+    },
+    {
+        "name": "Lavorvomon",
+        "sprite_folder": "spr_mon_lavorvo",
+        "type": "Virus",
+        "suffix": "lavorvo"
+    },
+    {
+        "name": "Shadramon",
+        "sprite_folder": "spr_mon_shadra",
+        "type": "Free",
+        "suffix": "shadra"
+    },
+    {
+        "name": "Tia Ludomon",
+        "sprite_folder": "spr_mon_tialudo",
+        "type": "Data",
+        "suffix": "tialudo"
+    },
+    {
+        "name": "Arresterdramon",
+        "sprite_folder": "spr_mon_arresterdra",
+        "type": "Free",
+        "suffix": "arresterdra"
+    },
+    {
+        "name": "Ginryumon",
+        "sprite_folder": "spr_mon_ginryu",
+        "type": "Vaccine",
+        "suffix": "ginryu"
+    },
+    {
+        "name": "Turuiemon",
+        "sprite_folder": "spr_mon_turuie",
+        "type": "Data",
+        "suffix": "turuie"
+    },
+    {
+        "name": "Reppamon",
+        "sprite_folder": "spr_mon_reppa",
+        "type": "Vaccine",
+        "suffix": "reppa"
+    },
+    {
+        "name": "Baalmon",
+        "sprite_folder": "spr_mon_baal",
+        "type": "Free",
+        "suffix": "baal"
+    },
+    {
+        "name": "Andiramon (Virus)",
+        "sprite_folder": "spr_mon_andira",
+        "type": "Virus",
+        "suffix": "andira"
+    },
+    {
+        "name": "Lilamon",
+        "sprite_folder": "spr_mon_lila",
+        "type": "Data",
+        "suffix": "lila"
+    },
+    {
+        "name": "Astamon",
+        "sprite_folder": "spr_mon_asta",
+        "type": "Virus",
+        "suffix": "asta"
+    },
+    {
+        "name": "Lavogaritamon",
+        "sprite_folder": "spr_mon_lavogarita",
+        "type": "Virus",
+        "suffix": "lavogarita"
+    },
+    {
+        "name": "Dark Knightmon",
+        "sprite_folder": "spr_mon_darkKnight",
+        "type": "Free",
+        "suffix": "darkKnight"
+    },
+    {
+        "name": "Hisyaryumon",
+        "sprite_folder": "spr_mon_hisaryu",
+        "type": "Vaccine",
+        "suffix": "hisaryu"
+    },
+    {
+        "name": "Raiji Ludomon",
+        "sprite_folder": "spr_mon_raijiludo",
+        "type": "Data",
+        "suffix": "raijiludo"
+    },
+    {
+        "name": "Meicrackmon: Vicious Mode",
+        "sprite_folder": "spr_mon_meicrackVM",
+        "type": "Free",
+        "suffix": "meicrackVM"
+    },
+    {
+        "name": "Rize Greymon",
+        "sprite_folder": "spr_mon_rizegrey",
+        "type": "Vaccine",
+        "suffix": "rizegrey"
+    },
+    {
+        "name": "Lotusmon",
+        "sprite_folder": "spr_mon_lotus",
+        "type": "Data",
+        "suffix": "lotus"
+    },
+    {
+        "name": "Bryweludramon",
+        "sprite_folder": "spr_mon_bryweludra",
+        "type": "Data",
+        "suffix": "bryweludra"
+    },
+    {
+        "name": "Ouryumon",
+        "sprite_folder": "spr_mon_oryu",
+        "type": "Vaccine",
+        "suffix": "oryu"
+    },
+    {
+        "name": "Bancho Leomon",
+        "sprite_folder": "spr_mon_bancholeo",
+        "type": "Vaccine",
+        "suffix": "bancholeo"
+    },
+    {
+        "name": "Darkdramon",
+        "sprite_folder": "spr_mon_darkdra",
+        "type": "Virus",
+        "suffix": "darkdra"
+    },
+    {
+        "name": "Raguelmon",
+        "sprite_folder": "spr_mon_raguel",
+        "type": "Free",
+        "suffix": "raguel"
+    },
+    {
+        "name": "Dorugoramon",
+        "sprite_folder": "spr_mon_dorugora",
+        "type": "Data",
+        "suffix": "dorugora"
+    },
+    {
+        "name": "Duftmon",
+        "sprite_folder": "spr_mon_duft",
+        "type": "Data",
+        "suffix": "duft"
+    },
+    {
+        "name": "Volcanicdramon",
+        "sprite_folder": "spr_mon_volcanicdra",
+        "type": "Virus",
+        "suffix": "volcanicdra"
+    },
+    {
+        "name": "Ulforce V-dramon",
+        "sprite_folder": "spr_mon_ulforcevdra",
+        "type": "Vaccine",
+        "suffix": "ulforcevdra"
+    },
+    {
+        "name": "Mastemon",
+        "sprite_folder": "spr_mon_maste",
+        "type": "Vaccine",
+        "suffix": "maste"
+    },
+    {
+        "name": "Ordinemon",
+        "sprite_folder": "spr_mon_ordine",
+        "type": "Free",
+        "suffix": "ordine"
+    },
+    {
+        "name": "Voltobautamon",
+        "sprite_folder": "spr_mon_voltobauta",
+        "type": "Virus",
+        "suffix": "voltobauta"
+    },
+    {
+        "name": "Beelzebumon: Blast Mode",
+        "sprite_folder": "spr_mon_beelzebuB",
+        "type": "Virus",
+        "suffix": "beelzebuB"
+    },
+    {
+        "name": "Chaosmon",
+        "sprite_folder": "spr_mon_chaos",
+        "type": "Vaccine",
+        "suffix": "chaos"
+    },
+    {
+        "name": "Belphemon: Rage Mode",
+        "sprite_folder": "spr_mon_belpheRM",
+        "type": "Virus",
+        "suffix": "belpheRM"
+    },
+    {
+        "name": "Ogudomon",
+        "sprite_folder": "spr_mon_ogudo",
+        "type": "Virus",
+        "suffix": "ogudo"
+    },
+    {
+        "name": "Ragna Lordmon",
+        "sprite_folder": "spr_mon_ragnalord",
+        "type": "Virus",
+        "suffix": "ragnalord"
+    },
+    {
+        "name": "Alphamon: Ouryuken",
+        "sprite_folder": "spr_mon_alphaO",
+        "type": "Vaccine",
+        "suffix": "alphaO"
+    },
+    {
+        "name": "Imperialdramon: Paladin Mode",
+        "sprite_folder": "spr_mon_imperialdrapm",
+        "type": "Free",
+        "suffix": "imperialdrapm"
+    },
+    {
+        "name": "Hawkmon",
+        "sprite_folder": "spr_mon_hawk",
+        "type": "Free",
+        "suffix": "hawk"
+    },
+    {
+        "name": "Witchmon",
+        "sprite_folder": "spr_mon_witch",
+        "type": "Data",
+        "suffix": "witch"
+    },
+    {
+        "name": "Aquilamon",
+        "sprite_folder": "spr_mon_aquila",
+        "type": "Free",
+        "suffix": "aquila"
+    },
+    {
+        "name": "Black Tailmon",
+        "sprite_folder": "spr_mon_tailB",
+        "type": "Virus",
+        "suffix": "tailB"
+    },
+    {
+        "name": "Grap Leomon",
+        "sprite_folder": "spr_mon_grapleo",
+        "type": "Vaccine",
+        "suffix": "grapleo"
+    },
+    {
+        "name": "Garudamon X",
+        "sprite_folder": "spr_mon_garudax",
+        "type": "Vaccine",
+        "suffix": "garudax"
+    },
+    {
+        "name": "Neo Devimon",
+        "sprite_folder": "spr_mon_neodevi",
+        "type": "Virus",
+        "suffix": "neodevi"
+    },
+    {
+        "name": "Chaosdramon",
+        "sprite_folder": "spr_mon_chaosdra",
+        "type": "Virus",
+        "suffix": "chaosdra"
+    },
+    {
+        "name": "Lilithmon",
+        "sprite_folder": "spr_mon_lilith",
+        "type": "Virus",
+        "suffix": "lilith"
+    },
+    {
+        "name": "D-Mon",
+        "sprite_folder": "spr_mon_dmon",
+        "type": "Vaccine",
+        "suffix": "dmon"
+    },
+    {
+        "name": "HiAndromon",
+        "sprite_folder": "spr_mon_hiandro",
+        "type": "Free",
+        "suffix": "hiandro"
+    },
+    {
+        "name": "Goddramon X",
+        "sprite_folder": "spr_mon_goddra_x",
+        "type": "Vaccine",
+        "suffix": "goddra_x"
+    },
+    {
+        "name": "RustTyrannomon",
+        "sprite_folder": "spr_mon_rustyboss",
+        "type": "Virus",
+        "suffix": "rustyboss"
+    },
+    {
+        "name": "BlackGarurumon",
+        "sprite_folder": "spr_mon_garurublk",
+        "type": "Virus",
+        "suffix": "garurublk"
+    },
+    {
+        "name": "Ebemon X",
+        "sprite_folder": "spr_mon_ebe_x",
+        "type": "Virus",
+        "suffix": "ebe_x"
+    },
+    {
+        "name": "BushiAgumon",
+        "sprite_folder": "spr_mon_bushiAgu",
+        "type": "Vaccine",
+        "suffix": "bushiAgu"
+    },
+    {
+        "name": "Gaioumon",
+        "sprite_folder": "spr_mon_gaiou",
+        "type": "Virus",
+        "suffix": "gaiou"
+    },
+    {
+        "name": "MirageGaogamon",
+        "sprite_folder": "spr_mon_miragegaoga",
+        "type": "Data",
+        "suffix": "miragegaoga"
+    },
+    {
+        "name": "Belphemon",
+        "sprite_folder": "spr_mon_belpheRM",
+        "type": "Free",
+        "suffix": "belpheRM"
+    },
+    {
+        "name": "Orochimon",
+        "sprite_folder": "spr_mon_orochiboss",
+        "type": "Virus",
+        "suffix": "orochiboss"
+    },
+    {
+        "name": "BlackWereGarurumon",
+        "sprite_folder": "spr_mon_weregaruruB",
+        "type": "Virus",
+        "suffix": "weregaruruB"
+    },
+    {
+        "name": "Corrupted Belial Vamdemon",
+        "sprite_folder": "spr_mon_belialboss",
+        "type": "Free",
+        "suffix": "belialboss"
+    },
+    {
+        "name": "Heavyliomon",
+        "sprite_folder": "spr_mon_heavyleo",
+        "type": "Vaccine",
+        "suffix": "heavyleo"
+    },
+    {
+        "name": "Gundramon",
+        "sprite_folder": "spr_mon_gundraboss",
+        "type": "Virus",
+        "suffix": "gundraboss"
+    },
+    {
+        "name": "Dinotigermon",
+        "sprite_folder": "spr_mon_dinotigerboss",
+        "type": "Data",
+        "suffix": "dinotigerboss"
+    },
+    {
+        "name": "GoldGoburimon",
+        "sprite_folder": "spr_mon_goburigold",
+        "type": "Virus",
+        "suffix": "goburigold"
+    },
+    {
+        "name": "Jesmon GX",
+        "sprite_folder": "spr_mon_jes_gx",
+        "type": "Free",
+        "suffix": "jes_gx"
+    },
+    {
+        "name": "SkullMammon",
+        "sprite_folder": "spr_mon_skullmam",
+        "type": "Free",
+        "suffix": "skullmam"
+    },
+    {
+        "name": "Panjyamon",
+        "sprite_folder": "spr_mon_panjya",
+        "type": "Free",
+        "suffix": "panjya"
+    },
+    {
+        "name": "Machmon",
+        "sprite_folder": "spr_mon_mach",
+        "type": "Free",
+        "suffix": "mach"
+    },
+    {
+        "name": "Loader Liomon",
+        "sprite_folder": "spr_mon_loaderlio",
+        "type": "Free",
+        "suffix": "loaderlio"
+    },
+    {
+        "name": "Gankoomon X",
+        "sprite_folder": "spr_mon_gankoo_x",
+        "type": "Data",
+        "suffix": "gankoo_x"
+    },
+    {
+        "name": "Barbamon",
+        "sprite_folder": "spr_mon_boss_barba",
+        "type": "Virus",
+        "suffix": "boss_barba"
+    },
+    {
+        "name": "Sleipmon",
+        "sprite_folder": "spr_mon_sleipboss",
+        "type": "Vaccine",
+        "suffix": "sleipboss"
+    },
+    {
+        "name": "Swimmon",
+        "sprite_folder": "spr_mon_swim",
+        "type": "Vaccine",
+        "suffix": "swim"
+    },
+    {
+        "name": "Kokabuterimon",
+        "sprite_folder": "spr_mon_kokabuteri",
+        "type": "Virus",
+        "suffix": "kokabuteri"
+    },
+    {
+        "name": "Falcomon",
+        "sprite_folder": "spr_mon_falco",
+        "type": "Vaccine",
+        "suffix": "falco"
+    },
+    {
+        "name": "Commandramon",
+        "sprite_folder": "spr_mon_commandra",
+        "type": "Virus",
+        "suffix": "commandra"
+    },
+    {
+        "name": "Liollmon",
+        "sprite_folder": "spr_mon_lioll",
+        "type": "Vaccine",
+        "suffix": "lioll"
+    },
+    {
+        "name": "Dracmon",
+        "sprite_folder": "spr_mon_drac",
+        "type": "Virus",
+        "suffix": "drac"
+    },
+    {
+        "name": "Kudamon",
+        "sprite_folder": "spr_mon_kuda",
+        "type": "Vaccine",
+        "suffix": "kuda"
+    },
+    {
+        "name": "Flare Lizamon",
+        "sprite_folder": "spr_mon_flarelizar",
+        "type": "Data",
+        "suffix": "flarelizar"
+    },
+    {
+        "name": "Seahomon",
+        "sprite_folder": "spr_mon_seaho",
+        "type": "Free",
+        "suffix": "seaho"
+    },
+    {
+        "name": "Nohemon",
+        "sprite_folder": "spr_mon_nohe",
+        "type": "Free",
+        "suffix": "nohe"
+    },
+    {
+        "name": "Submarimon",
+        "sprite_folder": "spr_mon_submari",
+        "type": "Free",
+        "suffix": "submari"
+    },
+    {
+        "name": "Diatrymon",
+        "sprite_folder": "spr_mon_diatry",
+        "type": "Vaccine",
+        "suffix": "diatry"
+    },
+    {
+        "name": "Liamon",
+        "sprite_folder": "spr_mon_lia",
+        "type": "Vaccine",
+        "suffix": "lia"
+    },
+    {
+        "name": "Blade Kuwagamon",
+        "sprite_folder": "spr_mon_bladekuwaga",
+        "type": "Virus",
+        "suffix": "bladekuwaga"
+    },
+    {
+        "name": "Sealsdramon",
+        "sprite_folder": "spr_mon_sealsdra",
+        "type": "Virus",
+        "suffix": "sealsdra"
+    },
+    {
+        "name": "Snimon",
+        "sprite_folder": "spr_mon_sni",
+        "type": "Vaccine",
+        "suffix": "sni"
+    },
+    {
+        "name": "Pegasmon",
+        "sprite_folder": "spr_mon_pegas",
+        "type": "Free",
+        "suffix": "pegas"
+    },
+    {
+        "name": "Greymon X",
+        "sprite_folder": "spr_mon_greyx",
+        "type": "Vaccine",
+        "suffix": "greyx"
+    },
+    {
+        "name": "Tankdramon",
+        "sprite_folder": "spr_mon_tankdra",
+        "type": "Virus",
+        "suffix": "tankdra"
+    },
+    {
+        "name": "Loader Leomon",
+        "sprite_folder": "spr_mon_loaderlio",
+        "type": "Vaccine",
+        "suffix": "loaderlio"
+    },
+    {
+        "name": "Matadrmon",
+        "sprite_folder": "spr_mon_matadr",
+        "type": "Virus",
+        "suffix": "matadr"
+    },
+    {
+        "name": "Metallife Kuwagamon",
+        "sprite_folder": "spr_mon_metallifeKuwaga",
+        "type": "Virus",
+        "suffix": "metallifeKuwaga"
+    },
+    {
+        "name": "Volcdramon",
+        "sprite_folder": "spr_mon_volcdra",
+        "type": "Data",
+        "suffix": "volcdra"
+    },
+    {
+        "name": "Chirinmon",
+        "sprite_folder": "spr_mon_tyilin",
+        "type": "Vaccine",
+        "suffix": "tyilin"
+    },
+    {
+        "name": "Mercurymon",
+        "sprite_folder": "spr_mon_meruki",
+        "type": "Virus",
+        "suffix": "meruki"
+    },
+    {
+        "name": "Spinomon",
+        "sprite_folder": "spr_mon_spino",
+        "type": "Virus",
+        "suffix": "spino"
+    },
+    {
+        "name": "Grand Dracumon",
+        "sprite_folder": "spr_mon_granddracu",
+        "type": "Virus",
+        "suffix": "granddracu"
+    },
+    {
+        "name": "Neptunemon",
+        "sprite_folder": "spr_mon_neptune",
+        "type": "Vaccine",
+        "suffix": "neptune"
+    },
+    {
+        "name": "Tyrant Kabuterimon",
+        "sprite_folder": "spr_mon_tyrrantkabuteri",
+        "type": "Virus",
+        "suffix": "tyrrantkabuteri"
+    },
+    {
+        "name": "Ulforce V-dramon X: Blast Mode",
+        "sprite_folder": "spr_mon_ulforcevdrabx",
+        "type": "Vaccine",
+        "suffix": "ulforcevdrabx"
+    },
+    {
+        "name": "Ultimate Chaosmon",
+        "sprite_folder": "spr_mon_ultimatechaos",
+        "type": "Vaccine",
+        "suffix": "ultimatechaos"
+    },
+    {
+        "name": "Armadimon",
+        "sprite_folder": "spr_mon_armadi",
+        "type": "Free",
+        "suffix": "armadi"
+    },
+    {
+        "name": "Digmon",
+        "sprite_folder": "spr_mon_dig",
+        "type": "Free",
+        "suffix": "dig"
+    },
+    {
+        "name": "Holsmon",
+        "sprite_folder": "spr_mon_holse",
+        "type": "Free",
+        "suffix": "holse"
+    },
+    {
+        "name": "Fladramon",
+        "sprite_folder": "spr_mon_fladra",
+        "type": "Free",
+        "suffix": "fladra"
+    },
+    {
+        "name": "Lighdramon",
+        "sprite_folder": "spr_mon_lighdra",
+        "type": "Free",
+        "suffix": "lighdra"
+    },
+    {
+        "name": "Nefertimon",
+        "sprite_folder": "spr_mon_neferti",
+        "type": "Free",
+        "suffix": "neferti"
+    },
+    {
+        "name": "Shurimon",
+        "sprite_folder": "spr_mon_shuri",
+        "type": "Free",
+        "suffix": "shuri"
+    },
+    {
+        "name": "Ankylomon",
+        "sprite_folder": "spr_mon_ankylo",
+        "type": "Free",
+        "suffix": "ankylo"
+    },
+    {
+        "name": "Dinobeemon",
+        "sprite_folder": "spr_mon_dinobee",
+        "type": "Free",
+        "suffix": "dinobee"
+    },
+    {
+        "name": "Shakkoumon",
+        "sprite_folder": "spr_mon_shakkou",
+        "type": "Free",
+        "suffix": "shakkou"
+    },
+    {
+        "name": "Vikemon",
+        "sprite_folder": "spr_mon_vike",
+        "type": "Data",
+        "suffix": "vike"
+    },
+    {
+        "name": "Shin Monzaemon",
+        "sprite_folder": "spr_mon_shinmon",
+        "type": "Vaccine",
+        "suffix": "shinmon"
+    },
+    {
+        "name": "Ebemon",
+        "sprite_folder": "spr_mon_ebemon",
+        "type": "Virus",
+        "suffix": "ebemon"
+    },
+    {
+        "name": "Bloom Lordmon",
+        "sprite_folder": "spr_mon_bloomlord",
+        "type": "Vaccine",
+        "suffix": "bloomlord"
+    },
+    {
+        "name": "Gankoomon",
+        "sprite_folder": "spr_mon_gankoo",
+        "type": "Data",
+        "suffix": "gankoo"
+    },
+    {
+        "name": "Raidenmon",
+        "sprite_folder": "spr_mon_raiden",
+        "type": "Virus",
+        "suffix": "raiden"
+    },
+    {
+        "name": "Gokumon",
+        "sprite_folder": "spr_mon_goku",
+        "type": "Virus",
+        "suffix": "goku"
+    },
+    {
+        "name": "Jellymon",
+        "sprite_folder": "spr_mon_jelly",
+        "type": "Data",
+        "suffix": "jelly"
+    },
+    {
+        "name": "Angoramon",
+        "sprite_folder": "spr_mon_angora",
+        "type": "Vaccine",
+        "suffix": "angora"
+    },
+    {
+        "name": "Loogamon",
+        "sprite_folder": "spr_mon_looga",
+        "type": "Virus",
+        "suffix": "looga"
+    },
+    {
+        "name": "Pteromon",
+        "sprite_folder": "spr_mon_ptero",
+        "type": "Data",
+        "suffix": "ptero"
+    },
+    {
+        "name": "Gammamon",
+        "sprite_folder": "spr_mon_gamma",
+        "type": "Virus",
+        "suffix": "gamma"
+    },
+    {
+        "name": "Tesla Jellymon",
+        "sprite_folder": "spr_mon_teslajelly",
+        "type": "Data",
+        "suffix": "teslajelly"
+    },
+    {
+        "name": "Symbare Angoramon",
+        "sprite_folder": "spr_mon_symbareangora",
+        "type": "Vaccine",
+        "suffix": "symbareangora"
+    },
+    {
+        "name": "Galemon",
+        "sprite_folder": "spr_mon_gale",
+        "type": "Data",
+        "suffix": "gale"
+    },
+    {
+        "name": "Kaus Gammamon",
+        "sprite_folder": "spr_mon_kausgamma",
+        "type": "Data",
+        "suffix": "kausgamma"
+    },
+    {
+        "name": "Betel Gammamon",
+        "sprite_folder": "spr_mon_betelgamma",
+        "type": "Vaccine",
+        "suffix": "betelgamma"
+    },
+    {
+        "name": "Loogarmon",
+        "sprite_folder": "spr_mon_loogar",
+        "type": "Virus",
+        "suffix": "loogar"
+    },
+    {
+        "name": "Wezen Gammamon",
+        "sprite_folder": "spr_mon_wezengamma",
+        "type": "Data",
+        "suffix": "wezengamma"
+    },
+    {
+        "name": "Gulus Gammamon",
+        "sprite_folder": "spr_mon_gulusgamma",
+        "type": "Virus",
+        "suffix": "gulusgamma"
+    },
+    {
+        "name": "Hi-Commandramon",
+        "sprite_folder": "spr_mon_hicommandra",
+        "type": "Virus",
+        "suffix": "hicommandra"
+    },
+    {
+        "name": "Thetismon",
+        "sprite_folder": "spr_mon_thetis",
+        "type": "Data",
+        "suffix": "thetis"
+    },
+    {
+        "name": "Lamortmon",
+        "sprite_folder": "spr_mon_lamort",
+        "type": "Vaccine",
+        "suffix": "lamort"
+    },
+    {
+        "name": "Soloogarmon",
+        "sprite_folder": "spr_mon_soloogar",
+        "type": "Virus",
+        "suffix": "soloogar"
+    },
+    {
+        "name": "Cargodramon",
+        "sprite_folder": "spr_mon_cargodra",
+        "type": "Virus",
+        "suffix": "cargodra"
+    },
+    {
+        "name": "Canoweissmon",
+        "sprite_folder": "spr_mon_canoweiss",
+        "type": "Vaccine",
+        "suffix": "canoweiss"
+    },
+    {
+        "name": "Grand Galemon",
+        "sprite_folder": "spr_mon_grandgale",
+        "type": "Data",
+        "suffix": "grandgale"
+    },
+    {
+        "name": "Regulusmon",
+        "sprite_folder": "spr_mon_regulus",
+        "type": "Virus",
+        "suffix": "regulus"
+    },
+    {
+        "name": "El Doradimon",
+        "sprite_folder": "spr_mon_eldoradi",
+        "type": "Data",
+        "suffix": "eldoradi"
+    },
+    {
+        "name": "Hydramon",
+        "sprite_folder": "spr_mon_hydra",
+        "type": "Virus",
+        "suffix": "hydra"
+    },
+    {
+        "name": "Cthyllamon",
+        "sprite_folder": "spr_mon_cthylla",
+        "type": "Virus",
+        "suffix": "cthylla"
+    },
+    {
+        "name": "Jumbo Gamemon",
+        "sprite_folder": "spr_mon_jumbogame",
+        "type": "Data",
+        "suffix": "jumbogame"
+    },
+    {
+        "name": "Diarbbitmon",
+        "sprite_folder": "spr_mon_diarbbit",
+        "type": "Vaccine",
+        "suffix": "diarbbit"
+    },
+    {
+        "name": "Noble Pumpmon",
+        "sprite_folder": "spr_mon_noblepump",
+        "type": "Data",
+        "suffix": "noblepump"
+    },
+    {
+        "name": "Amphimon",
+        "sprite_folder": "spr_mon_amphi",
+        "type": "Data",
+        "suffix": "amphi"
+    },
+    {
+        "name": "Brigadramon",
+        "sprite_folder": "spr_mon_brigadra",
+        "type": "Virus",
+        "suffix": "brigadra"
+    },
+    {
+        "name": "Callismon",
+        "sprite_folder": "spr_mon_callis",
+        "type": "Virus",
+        "suffix": "callis"
+    },
+    {
+        "name": "Dominimon",
+        "sprite_folder": "spr_mon_domini",
+        "type": "Vaccine",
+        "suffix": "domini"
+    },
+    {
+        "name": "Fenriloogamon",
+        "sprite_folder": "spr_mon_fenrilooga",
+        "type": "Virus",
+        "suffix": "fenrilooga"
+    },
+    {
+        "name": "Quantumon",
+        "sprite_folder": "spr_mon_quantu",
+        "type": "Data",
+        "suffix": "quantu"
+    },
+    {
+        "name": "Zephagamon",
+        "sprite_folder": "spr_mon_zephaga",
+        "type": "Data",
+        "suffix": "zephaga"
+    },
+    {
+        "name": "Blastmon",
+        "sprite_folder": "spr_mon_blast",
+        "type": "Vaccine",
+        "suffix": "blast"
+    },
+    {
+        "name": "Siriusmon",
+        "sprite_folder": "spr_mon_sirius",
+        "type": "Vaccine",
+        "suffix": "sirius"
+    },
+    {
+        "name": "Arcturusmon",
+        "sprite_folder": "spr_mon_arcturus",
+        "type": "Virus",
+        "suffix": "arcturus"
+    },
+    {
+        "name": "Zeke Greymon",
+        "sprite_folder": "spr_mon_zekegrey",
+        "type": "Virus",
+        "suffix": "zekegrey"
+    },
+    {
+        "name": "Ragnamon",
+        "sprite_folder": "spr_mon_ragna",
+        "type": "Free",
+        "suffix": "ragna"
+    },
+    {
+        "name": "Mitamamon",
+        "sprite_folder": "spr_mon_mitama",
+        "type": "Vaccine",
+        "suffix": "mitama"
+    },
+    {
+        "name": "Cernumon",
+        "sprite_folder": "spr_mon_cernu",
+        "type": "Data",
+        "suffix": "cernu"
+    },
+    {
+        "name": "Tlalocmon",
+        "sprite_folder": "spr_mon_tlaloc",
+        "type": "Data",
+        "suffix": "tlaloc"
+    },
+    {
+        "name": "Proximamon",
+        "sprite_folder": "spr_mon_proxima",
+        "type": "Virus",
+        "suffix": "proxima"
+    },
+    {
+        "name": "Keramon",
+        "sprite_folder": "spr_mon_kera",
+        "type": "Free",
+        "suffix": "kera"
+    },
+    {
+        "name": "Evilmon",
+        "sprite_folder": "spr_mon_evil",
+        "type": "Virus",
+        "suffix": "evil"
+    },
+    {
+        "name": "Atlur Kabuterimon (Red)",
+        "sprite_folder": "spr_mon_megakabuteri_red",
+        "type": "Vaccine",
+        "suffix": "megakabuteri_red"
+    },
+    {
+        "name": "Gigadramon",
+        "sprite_folder": "spr_mon_gigadra",
+        "type": "Virus",
+        "suffix": "gigadra"
+    },
+    {
+        "name": "Infermon",
+        "sprite_folder": "spr_mon_inferm",
+        "type": "Free",
+        "suffix": "inferm"
+    },
+    {
+        "name": "Apocalymon",
+        "sprite_folder": "spr_mon_apocaly",
+        "type": "Free",
+        "suffix": "apocaly"
+    },
+    {
+        "name": "Chocomon",
+        "sprite_folder": "spr_mon_choco",
+        "type": "Free",
+        "suffix": "choco"
+    },
+    {
+        "name": "Gummymon",
+        "sprite_folder": "spr_mon_gummy",
+        "type": "Free",
+        "suffix": "gummy"
+    },
+    {
+        "name": "Tsumemon",
+        "sprite_folder": "spr_mon_tsume",
+        "type": "Free",
+        "suffix": "tsume"
+    },
+    {
+        "name": "Shakomon X",
+        "sprite_folder": "spr_mon_shako_x",
+        "type": "Virus",
+        "suffix": "shako_x"
+    },
+    {
+        "name": "Lopmon X",
+        "sprite_folder": "spr_mon_lop_x",
+        "type": "Data",
+        "suffix": "lop_x"
+    },
+    {
+        "name": "Jazamon",
+        "sprite_folder": "spr_mon_jaza",
+        "type": "Data",
+        "suffix": "jaza"
+    },
+    {
+        "name": "Palmon X",
+        "sprite_folder": "spr_mon_pal_x",
+        "type": "Data",
+        "suffix": "pal_x"
+    },
+    {
+        "name": "Keramon X",
+        "sprite_folder": "spr_mon_kera_x",
+        "type": "Free",
+        "suffix": "kera_x"
+    },
+    {
+        "name": "Terriermon X",
+        "sprite_folder": "spr_mon_terrier_x",
+        "type": "Vaccine",
+        "suffix": "terrier_x"
+    },
+    {
+        "name": "Blucomon",
+        "sprite_folder": "spr_mon_bluco",
+        "type": "Data",
+        "suffix": "bluco"
+    },
+    {
+        "name": "Meramon X",
+        "sprite_folder": "spr_mon_mera_x",
+        "type": "Data",
+        "suffix": "mera_x"
+    },
+    {
+        "name": "Jazardmon",
+        "sprite_folder": "spr_mon_jazard",
+        "type": "Data",
+        "suffix": "jazard"
+    },
+    {
+        "name": "Wizarmon X",
+        "sprite_folder": "spr_mon_wizar_x",
+        "type": "Data",
+        "suffix": "wizar_x"
+    },
+    {
+        "name": "Pteranomon X",
+        "sprite_folder": "spr_mon_pterano_x",
+        "type": "Data",
+        "suffix": "pterano_x"
+    },
+    {
+        "name": "Tylomon X",
+        "sprite_folder": "spr_mon_tylo_x",
+        "type": "Vaccine",
+        "suffix": "tylo_x"
+    },
+    {
+        "name": "Togemon X",
+        "sprite_folder": "spr_mon_toge_x",
+        "type": "Data",
+        "suffix": "toge_x"
+    },
+    {
+        "name": "Omekamon",
+        "sprite_folder": "spr_mon_omeka",
+        "type": "Data",
+        "suffix": "omeka"
+    },
+    {
+        "name": "Siesamon X",
+        "sprite_folder": "spr_mon_siesa_x",
+        "type": "Vaccine",
+        "suffix": "siesa_x"
+    },
+    {
+        "name": "Paledramon",
+        "sprite_folder": "spr_mon_paledra",
+        "type": "Data",
+        "suffix": "paledra"
+    },
+    {
+        "name": "Pegasmon X",
+        "sprite_folder": "spr_mon_pegas_x",
+        "type": "Vaccine",
+        "suffix": "pegas_x"
+    },
+    {
+        "name": "Tailmon X",
+        "sprite_folder": "spr_mon_tail_x",
+        "type": "Vaccine",
+        "suffix": "tail_x"
+    },
+    {
+        "name": "Anomalocarimon X",
+        "sprite_folder": "spr_mon_anomalocari_x",
+        "type": "Data",
+        "suffix": "anomalocari_x"
+    },
+    {
+        "name": "Cyberdramon X",
+        "sprite_folder": "spr_mon_cyberdra_x",
+        "type": "Vaccine",
+        "suffix": "cyberdra_x"
+    },
+    {
+        "name": "Crys Paledramon",
+        "sprite_folder": "spr_mon_cryspaledra",
+        "type": "Data",
+        "suffix": "cryspaledra"
+    },
+    {
+        "name": "Mamemon X",
+        "sprite_folder": "spr_mon_mame_x",
+        "type": "Data",
+        "suffix": "mame_x"
+    },
+    {
+        "name": "Omega Shoutmon X",
+        "sprite_folder": "spr_mon_omegashout_x",
+        "type": "Vaccine",
+        "suffix": "omegashout_x"
+    },
+    {
+        "name": "Monzaemon X",
+        "sprite_folder": "spr_mon_monzae_x",
+        "type": "Vaccine",
+        "suffix": "monzae_x"
+    },
+    {
+        "name": "Jazarichmon",
+        "sprite_folder": "spr_mon_jazarich",
+        "type": "Data",
+        "suffix": "jazarich"
+    },
+    {
+        "name": "Angewomon X",
+        "sprite_folder": "spr_mon_angewo_x",
+        "type": "Vaccine",
+        "suffix": "angewo_x"
+    },
+    {
+        "name": "Grademon",
+        "sprite_folder": "spr_mon_grade",
+        "type": "Vaccine",
+        "suffix": "grade"
+    },
+    {
+        "name": "Cannonbeemon",
+        "sprite_folder": "spr_mon_cannonbee",
+        "type": "Virus",
+        "suffix": "cannonbee"
+    },
+    {
+        "name": "Rize Greymon X",
+        "sprite_folder": "spr_mon_rizegrey_x",
+        "type": "Vaccine",
+        "suffix": "rizegrey_x"
+    },
+    {
+        "name": "Tiger Vespamon",
+        "sprite_folder": "spr_mon_tigervespa",
+        "type": "Virus",
+        "suffix": "tigervespa"
+    },
+    {
+        "name": "Plesiomon X",
+        "sprite_folder": "spr_mon_plesio_x",
+        "type": "Data",
+        "suffix": "plesio_x"
+    },
+    {
+        "name": "Metallicdramon",
+        "sprite_folder": "spr_mon_metallicdra",
+        "type": "Data",
+        "suffix": "metallicdra"
+    },
+    {
+        "name": "Rapidmon X",
+        "sprite_folder": "spr_mon_rapid_xg",
+        "type": "Vaccine",
+        "suffix": "rapid_xg"
+    },
+    {
+        "name": "Hexeblaumon",
+        "sprite_folder": "spr_mon_hexeblau",
+        "type": "Data",
+        "suffix": "hexeblau"
+    },
+    {
+        "name": "Hououmon X",
+        "sprite_folder": "spr_mon_houou_x",
+        "type": "Vaccine",
+        "suffix": "houou_x"
+    },
+    {
+        "name": "Justimon X",
+        "sprite_folder": "spr_mon_justi_x",
+        "type": "Vaccine",
+        "suffix": "justi_x"
+    },
+    {
+        "name": "Holydramon X",
+        "sprite_folder": "spr_mon_holydra_x",
+        "type": "Vaccine",
+        "suffix": "holydra_x"
+    },
+    {
+        "name": "Cherubimon X (Virtue)",
+        "sprite_folder": "spr_mon_cherubi_virtue_x",
+        "type": "Vaccine",
+        "suffix": "cherubi_virtue_x"
+    },
+    {
+        "name": "Ofanimon X",
+        "sprite_folder": "spr_mon_ofani_x",
+        "type": "Vaccine",
+        "suffix": "ofani_x"
+    },
+    {
+        "name": "Dynasmon X",
+        "sprite_folder": "spr_mon_dynas_x",
+        "type": "Data",
+        "suffix": "dynas_x"
+    },
+    {
+        "name": "Magnamon X",
+        "sprite_folder": "spr_mon_magna_x",
+        "type": "Vaccine",
+        "suffix": "magna_x"
+    },
+    {
+        "name": "Duftmon X",
+        "sprite_folder": "spr_mon_duft_x",
+        "type": "Data",
+        "suffix": "duft_x"
+    },
+    {
+        "name": "Ulforce V-dramon X",
+        "sprite_folder": "spr_mon_ulforcevdrax",
+        "type": "Vaccine",
+        "suffix": "ulforcevdrax"
+    },
+    {
+        "name": "Examon X",
+        "sprite_folder": "spr_mon_exa_x",
+        "type": "Data",
+        "suffix": "exa_x"
+    },
+    {
+        "name": "Ogudomon X",
+        "sprite_folder": "spr_mon_ogudo_x",
+        "type": "Virus",
+        "suffix": "ogudo_x"
+    },
+    {
+        "name": "Labramon",
+        "sprite_folder": "spr_mon_labra",
+        "type": "Vaccine",
+        "suffix": "labra"
+    },
+    {
+        "name": "Toy Agumon (Black)",
+        "sprite_folder": "spr_mon_toyagub",
+        "type": "Virus",
+        "suffix": "toyagub"
+    },
+    {
+        "name": "Golemon",
+        "sprite_folder": "spr_mon_gole",
+        "type": "Virus",
+        "suffix": "gole"
+    },
+    {
+        "name": "Chrysalimon",
+        "sprite_folder": "spr_mon_chrysa",
+        "type": "Virus",
+        "suffix": "chrysa"
+    },
+    {
+        "name": "Dinohumon",
+        "sprite_folder": "spr_mon_dinohum",
+        "type": "Data",
+        "suffix": "dinohum"
+    },
+    {
+        "name": "Scorpiomon",
+        "sprite_folder": "spr_mon_scorpio",
+        "type": "Data",
+        "suffix": "scorpio"
+    },
+    {
+        "name": "Karatenmon",
+        "sprite_folder": "spr_mon_karate",
+        "type": "Virus",
+        "suffix": "karate"
+    },
+    {
+        "name": "Black War Greymon",
+        "sprite_folder": "spr_mon_blackwargrey",
+        "type": "Virus",
+        "suffix": "blackwargrey"
+    },
+    {
+        "name": "Dukemon: Crimson Mode",
+        "sprite_folder": "spr_mon_dukec",
+        "type": "Virus",
+        "suffix": "dukec"
+    },
+    {
+        "name": "Zeed Millenniumon",
+        "sprite_folder": "spr_mon_zeedmill",
+        "type": "Virus",
+        "suffix": "zeedmill"
+    },
+    {
+        "name": "Budmon",
+        "sprite_folder": "spr_mon_bud",
+        "type": "Free",
+        "suffix": "bud"
+    },
+    {
+        "name": "Wanyamon",
+        "sprite_folder": "spr_mon_wanya",
+        "type": "Free",
+        "suffix": "wanya"
+    },
+    {
+        "name": "Gaomon",
+        "sprite_folder": "spr_mon_gao",
+        "type": "Data",
+        "suffix": "gao"
+    },
+    {
+        "name": "Agumon (Savers)",
+        "sprite_folder": "spr_mon_agu06",
+        "type": "Vaccine",
+        "suffix": "agu06"
+    },
+    {
+        "name": "Geo Greymon",
+        "sprite_folder": "spr_mon_geogrey",
+        "type": "Vaccine",
+        "suffix": "geogrey"
+    },
+    {
+        "name": "Gaogamon",
+        "sprite_folder": "spr_mon_gaoga",
+        "type": "Data",
+        "suffix": "gaoga"
+    },
+    {
+        "name": "Mach Gaogamon",
+        "sprite_folder": "spr_mon_machgaoga",
+        "type": "Data",
+        "suffix": "machgaoga"
+    },
+    {
+        "name": "Mirage Gaogamon",
+        "sprite_folder": "spr_mon_miragegaoga",
+        "type": "Data",
+        "suffix": "miragegaoga"
+    },
+    {
+        "name": "Shine Greymon",
+        "sprite_folder": "spr_mon_shinegrey",
+        "type": "Vaccine",
+        "suffix": "shinegrey"
+    },
+    {
+        "name": "Chapmon",
+        "sprite_folder": "spr_mon_chapmon",
+        "type": "Free",
+        "suffix": "chapmon"
+    },
+    {
+        "name": "Pinamon",
+        "sprite_folder": "spr_mon_pina",
+        "type": "Free",
+        "suffix": "pina"
+    },
+    {
+        "name": "Kyaromon",
+        "sprite_folder": "spr_mon_kyaro",
+        "type": "Free",
+        "suffix": "kyaro"
+    },
+    {
+        "name": "Kamemon",
+        "sprite_folder": "spr_mon_kame",
+        "type": "Data",
+        "suffix": "kame"
+    },
+    {
+        "name": "Gawappamon",
+        "sprite_folder": "spr_mon_gawap",
+        "type": "Data",
+        "suffix": "gawap"
+    },
+    {
+        "name": "Peckmon",
+        "sprite_folder": "spr_mon_peck",
+        "type": "Vaccine",
+        "suffix": "peck"
+    },
+    {
+        "name": "Shawujinmon",
+        "sprite_folder": "spr_mon_shawujinmon",
+        "type": "Virus",
+        "suffix": "shawujinmon"
+    },
+    {
+        "name": "Ravmon",
+        "sprite_folder": "spr_mon_rav",
+        "type": "Vaccine",
+        "suffix": "rav"
+    },
+    {
+        "name": "Tonosama Mamemon",
+        "sprite_folder": "spr_mon_tonomame",
+        "type": "Data",
+        "suffix": "tonomame"
+    },
+    {
+        "name": "Pawn Chessmon",
+        "sprite_folder": "spr_mon_pawn_chessmon",
+        "type": "Virus",
+        "suffix": "pawn_chessmon"
+    },
+    {
+        "name": "Knight Chessmon",
+        "sprite_folder": "spr_mon_knchess",
+        "type": "Virus",
+        "suffix": "knchess"
+    },
+    {
+        "name": "Craniummon",
+        "sprite_folder": "spr_mon_craniam",
+        "type": "Vaccine",
+        "suffix": "craniam"
+    },
+    {
+        "name": "Mirage Gaogamon: Burst Mode",
+        "sprite_folder": "spr_mon_miragegaogaB",
+        "type": "Data",
+        "suffix": "miragegaogaB"
+    },
+    {
+        "name": "Shine Greymon: Burst Mode",
+        "sprite_folder": "spr_mon_shinegreyB",
+        "type": "Vaccine",
+        "suffix": "shinegreyB"
+    },
+    {
+        "name": "Ravmon: Burst Mode",
+        "sprite_folder": "spr_mon_raveB",
+        "type": "Vaccine",
+        "suffix": "raveB"
+    },
+    {
+        "name": "Nyaromon",
+        "sprite_folder": "spr_mon_nyaro",
+        "type": "Free",
+        "suffix": "nyaro"
+    },
+    {
+        "name": "Minervamon",
+        "sprite_folder": "spr_mon_minerva",
+        "type": "Virus",
+        "suffix": "minerva"
+    },
+    {
+        "name": "Victory Greymon",
+        "sprite_folder": "spr_mon_victgrey",
+        "type": "Vaccine",
+        "suffix": "victgrey"
+    },
+    {
+        "name": "Z'd Garurumon",
+        "sprite_folder": "spr_mon_zdgaru",
+        "type": "Data",
+        "suffix": "zdgaru"
+    },
+    {
+        "name": "Mochimon",
+        "sprite_folder": "spr_mon_mochi",
+        "type": "Free",
+        "suffix": "mochi"
+    },
+    {
+        "name": "Tokomon",
+        "sprite_folder": "spr_mon_toko",
+        "type": "Free",
+        "suffix": "toko"
+    },
+    {
+        "name": "Funbeemon",
+        "sprite_folder": "spr_mon_funbee",
+        "type": "Virus",
+        "suffix": "funbee"
+    },
+    {
+        "name": "Guilmon X",
+        "sprite_folder": "spr_mon_guilx",
+        "type": "Virus",
+        "suffix": "guilx"
+    },
+    {
+        "name": "Monochromon X",
+        "sprite_folder": "spr_mon_monochrox",
+        "type": "Data",
+        "suffix": "monochrox"
+    },
+    {
+        "name": "Waspmon",
+        "sprite_folder": "spr_mon_wasp",
+        "type": "Virus",
+        "suffix": "wasp"
+    },
+    {
+        "name": "Raptordramon",
+        "sprite_folder": "spr_mon_raptordra",
+        "type": "Vaccine",
+        "suffix": "raptordra"
+    },
+    {
+        "name": "Medieval Dukemon",
+        "sprite_folder": "spr_mon_medievalduke",
+        "type": "Data",
+        "suffix": "medievalduke"
+    },
+    {
+        "name": "Death-X-Dorugamon",
+        "sprite_folder": "spr_mon_deathxdoruga",
+        "type": "Virus",
+        "suffix": "deathxdoruga"
+    },
+    {
+        "name": "Death-X-Doruguremon",
+        "sprite_folder": "spr_mon_deathxdorugure",
+        "type": "Virus",
+        "suffix": "deathxdorugure"
+    },
+    {
+        "name": "Death-X-Dorugoramon",
+        "sprite_folder": "spr_mon_deathxdorugora",
+        "type": "Virus",
+        "suffix": "deathxdorugora"
+    },
+    {
+        "name": "Hopmon",
+        "sprite_folder": "spr_mon_hop",
+        "type": "Free",
+        "suffix": "hop"
+    },
+    {
+        "name": "Algomon (Baby II)",
+        "sprite_folder": "spr_mon_algoii",
+        "type": "Free",
+        "suffix": "algoii"
+    },
+    {
+        "name": "Poromon",
+        "sprite_folder": "spr_mon_poro",
+        "type": "Free",
+        "suffix": "poro"
+    },
+    {
+        "name": "Upamon",
+        "sprite_folder": "spr_mon_upa",
+        "type": "Free",
+        "suffix": "upa"
+    },
+    {
+        "name": "Tinkermon",
+        "sprite_folder": "spr_mon_tinker",
+        "type": "Virus",
+        "suffix": "tinker"
+    },
+    {
+        "name": "Sangomon",
+        "sprite_folder": "spr_mon_sango",
+        "type": "Data",
+        "suffix": "sango"
+    },
+    {
+        "name": "Ghostmon",
+        "sprite_folder": "spr_mon_ghost",
+        "type": "Data",
+        "suffix": "ghost"
+    },
+    {
+        "name": "Sunarizamon",
+        "sprite_folder": "spr_mon_sunariza",
+        "type": "Virus",
+        "suffix": "sunariza"
+    },
+    {
+        "name": "Algomon (Child)",
+        "sprite_folder": "spr_mon_algoiii",
+        "type": "Virus",
+        "suffix": "algoiii"
+    },
+    {
+        "name": "Junkmon",
+        "sprite_folder": "spr_mon_junk",
+        "type": "Virus",
+        "suffix": "junk"
+    },
+    {
+        "name": "Morphomon",
+        "sprite_folder": "spr_mon_morpho",
+        "type": "Vaccine",
+        "suffix": "morpho"
+    },
+    {
+        "name": "Pomumon",
+        "sprite_folder": "spr_mon_pomu",
+        "type": "Data",
+        "suffix": "pomu"
+    },
+    {
+        "name": "Shoutmon",
+        "sprite_folder": "spr_mon_shout",
+        "type": "Data",
+        "suffix": "shout"
+    },
+    {
+        "name": "Komondomon",
+        "sprite_folder": "spr_mon_komondo",
+        "type": "Data",
+        "suffix": "komondo"
+    },
+    {
+        "name": "Gokimon",
+        "sprite_folder": "spr_mon_goki",
+        "type": "Virus",
+        "suffix": "goki"
+    },
+    {
+        "name": "Hookmon",
+        "sprite_folder": "spr_mon_hook",
+        "type": "Virus",
+        "suffix": "hook"
+    },
+    {
+        "name": "Hudiemon",
+        "sprite_folder": "spr_mon_hudie",
+        "type": "Free",
+        "suffix": "hudie"
+    },
+    {
+        "name": "Petermon",
+        "sprite_folder": "spr_mon_peter",
+        "type": "Data",
+        "suffix": "peter"
+    },
+    {
+        "name": "Minotaurmon",
+        "sprite_folder": "spr_mon_minotaur",
+        "type": "Virus",
+        "suffix": "minotaur"
+    },
+    {
+        "name": "Eosmon (Adult)",
+        "sprite_folder": "spr_mon_eosiv",
+        "type": "Free",
+        "suffix": "eosiv"
+    },
+    {
+        "name": "Tobiumon",
+        "sprite_folder": "spr_mon_tobiu",
+        "type": "Vaccine",
+        "suffix": "tobiu"
+    },
+    {
+        "name": "Parasaurmon",
+        "sprite_folder": "spr_mon_parasaur",
+        "type": "Virus",
+        "suffix": "parasaur"
+    },
+    {
+        "name": "Mimicmon",
+        "sprite_folder": "spr_mon_mimic",
+        "type": "Virus",
+        "suffix": "mimic"
+    },
+    {
+        "name": "Baluchimon",
+        "sprite_folder": "spr_mon_baluchi",
+        "type": "Data",
+        "suffix": "baluchi"
+    },
+    {
+        "name": "Shoutmon X3",
+        "sprite_folder": "spr_mon_shoutx3",
+        "type": "Data",
+        "suffix": "shoutx3"
+    },
+    {
+        "name": "Algomon (Adult)",
+        "sprite_folder": "spr_mon_algoiv",
+        "type": "Virus",
+        "suffix": "algoiv"
+    },
+    {
+        "name": "Baboongamon",
+        "sprite_folder": "spr_mon_baboonga",
+        "type": "Vaccine",
+        "suffix": "baboonga"
+    },
+    {
+        "name": "Sirenmon",
+        "sprite_folder": "spr_mon_siren",
+        "type": "Data",
+        "suffix": "siren"
+    },
+    {
+        "name": "Toropiamon",
+        "sprite_folder": "spr_mon_toropia",
+        "type": "Virus",
+        "suffix": "toropia"
+    },
+    {
+        "name": "Locomon",
+        "sprite_folder": "spr_mon_loco",
+        "type": "Data",
+        "suffix": "loco"
+    },
+    {
+        "name": "Gusokumon",
+        "sprite_folder": "spr_mon_gusoku",
+        "type": "Vaccine",
+        "suffix": "gusoku"
+    },
+    {
+        "name": "Mermaimon",
+        "sprite_folder": "spr_mon_mermai",
+        "type": "Data",
+        "suffix": "mermai"
+    },
+    {
+        "name": "Waru Seadramon",
+        "sprite_folder": "spr_mon_waruseadra",
+        "type": "Virus",
+        "suffix": "waruseadra"
+    },
+    {
+        "name": "Piranimon",
+        "sprite_folder": "spr_mon_pirani",
+        "type": "Virus",
+        "suffix": "pirani"
+    },
+    {
+        "name": "Eosmon (Perfect)",
+        "sprite_folder": "spr_mon_eosv",
+        "type": "Free",
+        "suffix": "eosv"
+    },
+    {
+        "name": "Manticoremon",
+        "sprite_folder": "spr_mon_manticore",
+        "type": "Virus",
+        "suffix": "manticore"
+    },
+    {
+        "name": "Algomon (Perfect)",
+        "sprite_folder": "spr_mon_algov",
+        "type": "Virus",
+        "suffix": "algov"
+    },
+    {
+        "name": "Rebellimon",
+        "sprite_folder": "spr_mon_rebelli",
+        "type": "Virus",
+        "suffix": "rebelli"
+    },
+    {
+        "name": "Entmon",
+        "sprite_folder": "spr_mon_ent",
+        "type": "Virus",
+        "suffix": "ent"
+    },
+    {
+        "name": "Marine Chimairamon",
+        "sprite_folder": "spr_mon_marinchimaira",
+        "type": "Vaccine",
+        "suffix": "marinchimaira"
+    },
+    {
+        "name": "Gogmamon",
+        "sprite_folder": "spr_mon_gogma",
+        "type": "Vaccine",
+        "suffix": "gogma"
+    },
+    {
+        "name": "Shoutmon X5",
+        "sprite_folder": "spr_mon_shoutx5",
+        "type": "Data",
+        "suffix": "shoutx5"
+    },
+    {
+        "name": "Algomon (Ultimate)",
+        "sprite_folder": "spr_mon_algovi",
+        "type": "Virus",
+        "suffix": "algovi"
+    },
+    {
+        "name": "Grand Locomon",
+        "sprite_folder": "spr_mon_grandloco",
+        "type": "Data",
+        "suffix": "grandloco"
+    },
+    {
+        "name": "Heavy Leomon",
+        "sprite_folder": "spr_mon_heavyleo",
+        "type": "Vaccine",
+        "suffix": "heavyleo"
+    },
+    {
+        "name": "Leviamon",
+        "sprite_folder": "spr_mon_levia",
+        "type": "Virus",
+        "suffix": "levia"
+    },
+    {
+        "name": "Eosmon (Ultimate)",
+        "sprite_folder": "spr_mon_eosvi",
+        "type": "Free",
+        "suffix": "eosvi"
+    },
+    {
+        "name": "Regalecusmon",
+        "sprite_folder": "spr_mon_regalecus",
+        "type": "Virus",
+        "suffix": "regalecus"
+    },
+    {
+        "name": "Done Devimon",
+        "sprite_folder": "spr_mon_donedevi",
+        "type": "Virus",
+        "suffix": "donedevi"
+    },
+    {
+        "name": "Nidhoggmon",
+        "sprite_folder": "spr_mon_nidhogg",
+        "type": "Virus",
+        "suffix": "nidhogg"
+    },
+    {
+        "name": "Agumon -Yuki no Kizuna-",
+        "sprite_folder": "spr_mon_aguynk",
+        "type": "Free",
+        "suffix": "aguynk"
+    },
+    {
+        "name": "Gabumon -Yujo no Kizuna-",
+        "sprite_folder": "spr_mon_gabuynk",
+        "type": "Free",
+        "suffix": "gabuynk"
+    },
+    {
+        "name": "Mokumon",
+        "sprite_folder": "spr_mon_moku",
+        "type": "Free",
+        "suffix": "moku"
+    },
+    {
+        "name": "Nyokimon",
+        "sprite_folder": "spr_mon_nyoki",
+        "type": "Free",
+        "suffix": "nyoki"
+    },
+    {
+        "name": "Pitchmon",
+        "sprite_folder": "spr_mon_pitch",
+        "type": "Free",
+        "suffix": "pitch"
+    },
+    {
+        "name": "Dodomon",
+        "sprite_folder": "spr_mon_dodo",
+        "type": "Free",
+        "suffix": "dodo"
+    },
+    {
+        "name": "Pupumon",
+        "sprite_folder": "spr_mon_pupu",
+        "type": "Free",
+        "suffix": "pupu"
+    },
+    {
+        "name": "Choromon",
+        "sprite_folder": "spr_mon_choro",
+        "type": "Free",
+        "suffix": "choro"
+    },
+    {
+        "name": "Fufumon",
+        "sprite_folder": "spr_mon_fufu",
+        "type": "Free",
+        "suffix": "fufu"
+    },
+    {
+        "name": "Kuramon",
+        "sprite_folder": "spr_mon_kura",
+        "type": "Free",
+        "suffix": "kura"
+    },
+    {
+        "name": "Tsunomon",
+        "sprite_folder": "spr_mon_tsuno",
+        "type": "Free",
+        "suffix": "tsuno"
+    },
+    {
+        "name": "Tanemon",
+        "sprite_folder": "spr_mon_tane",
+        "type": "Free",
+        "suffix": "tane"
+    },
+    {
+        "name": "Peti Meramon",
+        "sprite_folder": "spr_mon_petimera",
+        "type": "Free",
+        "suffix": "petimera"
+    },
+    {
+        "name": "Pokomon",
+        "sprite_folder": "spr_mon_poko",
+        "type": "Free",
+        "suffix": "poko"
+    },
+    {
+        "name": "Gigimon",
+        "sprite_folder": "spr_mon_gigi",
+        "type": "Free",
+        "suffix": "gigi"
+    },
+    {
+        "name": "Pukamon",
+        "sprite_folder": "spr_mon_puka",
+        "type": "Free",
+        "suffix": "puka"
+    },
+    {
+        "name": "Pyocomon",
+        "sprite_folder": "spr_mon_pyoco",
+        "type": "Free",
+        "suffix": "pyoco"
+    },
+    {
+        "name": "Culumon",
+        "sprite_folder": "spr_mon_culu",
+        "type": "Free",
+        "suffix": "culu"
+    },
+    {
+        "name": "Dorimon",
+        "sprite_folder": "spr_mon_dori",
+        "type": "Free",
+        "suffix": "dori"
+    },
+    {
+        "name": "Caprimon",
+        "sprite_folder": "spr_mon_capri",
+        "type": "Free",
+        "suffix": "capri"
+    },
+    {
+        "name": "Kyokyomon",
+        "sprite_folder": "spr_mon_kyokyo",
+        "type": "Free",
+        "suffix": "kyokyo"
+    },
+    {
+        "name": "Puroromon",
+        "sprite_folder": "spr_mon_puroro",
+        "type": "Free",
+        "suffix": "puroro"
+    },
+    {
+        "name": "Tsukaimon",
+        "sprite_folder": "spr_mon_tsukai",
+        "type": "Virus",
+        "suffix": "tsukai"
+    },
+    {
+        "name": "Soulmon",
+        "sprite_folder": "spr_mon_soul",
+        "type": "Virus",
+        "suffix": "soul"
+    },
+    {
+        "name": "Dogmon",
+        "sprite_folder": "spr_mon_dog",
+        "type": "Data",
+        "suffix": "dog"
+    },
+    {
+        "name": "Dark Lizamon",
+        "sprite_folder": "spr_mon_darkliza",
+        "type": "Virus",
+        "suffix": "darkliza"
+    },
+    {
+        "name": "Pucchiemon",
+        "sprite_folder": "spr_mon_pucchie",
+        "type": "Free",
+        "suffix": "pucchie"
+    },
+    {
+        "name": "Allomon",
+        "sprite_folder": "spr_mon_allo",
+        "type": "Free",
+        "suffix": "allo"
+    },
+    {
+        "name": "Depthmon",
+        "sprite_folder": "spr_mon_depth",
+        "type": "Free",
+        "suffix": "depth"
+    },
+    {
+        "name": "Sepikmon",
+        "sprite_folder": "spr_mon_sepik",
+        "type": "Free",
+        "suffix": "sepik"
+    },
+    {
+        "name": "Mothmon",
+        "sprite_folder": "spr_mon_moth",
+        "type": "Free",
+        "suffix": "moth"
+    },
+    {
+        "name": "Searchmon",
+        "sprite_folder": "spr_mon_search",
+        "type": "Free",
+        "suffix": "search"
+    },
+    {
+        "name": "Pteranomon",
+        "sprite_folder": "spr_mon_pterano",
+        "type": "Free",
+        "suffix": "pterano"
+    },
+    {
+        "name": "Wendimon",
+        "sprite_folder": "spr_mon_wendi",
+        "type": "Virus",
+        "suffix": "wendi"
+    },
+    {
+        "name": "Tylomon",
+        "sprite_folder": "spr_mon_tylo",
+        "type": "Free",
+        "suffix": "tylo"
+    },
+    {
+        "name": "Ponchomon",
+        "sprite_folder": "spr_mon_poncho",
+        "type": "Free",
+        "suffix": "poncho"
+    },
+    {
+        "name": "Sorcerimon",
+        "sprite_folder": "spr_mon_sorceri",
+        "type": "Vaccine",
+        "suffix": "sorceri"
+    },
+    {
+        "name": "Yaksamon",
+        "sprite_folder": "spr_mon_yasha",
+        "type": "Free",
+        "suffix": "yasha"
+    },
+    {
+        "name": "Harpymon",
+        "sprite_folder": "spr_mon_harpy",
+        "type": "Free",
+        "suffix": "harpy"
+    },
+    {
+        "name": "Sethmon",
+        "sprite_folder": "spr_mon_seth",
+        "type": "Free",
+        "suffix": "seth"
+    },
+    {
+        "name": "Baromon",
+        "sprite_folder": "spr_mon_baro",
+        "type": "Free",
+        "suffix": "baro"
+    },
+    {
+        "name": "Gorimon",
+        "sprite_folder": "spr_mon_gori",
+        "type": "Data",
+        "suffix": "gori"
+    },
+    {
+        "name": "Moosemon",
+        "sprite_folder": "spr_mon_moose",
+        "type": "Free",
+        "suffix": "moose"
+    },
+    {
+        "name": "Black Growmon",
+        "sprite_folder": "spr_mon_growb",
+        "type": "Virus",
+        "suffix": "growb"
+    },
+    {
+        "name": "Youkomon",
+        "sprite_folder": "spr_mon_youko",
+        "type": "Data",
+        "suffix": "youko"
+    },
+    {
+        "name": "Musyamon",
+        "sprite_folder": "spr_mon_musya",
+        "type": "Virus",
+        "suffix": "musya"
+    },
+    {
+        "name": "Ice Devimon",
+        "sprite_folder": "spr_mon_icedevi",
+        "type": "Virus",
+        "suffix": "icedevi"
+    },
+    {
+        "name": "Kongoumon",
+        "sprite_folder": "spr_mon_kongou",
+        "type": "Free",
+        "suffix": "kongou"
+    },
+    {
+        "name": "Superstarmon",
+        "sprite_folder": "spr_mon_superstar",
+        "type": "Data",
+        "suffix": "superstar"
+    },
+    {
+        "name": "Black Rapidmon",
+        "sprite_folder": "spr_mon_rapidb",
+        "type": "Vaccine",
+        "suffix": "rapidb"
+    },
+    {
+        "name": "Black Megalo Growmon",
+        "sprite_folder": "spr_mon_megalogrowb",
+        "type": "Virus",
+        "suffix": "megalogrowb"
+    },
+    {
+        "name": "Doumon",
+        "sprite_folder": "spr_mon_dou",
+        "type": "Data",
+        "suffix": "dou"
+    },
+    {
+        "name": "Devitamamon",
+        "sprite_folder": "spr_mon_devita",
+        "type": "Virus",
+        "suffix": "devita"
+    },
+    {
+        "name": "Rapidmon (Gold)",
+        "sprite_folder": "spr_mon_rapidg",
+        "type": "Vaccine",
+        "suffix": "rapidg"
+    },
+    {
+        "name": "Parasimon",
+        "sprite_folder": "spr_mon_parasi",
+        "type": "Virus",
+        "suffix": "parasi"
+    },
+    {
+        "name": "Crossmon",
+        "sprite_folder": "spr_mon_cross",
+        "type": "Vaccine",
+        "suffix": "cross"
+    },
+    {
+        "name": "Cherubimon (Vice)",
+        "sprite_folder": "spr_mon_cherubiV",
+        "type": "Virus",
+        "suffix": "cherubiV"
+    },
+    {
+        "name": "Kuzuhamon",
+        "sprite_folder": "spr_mon_kuzuha",
+        "type": "Data",
+        "suffix": "kuzuha"
+    },
+    {
+        "name": "Black Saint Galgomon",
+        "sprite_folder": "spr_mon_saintgalgob",
+        "type": "Vaccine",
+        "suffix": "saintgalgob"
+    },
+    {
+        "name": "Death-X-mon",
+        "sprite_folder": "spr_mon_deathx",
+        "type": "Virus",
+        "suffix": "deathx"
+    },
+    {
+        "name": "Zanbamon",
+        "sprite_folder": "spr_mon_zanba",
+        "type": "Virus",
+        "suffix": "zanba"
+    },
+    {
+        "name": "Chaos Dukemon",
+        "sprite_folder": "spr_mon_chaosduke",
+        "type": "Virus",
+        "suffix": "chaosduke"
+    },
+    {
+        "name": "Demon (Mantled)",
+        "sprite_folder": "spr_mon_demonm",
+        "type": "Virus",
+        "suffix": "demonm"
+    },
+    {
+        "name": "Suijinmon",
+        "sprite_folder": "spr_mon_sujin",
+        "type": "Virus",
+        "suffix": "sujin"
+    },
+    {
+        "name": "Moon Millenniumon",
+        "sprite_folder": "spr_mon_moonmill",
+        "type": "Virus",
+        "suffix": "moonmill"
+    },
+    {
+        "name": "Skull Knightmon",
+        "sprite_folder": "spr_mon_skullknight",
+        "type": "Free",
+        "suffix": "skullknight"
+    },
+    {
+        "name": "Shoutmon X2",
+        "sprite_folder": "spr_mon_shoutx2",
+        "type": "Data",
+        "suffix": "shoutx2"
+    },
+    {
+        "name": "Greymon (XW)",
+        "sprite_folder": "spr_mon_greyxw",
+        "type": "Virus",
+        "suffix": "greyxw"
+    },
+    {
+        "name": "Shoutmon X4",
+        "sprite_folder": "spr_mon_shoutx4",
+        "type": "Data",
+        "suffix": "shoutx4"
+    },
+    {
+        "name": "Shoutmon X4B",
+        "sprite_folder": "spr_mon_shoutx4b",
+        "type": "Data",
+        "suffix": "shoutx4b"
+    },
+    {
+        "name": "Metal Greymon (XW)",
+        "sprite_folder": "spr_mon_metalgreyxw",
+        "type": "Virus",
+        "suffix": "metalgreyxw"
+    },
+    {
+        "name": "Honeybeemon",
+        "sprite_folder": "spr_mon_honeybee",
+        "type": "Free",
+        "suffix": "honeybee"
+    },
+    {
+        "name": "Owlmon",
+        "sprite_folder": "spr_mon_owl",
+        "type": "Free",
+        "suffix": "owl"
+    },
+    {
+        "name": "Butterflymon",
+        "sprite_folder": "spr_mon_butterfly",
+        "type": "Free",
+        "suffix": "butterfly"
+    },
+    {
+        "name": "Chamelemon",
+        "sprite_folder": "spr_mon_chamele",
+        "type": "Free",
+        "suffix": "chamele"
+    },
+    {
+        "name": "Frogmon",
+        "sprite_folder": "spr_mon_frog",
+        "type": "Free",
+        "suffix": "frog"
+    },
+    {
+        "name": "Bitmon",
+        "sprite_folder": "spr_mon_bit",
+        "type": "Free",
+        "suffix": "bit"
+    },
+    {
+        "name": "Pipismon",
+        "sprite_folder": "spr_mon_pipis",
+        "type": "Free",
+        "suffix": "pipis"
+    },
+    {
+        "name": "Opossummon",
+        "sprite_folder": "spr_mon_opossum",
+        "type": "Free",
+        "suffix": "opossum"
+    },
+    {
+        "name": "Toucanmon",
+        "sprite_folder": "spr_mon_toucan",
+        "type": "Free",
+        "suffix": "toucan"
+    },
+    {
+        "name": "Sheepmon",
+        "sprite_folder": "spr_mon_sheep",
+        "type": "Free",
+        "suffix": "sheep"
+    },
+    {
+        "name": "Mantaraymon",
+        "sprite_folder": "spr_mon_mantaray",
+        "type": "Free",
+        "suffix": "mantaray"
+    },
+    {
+        "name": "Prairiemon",
+        "sprite_folder": "spr_mon_prairie",
+        "type": "Free",
+        "suffix": "prairie"
+    },
+    {
+        "name": "Rinkmon",
+        "sprite_folder": "spr_mon_rink",
+        "type": "Free",
+        "suffix": "rink"
+    },
+    {
+        "name": "Archelomon",
+        "sprite_folder": "spr_mon_archelo",
+        "type": "Free",
+        "suffix": "archelo"
+    },
+    {
+        "name": "Orcamon",
+        "sprite_folder": "spr_mon_orca",
+        "type": "Free",
+        "suffix": "orca"
+    },
+    {
+        "name": "Flybeemon",
+        "sprite_folder": "spr_mon_flybee",
+        "type": "Free",
+        "suffix": "flybee"
+    },
+    {
+        "name": "Kangarumon",
+        "sprite_folder": "spr_mon_kangaru",
+        "type": "Free",
+        "suffix": "kangaru"
+    },
+    {
+        "name": "Coatlmon",
+        "sprite_folder": "spr_mon_coatl",
+        "type": "Free",
+        "suffix": "coatl"
+    },
+    {
+        "name": "Kabukimon",
+        "sprite_folder": "spr_mon_kabuki",
+        "type": "Free",
+        "suffix": "kabuki"
+    },
+    {
+        "name": "Stegomon",
+        "sprite_folder": "spr_mon_stego",
+        "type": "Free",
+        "suffix": "stego"
+    },
+    {
+        "name": "Swanmon",
+        "sprite_folder": "spr_mon_swan",
+        "type": "Free",
+        "suffix": "swan"
+    },
+    {
+        "name": "Togemogumon",
+        "sprite_folder": "spr_mon_togemogu",
+        "type": "Free",
+        "suffix": "togemogu"
+    },
+    {
+        "name": "Boarmon",
+        "sprite_folder": "spr_mon_boar",
+        "type": "Free",
+        "suffix": "boar"
+    },
+    {
+        "name": "Bullmon",
+        "sprite_folder": "spr_mon_bull",
+        "type": "Free",
+        "suffix": "bull"
+    },
+    {
+        "name": "Gargoylemon",
+        "sprite_folder": "spr_mon_gargoyle",
+        "type": "Free",
+        "suffix": "gargoyle"
+    },
+    {
+        "name": "Sagittarimon",
+        "sprite_folder": "spr_mon_sagittari",
+        "type": "Free",
+        "suffix": "sagittari"
+    },
+    {
+        "name": "Maildramon",
+        "sprite_folder": "spr_mon_maildra",
+        "type": "Free",
+        "suffix": "maildra"
+    },
+    {
+        "name": "Rhinomon",
+        "sprite_folder": "spr_mon_rhino",
+        "type": "Free",
+        "suffix": "rhino"
+    },
+    {
+        "name": "Peacockmon",
+        "sprite_folder": "spr_mon_peacock",
+        "type": "Free",
+        "suffix": "peacock"
+    },
+    {
+        "name": "Elephamon",
+        "sprite_folder": "spr_mon_elepha",
+        "type": "Free",
+        "suffix": "elepha"
+    },
+    {
+        "name": "Lampmon",
+        "sprite_folder": "spr_mon_lamp",
+        "type": "Data",
+        "suffix": "lamp"
+    },
+    {
+        "name": "Pandamon",
+        "sprite_folder": "spr_mon_panda",
+        "type": "Data",
+        "suffix": "panda"
+    },
+    {
+        "name": "Kuzuhamon: Miko Mode",
+        "sprite_folder": "spr_mon_kuzuhamm",
+        "type": "Data",
+        "suffix": "kuzuhamm"
+    },
+    {
+        "name": "Sakuyamon: Miko Mode",
+        "sprite_folder": "spr_mon_sakuyamm",
+        "type": "Data",
+        "suffix": "sakuyamm"
+    },
+    {
+        "name": "Bombmon",
+        "sprite_folder": "spr_mon_bomb",
+        "type": "Free",
+        "suffix": "bomb"
+    },
+    {
+        "name": "Chibickmon",
+        "sprite_folder": "spr_mon_chibick",
+        "type": "Free",
+        "suffix": "chibick"
+    },
+    {
+        "name": "Monimon",
+        "sprite_folder": "spr_mon_moni",
+        "type": "Free",
+        "suffix": "moni"
+    },
+    {
+        "name": "Cupimon",
+        "sprite_folder": "spr_mon_cupi",
+        "type": "Free",
+        "suffix": "cupi"
+    },
+    {
+        "name": "Chikurimon",
+        "sprite_folder": "spr_mon_chikuri",
+        "type": "Virus",
+        "suffix": "chikuri"
+    },
+    {
+        "name": "Cutemon",
+        "sprite_folder": "spr_mon_cute",
+        "type": "Vaccine",
+        "suffix": "cute"
+    },
+    {
+        "name": "Monitamon",
+        "sprite_folder": "spr_mon_monita",
+        "type": "Data",
+        "suffix": "monita"
+    },
+    {
+        "name": "Spadamon",
+        "sprite_folder": "spr_mon_spada",
+        "type": "Free",
+        "suffix": "spada"
+    },
+    {
+        "name": "Starmons",
+        "sprite_folder": "spr_mon_starmons",
+        "type": "Data",
+        "suffix": "starmons"
+    },
+    {
+        "name": "Dondokomon",
+        "sprite_folder": "spr_mon_dondoko",
+        "type": "Vaccine",
+        "suffix": "dondoko"
+    },
+    {
+        "name": "Gaossmon",
+        "sprite_folder": "spr_mon_gaoss",
+        "type": "Virus",
+        "suffix": "gaoss"
+    },
+    {
+        "name": "Sparrowmon",
+        "sprite_folder": "spr_mon_sparrow",
+        "type": "Data",
+        "suffix": "sparrow"
+    },
+    {
+        "name": "Ballistamon",
+        "sprite_folder": "spr_mon_ballista",
+        "type": "Vaccine",
+        "suffix": "ballista"
+    },
+    {
+        "name": "Mail Birdramon",
+        "sprite_folder": "spr_mon_mailbirdra",
+        "type": "Data",
+        "suffix": "mailbirdra"
+    },
+    {
+        "name": "Dorulumon",
+        "sprite_folder": "spr_mon_dorulu",
+        "type": "Virus",
+        "suffix": "dorulu"
+    },
+    {
+        "name": "Deckerdramon",
+        "sprite_folder": "spr_mon_deckerdra",
+        "type": "Virus",
+        "suffix": "deckerdra"
+    },
+    {
+        "name": "Wisemon",
+        "sprite_folder": "spr_mon_wise",
+        "type": "Virus",
+        "suffix": "wise"
+    },
+    {
+        "name": "Blue Meramon",
+        "sprite_folder": "spr_mon_bluemera",
+        "type": "Virus",
+        "suffix": "bluemera"
+    },
+    {
+        "name": "Mervamon",
+        "sprite_folder": "spr_mon_merva",
+        "type": "Virus",
+        "suffix": "merva"
+    },
+    {
+        "name": "Yukimi Botamon",
+        "sprite_folder": "spr_mon_yukimibota",
+        "type": "Free",
+        "suffix": "yukimibota"
+    }
+]

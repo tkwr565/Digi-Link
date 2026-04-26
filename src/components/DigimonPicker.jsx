@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect } from 'react'
 import DigimonSprite from './DigimonSprite'
 import styles from './DigimonPicker.module.css'
+import { loadDigimonDb } from '../utils/digimonUtils'
 
 export default function DigimonPicker({
   value,
@@ -15,16 +16,10 @@ export default function DigimonPicker({
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/sprites/digimon_db.json')
-      .then(res => res.json())
-      .then(data => {
-        setDigimonList(data)
-        setLoading(false)
-      })
-      .catch(err => {
-        console.error('Failed to load Digimon data:', err)
-        setLoading(false)
-      })
+    loadDigimonDb().then(data => {
+      setDigimonList(data)
+      setLoading(false)
+    })
   }, [])
 
   const filteredDigimon = digimonList.filter(d => {

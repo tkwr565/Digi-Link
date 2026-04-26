@@ -50,10 +50,7 @@ export default function ProfilePage() {
       .then(data => setDeviceList(data))
       .catch(err => console.error('Failed to load device list:', err))
 
-    fetch('/sprites/digimon_db.json')
-      .then(res => res.json())
-      .then(data => setDigimonList(data))
-      .catch(err => console.error('Failed to load digimon list:', err))
+    loadDigimonDb().then(data => setDigimonList(data))
   }, [])
 
   // Load profile data
