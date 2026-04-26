@@ -69,34 +69,90 @@ function MessageThreadPage() {
     setTimeout(scrollToBottom, 100)
   }
 
+
   useEffect(() => { loadConversation() }, [user, conversationId])
   useEffect(() => { if (messages.length > 0) scrollToBottom() }, [messages])
 
+  // ✅ FIXED: Messages subscription - removed Date.now()
   useEffect(() => {
     if (!conversation?.id) return
-    const setupSubscription = () => {
-      if (channelRef.current) supabase.removeChannel(channelRef.current)
-      const channel = supabase.channel(`messages-${conversation.id}-${Date.now()}`)
-        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `conversation_id=eq.${conversation.id}` }, (payload) => {
-          setMessages(prev => prev.some(m => m.id === payload.new.id) ? prev : [...prev, payload.new])
-          if (payload.new.to_user_id === user.id) markConversationAsRead(conversation.id, user.id, supabase)
-        })
-        .subscribe()
-      channelRef.current = channel
+
+    // Cleanup old channel first
+    if (channelRef.current) {
+      supabase.removeChannel(channelRef.current)
+      channelRef.current = null
     }
-    setupSubscription()
-    return () => { if (channelRef.current) supabase.removeChannel(channelRef.current) }
+
+    // Static channel name - no Date.now()!
+    const channel = supabase
+      .channel(`thread-messages-${conversation.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'messages',
+          filter: `conversation_id=eq.${conversation.id}`
+        },
+        (payload) => {
+          setMessages(prev => 
+            prev.some(m => m.id === payload.new.id) 
+              ? prev 
+              : [...prev, payload.new]
+          )
+          if (payload.new.to_user_id === user.id) {
+            markConversationAsRead(conversation.id, user.id, supabase)
+          }
+        }
+      )
+      .subscribe()
+
+    channelRef.current = channel
+
+    return () => {
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current)
+        channelRef.current = null
+      }
+    }
   }, [conversation?.id, user?.id])
 
+  // ✅ FIXED: Battle subscription - removed Date.now()
   useEffect(() => {
     if (!battle?.id) return
-    const channel = supabase.channel(`battle-${battle.id}-${Date.now()}`)
-      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'battles', filter: `id=eq.${battle.id}` }, payload => setBattle(payload.new))
+
+    // Cleanup old channel first
+    if (battleChannelRef.current) {
+      supabase.removeChannel(battleChannelRef.current)
+      battleChannelRef.current = null
+    }
+
+    // Static channel name - no Date.now()!
+    const channel = supabase
+      .channel(`thread-battle-${battle.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'battles',
+          filter: `id=eq.${battle.id}`
+        },
+        payload => setBattle(payload.new)
+      )
       .subscribe()
+
     battleChannelRef.current = channel
-    return () => { if (battleChannelRef.current) supabase.removeChannel(battleChannelRef.current) }
+
+    return () => {
+      if (battleChannelRef.current) {
+        supabase.removeChannel(battleChannelRef.current)
+        battleChannelRef.current = null
+      }
+    }
   }, [battle?.id])
 
+  
   const handleBattleConfirmation = async () => {
     if (!battle || confirmingBattle) return
     setConfirmingBattle(true)
