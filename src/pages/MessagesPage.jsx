@@ -82,26 +82,29 @@ function MessagesPage() {
     loadPendingRequests()
   }, [user])
 
-  // ✅ FIXED: Conversations subscription - removed Date.now()
   useEffect(() => {
     if (!user?.id) return
-    
-    // Cleanup old channel first
+
     if (channelRef.current) {
       supabase.removeChannel(channelRef.current)
       channelRef.current = null
     }
-    
-    // Static channel name - no Date.now()!
+
+    // Two filtered listeners cover conversations where user is user1 OR user2.
     const channel = supabase
       .channel(`messages-list-${user.id}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'conversations' },
+        { event: '*', schema: 'public', table: 'conversations', filter: `user1_id=eq.${user.id}` },
+        () => loadConversations()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'conversations', filter: `user2_id=eq.${user.id}` },
         () => loadConversations()
       )
       .subscribe()
-    
+
     channelRef.current = channel
 
     return () => {
@@ -112,22 +115,29 @@ function MessagesPage() {
     }
   }, [user?.id])
 
-  // ✅ FIXED: Battle requests subscription - removed Date.now()
   useEffect(() => {
     if (!user?.id) return
-    
-    // Cleanup old channel first
+
     if (requestsChannelRef.current) {
       supabase.removeChannel(requestsChannelRef.current)
       requestsChannelRef.current = null
     }
-    
-    // Static channel name - no Date.now()!
+
     const channel = supabase
       .channel(`battle-requests-list-${user.id}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'battles' },
+        { event: '*', schema: 'public', table: 'battles', filter: `requester_id=eq.${user.id}` },
+        (payload) => {
+          loadPendingRequests()
+          if (payload.eventType === 'UPDATE' && payload.new.request_status === 'accepted') {
+            loadConversations()
+          }
+        }
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'battles', filter: `responder_id=eq.${user.id}` },
         (payload) => {
           loadPendingRequests()
           if (payload.eventType === 'UPDATE' && payload.new.request_status === 'accepted') {
@@ -136,7 +146,7 @@ function MessagesPage() {
         }
       )
       .subscribe()
-    
+
     requestsChannelRef.current = channel
 
     return () => {

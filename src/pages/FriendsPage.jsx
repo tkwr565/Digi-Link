@@ -79,7 +79,7 @@ export default function FriendsPage() {
     loadAll()
   }, [user])
 
-  // Realtime (primary): own dedicated channel for immediate page-content refresh
+  // Realtime: two filtered listeners cover friendships where user is either side.
   useEffect(() => {
     if (!user?.id) return
 
@@ -87,7 +87,12 @@ export default function FriendsPage() {
       .channel(`friends-page-${user.id}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'friendships' },
+        { event: '*', schema: 'public', table: 'friendships', filter: `user_id=eq.${user.id}` },
+        () => loadAll(true)
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'friendships', filter: `friend_id=eq.${user.id}` },
         () => loadAll(true)
       )
       .subscribe()
