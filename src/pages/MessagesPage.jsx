@@ -82,29 +82,69 @@ function MessagesPage() {
     loadPendingRequests()
   }, [user])
 
+  // ✅ FIXED: Conversations subscription - removed Date.now()
   useEffect(() => {
     if (!user?.id) return
-    const setupSubscription = () => {
-      if (channelRef.current) supabase.removeChannel(channelRef.current)
-      const channel = supabase.channel(`conversations-${user.id}-${Date.now()}`)
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'conversations' }, () => loadConversations())
-        .subscribe()
-      channelRef.current = channel
+    
+    // Cleanup old channel first
+    if (channelRef.current) {
+      supabase.removeChannel(channelRef.current)
+      channelRef.current = null
     }
-    setupSubscription()
-    return () => { if (channelRef.current) supabase.removeChannel(channelRef.current) }
+    
+    // Static channel name - no Date.now()!
+    const channel = supabase
+      .channel(`messages-list-${user.id}`)
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'conversations' },
+        () => loadConversations()
+      )
+      .subscribe()
+    
+    channelRef.current = channel
+
+    return () => {
+      if (channelRef.current) {
+        supabase.removeChannel(channelRef.current)
+        channelRef.current = null
+      }
+    }
   }, [user?.id])
 
+  // ✅ FIXED: Battle requests subscription - removed Date.now()
   useEffect(() => {
     if (!user?.id) return
-    const channel = supabase.channel(`battle-requests-${user.id}-${Date.now()}`)
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'battles' }, (payload) => {
-        loadPendingRequests()
-        if (payload.eventType === 'UPDATE' && payload.new.request_status === 'accepted') loadConversations()
-      })
+    
+    // Cleanup old channel first
+    if (requestsChannelRef.current) {
+      supabase.removeChannel(requestsChannelRef.current)
+      requestsChannelRef.current = null
+    }
+    
+    // Static channel name - no Date.now()!
+    const channel = supabase
+      .channel(`battle-requests-list-${user.id}`)
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'battles' },
+        (payload) => {
+          loadPendingRequests()
+          if (payload.eventType === 'UPDATE' && payload.new.request_status === 'accepted') {
+            loadConversations()
+          }
+        }
+      )
       .subscribe()
+    
     requestsChannelRef.current = channel
-    return () => { if (requestsChannelRef.current) supabase.removeChannel(requestsChannelRef.current) }
+
+    return () => {
+      if (requestsChannelRef.current) {
+        supabase.removeChannel(requestsChannelRef.current)
+        requestsChannelRef.current = null
+      }
+    }
   }, [user?.id])
 
   const handleAcceptRequest = async (battleRequest) => {
