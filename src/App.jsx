@@ -14,7 +14,7 @@ import MessageThreadPage from './pages/MessageThreadPage'
 import AppLayout from './components/AppLayout'
 import MyPinsPage from './pages/MyPinsPage'
 import FriendsPage from './pages/FriendsPage'
-import LeaderboardPage from './pages/LeaderboardPage'
+// LeaderboardPage intentionally not imported — route disabled to reduce Vercel usage
 
 // Protected route wrapper
 function ProtectedRoute({ children }) {
@@ -267,17 +267,8 @@ function App() {
             }
           />
 
-          {/* Leaderboard page */}
-          <Route
-            path="/leaderboard"
-            element={
-              <ProtectedRoute>
-                <AppLayout>
-                  <LeaderboardPage />
-                </AppLayout>
-              </ProtectedRoute>
-            }
-          />
+          {/* Leaderboard disabled — redirect to home until re-enabled */}
+          <Route path="/leaderboard" element={<Navigate to="/" replace />} />
 
           {/* Friends page */}
           <Route
