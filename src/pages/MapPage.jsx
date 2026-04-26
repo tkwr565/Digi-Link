@@ -294,12 +294,13 @@ export default function MapPage() {
     loadPinsInViewport()
     loadPois()
   }
-
   const handleMapIdle = () => {
-    loadPinsInViewport()
-    loadPois()
+    clearTimeout(idleTimeout.current)
+    idleTimeout.current = setTimeout(() => {
+      loadPinsInViewport()
+      loadPois()
+    }, 500)
   }
-
   // Load relationship data on mount
   useEffect(() => {
     if (user) {
