@@ -70,7 +70,9 @@ export default function MapPage() {
   const mapRef = useRef()
   const districtRef = useRef()
   const lastPoiFetchRef = useRef(0)
+  const idleTimeout = useRef(null)
 
+  
   useEffect(() => {
     ;(async () => {
       let lat, lng
