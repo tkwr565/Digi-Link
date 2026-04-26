@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/:file(.*\\.(ico|png|webmanifest|svg))",
+      "source": "/(.*\\.(ico|png|webmanifest|svg))",
       "headers": [
         {
           "key": "Cache-Control",
