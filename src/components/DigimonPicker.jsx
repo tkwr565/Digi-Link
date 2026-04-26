@@ -1,6 +1,26 @@
 ﻿import { useState, useEffect } from 'react'
-import { getSpriteUrl } from '../utils/digimonUtils'
+import spriteIndex from '../utils/spritesheet_index.json'
 import styles from './DigimonPicker.module.css'
+
+// Sprite sheet constants (must match generate-spritesheet.py)
+const CELL    = 32
+const COLS    = 40
+const SHEET_W = 1280
+const SHEET_H = 1600
+
+function pickerSpriteStyle(suffix) {
+  const index = spriteIndex[suffix]
+  if (index === undefined) return {}
+  const col = index % COLS
+  const row = Math.floor(index / COLS)   // always frame 0
+  return {
+    backgroundImage:    'url(/sprites/spritesheet.png)',
+    backgroundRepeat:   'no-repeat',
+    backgroundSize:     `${SHEET_W}px ${SHEET_H}px`,
+    backgroundPosition: `-${col * CELL}px -${row * CELL}px`,
+    imageRendering:     'pixelated',
+  }
+}
 
 export default function DigimonPicker({
   value,
@@ -100,12 +120,10 @@ export default function DigimonPicker({
             onClick={() => handleSelect(digimon)}
             className={`${styles.card} ${isSelected(digimon) ? styles.selected : ''}`}
           >
-            <img
-              src={getSpriteUrl(digimon.suffix, 0)}
-              alt={digimon.name}
-              loading="lazy"
-              decoding="async"
+            <div
               className={styles.spriteImg}
+              style={pickerSpriteStyle(digimon.suffix)}
+              aria-hidden="true"
             />
             <div className={styles.name}>{digimon.name}</div>
             <div className={`${styles.type} ${styles[`type-${digimon.type.toLowerCase()}`]}`}>

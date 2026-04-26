@@ -207,9 +207,9 @@
 }
 
 .spriteImg {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
