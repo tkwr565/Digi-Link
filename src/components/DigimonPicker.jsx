@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from 'react'
-import DigimonSprite from './DigimonSprite'
+import { getSpriteUrl } from '../utils/digimonUtils'
 import styles from './DigimonPicker.module.css'
 
 export default function DigimonPicker({
@@ -32,11 +32,6 @@ export default function DigimonPicker({
     const matchesType = typeFilter === 'all' || d.type === typeFilter
     return matchesSearch && matchesType
   })
-
-  // Debug: log unique types in filtered results
-  useEffect(() => {
-    const uniqueTypes = new Set(filteredDigimon.map(d => d.type))
-  }, [typeFilter, filteredDigimon])
 
   const handleSelect = (digimon) => {
     if (multiple) {
@@ -105,7 +100,13 @@ export default function DigimonPicker({
             onClick={() => handleSelect(digimon)}
             className={`${styles.card} ${isSelected(digimon) ? styles.selected : ''}`}
           >
-            <DigimonSprite suffix={digimon.suffix} size="md" />
+            <img
+              src={getSpriteUrl(digimon.suffix, 0)}
+              alt={digimon.name}
+              loading="lazy"
+              decoding="async"
+              className={styles.spriteImg}
+            />
             <div className={styles.name}>{digimon.name}</div>
             <div className={`${styles.type} ${styles[`type-${digimon.type.toLowerCase()}`]}`}>
               {digimon.type}

@@ -206,6 +206,14 @@
   color: var(--text-secondary);
 }
 
+.spriteImg {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
 .loading,
 .empty {
   text-align: center;
