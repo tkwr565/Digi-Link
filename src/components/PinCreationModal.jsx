@@ -966,7 +966,7 @@ export default function PinCreationModal({ isOpen, onClose, onSuccess, userLocat
                 )}
                 {timeMode === TIME_MODES.THIS_WEEK && (
                   <p>
-                    {nextSixDays.find(d => d.value === weekDate)?.label || weekDate} {t('createPin.fromTime', { start: weekStartTime, end: weekEndTime })}
+                    {weekDate ? new Date(weekDate + 'T00:00').toLocaleDateString() : weekDate} {t('createPin.fromTime', { start: weekStartTime, end: weekEndTime })}
                   </p>
                 )}
                 {timeMode === TIME_MODES.RECURRING && (
