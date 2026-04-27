@@ -1,7 +1,29 @@
-﻿import { useState, useEffect } from 'react'
+﻿import { useState, useEffect, useRef } from 'react'
 import DigimonSprite from './DigimonSprite'
 import styles from './DigimonPicker.module.css'
 import { loadDigimonDb } from '../utils/digimonUtils'
+
+function LazySprite({ suffix }) {
+  const [visible, setVisible] = useState(false)
+  const ref = useRef()
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect() } },
+      { rootMargin: '150px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref} className={styles.spriteSlot}>
+      {visible && <DigimonSprite suffix={suffix} size="md" />}
+    </div>
+  )
+}
 
 export default function DigimonPicker({
   value,
@@ -100,7 +122,7 @@ export default function DigimonPicker({
             onClick={() => handleSelect(digimon)}
             className={`${styles.card} ${isSelected(digimon) ? styles.selected : ''}`}
           >
-            <DigimonSprite suffix={digimon.suffix} size="md" />
+            <LazySprite suffix={digimon.suffix} />
             <div className={styles.name}>{digimon.name}</div>
             <div className={`${styles.type} ${styles[`type-${digimon.type.toLowerCase()}`]}`}>
               {digimon.type}

@@ -206,6 +206,14 @@
   color: var(--text-secondary);
 }
 
+.spriteSlot {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .loading,
 .empty {
   text-align: center;
