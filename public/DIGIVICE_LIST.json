@@ -101,6 +101,16 @@
         ]
       },
       {
+        "id": "vpet-dm-x",
+        "name": "Digital Monster X",
+        "year": 2019,
+        "versions": [
+          "Ver. 1 Black/White",
+          "Ver. 2 Red/Purple",
+          "Ver. 3 Blue/Yellow"
+        ]
+      },
+      {
         "id": "vpet-pendulum-z",
         "name": "Digimon Pendulum Z / Z II",
         "year": 2020,
@@ -165,16 +175,6 @@
           "Xros Wars Red",
           "Xros Wars Blue",
           "Xros Wars Black"
-        ]
-      },
-      {
-        "id": "vpet-dm-x",
-        "name": "Digital Monster X",
-        "year": 2019,
-        "versions": [
-          "Ver. 1 Black/White",
-          "Ver. 2 Red/Purple",
-          "Ver. 3 Blue/Yellow"
         ]
       }
     ]
