@@ -8,7 +8,7 @@ export const loadDigimonDb = async () => digimonDbData
 
 // Get full Digimon name from suffix
 export const getDigimonName = (suffix, digimonDb = null) => {
-  const db = digimonDb || digimonDbCache
+  const db = digimonDb || digimonDbData
 
   if (!db) {
     return suffix
