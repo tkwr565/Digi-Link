@@ -1,5 +1,11 @@
 [
     {
+        "name": "Gumdramon",
+        "sprite_folder": "spr_mon_gumdra",
+        "type": "Vaccine",
+        "suffix": "gumdra"
+    },
+    {
         "name": "Gizamon",
         "sprite_folder": "spr_mon_giza",
         "type": "Virus",
@@ -2680,12 +2686,6 @@
         "sprite_folder": "spr_mon_aguH",
         "type": "Vaccine",
         "suffix": "aguH"
-    },
-    {
-        "name": "Bushi Agumon",
-        "sprite_folder": "spr_mon_bushiAgu",
-        "type": "Vaccine",
-        "suffix": "bushiAgu"
     },
     {
         "name": "Porcupamon",

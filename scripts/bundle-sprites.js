@@ -13,7 +13,7 @@ function walkDir(dir) {
     const full = path.join(dir, entry.name)
     if (entry.isDirectory()) {
       files.push(...walkDir(full))
-    } else if (entry.name.endsWith('.png')) {
+    } else if (entry.name.endsWith('.png') || entry.name.endsWith('.json')) {
       files.push(full)
     }
   }
@@ -21,10 +21,10 @@ function walkDir(dir) {
 }
 
 const allFiles = walkDir(spritesDir)
-// Only frames 0 and 1 — the only frames DigimonSprite renders
+// Only frames 0 and 1 — the only frames DigimonSprite renders, PLUS the database
 const spriteFiles = allFiles.filter(f => {
-  const base = path.basename(f, '.png')
-  return base.endsWith('_0') || base.endsWith('_1')
+  const base = path.basename(f)
+  return base.endsWith('_0.png') || base.endsWith('_1.png') || base === 'digimon_db.json'
 })
 
 console.log(`Bundling ${spriteFiles.length} sprites...`)

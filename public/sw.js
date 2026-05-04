@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sprites-v1'
+const CACHE_NAME = 'sprites-v1.01'
 const BUNDLE_URL = '/sprites/bundle_v1.bin'
 const MARKER_URL = '/_sprites_ready'
 
@@ -30,7 +30,8 @@ async function loadBundle() {
     const cache = await caches.open(CACHE_NAME)
     if (await cache.match(new URL(MARKER_URL, self.location.origin).href)) return
 
-    const resp = await fetch(BUNDLE_URL)
+    // Add timestamp to bypass potential server/browser cache of the binary file
+    const resp = await fetch(`${BUNDLE_URL}?t=${Date.now()}`)
     if (!resp.ok) throw new Error(`Bundle fetch failed: ${resp.status}`)
 
     const buffer = await resp.arrayBuffer()
@@ -53,9 +54,11 @@ async function loadBundle() {
       offset += dataLen
 
       const url = new URL(`/sprites/${filePath}`, self.location.origin).href
+      const contentType = filePath.endsWith('.json') ? 'application/json' : 'image/png'
+
       batch.push(
-        cache.put(url, new Response(new Blob([png], { type: 'image/png' }), {
-          headers: { 'Content-Type': 'image/png' }
+        cache.put(url, new Response(new Blob([png], { type: contentType }), {
+          headers: { 'Content-Type': contentType }
         }))
       )
 

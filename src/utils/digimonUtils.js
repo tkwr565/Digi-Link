@@ -1,20 +1,25 @@
 // Utility functions for Digimon data
-import digimonDbData from './digimon_db.json'
 
 export const getSpriteUrl = (suffix, frame) =>
   `/sprites/spr_mon_${suffix}/spr_mon_${suffix}_${frame}.png`
 
-export const loadDigimonDb = async () => digimonDbData
+export const loadDigimonDb = async () => {
+  try {
+    const response = await fetch('/sprites/digimon_db.json')
+    return await response.json()
+  } catch (error) {
+    console.error('Error loading digimon db:', error)
+    return []
+  }
+}
 
 // Get full Digimon name from suffix
 export const getDigimonName = (suffix, digimonDb = null) => {
-  const db = digimonDb || digimonDbData
-
-  if (!db) {
+  if (!digimonDb) {
     return suffix
   }
 
-  const digimon = db.find(d => d.suffix === suffix)
+  const digimon = digimonDb.find(d => d.suffix === suffix)
   return digimon ? digimon.name : suffix
 }
 

@@ -15,6 +15,7 @@ import AppLayout from './components/AppLayout'
 import MyPinsPage from './pages/MyPinsPage'
 import FriendsPage from './pages/FriendsPage'
 import LeaderboardPage from './pages/LeaderboardPage'
+import DebugDigimonPage from './pages/DebugDigimonPage'
 
 // Protected route wrapper
 function ProtectedRoute({ children }) {
@@ -290,6 +291,11 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          {/* Local Debug Route */}
+          {window.location.hostname === 'localhost' && (
+            <Route path="/debug-db" element={<DebugDigimonPage />} />
+          )}
 
           {/* Public routes */}
           <Route
